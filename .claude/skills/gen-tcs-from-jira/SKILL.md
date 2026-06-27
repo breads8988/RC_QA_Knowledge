@@ -50,7 +50,7 @@ Target file: `03_Testcases/<feature>.md`, using the format in `04_Templates/test
 - **If the file does not exist**, create it: fill the header (Feature, SRS ref, Jira tickets) and write the grouped Test Case Table.
 - **If it exists**, this ticket's TCs are **appended** — continue the feature's TC numbering (find the highest existing `TC-<CODE>-NNN` and carry on), add rows under the right theme groups, and add this `<KEY>` to the header's "Jira tickets" list.
 
-TC IDs are feature-based and zero-padded (`TC-<CODE>-001`). Every row's **AC** column names the `AC-<CODE>-NN` / `BR-<CODE>-NN` it verifies (or `—`), and the **Jira** column links this ticket. New TCs start at `Coverage: 🔵 Pending`, `Status: ⬜ Not Run`. Keep steps concrete (3–5) and the expected result unambiguous (status / error code / state).
+TC IDs are feature-based and zero-padded (`TC-<CODE>-001`). Every row's **AC** column names the `AC-<CODE>-NN` / `BR-<CODE>-NN` it verifies (or `—`), and the **Jira** column links this ticket. New TCs start at `Coverage: 🔵 Pending`, `Status: ⬜ Not Run`. Keep each TC high-level (one scenario, 3–5 steps max, NO click-by-click — the automation/Cucumber layer writes detailed steps) and the expected result unambiguous (status / error code / state).
 
 ### 6. Update the Coverage Summary
 Recount ALL TCs in the file (existing + new) and refresh the Coverage Summary tables (Total/Automated/Manual/Pending + Critical/High/Medium/Low).
