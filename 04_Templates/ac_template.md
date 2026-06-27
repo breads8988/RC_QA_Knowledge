@@ -42,21 +42,21 @@ BABOK-aligned acceptance criteria (BABOK §10.1 *Acceptance and Evaluation Crite
 
 > One row = one scenario. Compound steps: put extra steps in the same cell with `<br>And …` / `<br>But …`. Cover happy path first, then alternate, negative, edge.
 
-| AC ID           | Scenario            | Jira         | Type      | Priority | Given (context)             | When (action / trigger)      | Then (expected outcome)                          | Linked TCs           | Status |
-| --------------- | ------------------- | ------------ | --------- | -------- | --------------------------- | ---------------------------- | ------------------------------------------------ | -------------------- | ------ |
-| AC-<CODE>-01 | <happy path title>  | [<KEY>](url) | Happy     | Must     | <user state / system state> | <the action the user takes>  | <observable result><br>And <secondary assertion> | `TC-<CODE>-001`   | Draft  |
-| AC-<CODE>-02 | <alternate title>   | [<KEY>](url) | Alternate | Should   | <context>                   | <action>                     | <result>                                         | `TC-<CODE>-002`   | Draft  |
-| AC-<CODE>-03 | <negative title>    | [<KEY>](url) | Negative  | Must     | <context>                   | <invalid action / bad input> | <rejection + error message / code>               | `TC-<CODE>-003`   | Draft  |
-| AC-<CODE>-04 | <edge title>        | [<KEY>](url) | Edge      | Could    | <boundary context>          | <boundary action>            | <expected boundary behaviour>                    | `TC-<CODE>-004`   | Draft  |
+| AC ID        | Scenario           | Jira         | Type      | Criticality | Given (context)             | When (action / trigger)      | Then (expected outcome)                          | Linked TCs      | Status |
+| ------------ | ------------------ | ------------ | --------- | ----------- | --------------------------- | ---------------------------- | ------------------------------------------------ | --------------- | ------ |
+| AC-<CODE>-01 | <happy path title> | [<KEY>](url) | Happy     | 🔴 Critical | <user state / system state> | <the action the user takes>  | <observable result><br>And <secondary assertion> | `TC-<CODE>-001` | Draft  |
+| AC-<CODE>-02 | <alternate title>  | [<KEY>](url) | Alternate | 🟠 High     | <context>                   | <action>                     | <result>                                         | `TC-<CODE>-002` | Draft  |
+| AC-<CODE>-03 | <negative title>   | [<KEY>](url) | Negative  | 🔴 Critical | <context>                   | <invalid action / bad input> | <rejection + error message / code>               | `TC-<CODE>-003` | Draft  |
+| AC-<CODE>-04 | <edge title>       | [<KEY>](url) | Edge      | ⚪ Low       | <boundary context>          | <boundary action>            | <expected boundary behaviour>                    | `TC-<CODE>-004` | Draft  |
 
 ## Business Rules (rule-based AC)
 
 > For constraints, policies, limits, formulas, permissions — things that govern many scenarios. State the rule precisely enough to test.
 
-| Rule ID         | Business Rule                                  | Jira         | Rationale / Source     | Priority | Linked TCs         | Status |
-| --------------- | ---------------------------------------------- | ------------ | ---------------------- | -------- | ------------------ | ------ |
-| BR-<CODE>-01 | <e.g. "Password must be 8–32 chars, ≥1 digit"> | [<KEY>](url) | <stakeholder / policy> | Must     | `TC-<CODE>-005` | Draft  |
-| BR-<CODE>-02 | <e.g. "Session expires after 15 min idle">     | [<KEY>](url) | <security policy>      | Must     | `TC-<CODE>-006` | Draft  |
+| Rule ID      | Business Rule                                  | Jira         | Rationale / Source     | Criticality | Linked TCs      | Status |
+| ------------ | ---------------------------------------------- | ------------ | ---------------------- | ----------- | --------------- | ------ |
+| BR-<CODE>-01 | <e.g. "Password must be 8–32 chars, ≥1 digit"> | [<KEY>](url) | <stakeholder / policy> | 🔴 Critical | `TC-<CODE>-005` | Draft  |
+| BR-<CODE>-02 | <e.g. "Session expires after 15 min idle">     | [<KEY>](url) | <security policy>      | 🔴 Critical | `TC-<CODE>-006` | Draft  |
 
 ## Column Guide
 
@@ -67,7 +67,7 @@ BABOK-aligned acceptance criteria (BABOK §10.1 *Acceptance and Evaluation Crite
 | **Scenario**    | Short title of the behaviour, start with an action verb          | Plain text                                        |
 | **Jira**        | The ticket this AC came from                                     | `[<KEY>](url)`                                     |
 | **Type**        | Class of scenario                                               | Happy / Alternate / Negative / Edge / Permission  |
-| **Priority**    | MoSCoW prioritisation (BABOK)                                    | Must / Should / Could / Won't                     |
+| **Criticality** | Impact if this AC fails — drives the verifying TC's priority     | 🔴 Critical / 🟠 High / 🟡 Medium / ⚪ Low          |
 | **Given**       | Precondition / context true before the action                   | One state per clause; `<br>And …` to compound     |
 | **When**        | The single action or event that triggers behaviour             | One trigger                                        |
 | **Then**        | Observable, verifiable outcome — pass/fail must be objective    | Include error code / message / state where relevant |
@@ -83,6 +83,6 @@ Jira ticket  ──▶  AC-<CODE>-NN / BR-<CODE>-NN  ──▶  TC-<CODE>-NNN
 
 - **Upward**: header `SRS ref` + each row's `Jira` column link the AC to its source.
 - **Downward**: the `Linked TCs` column lists the test cases that verify each AC.
-- **Coverage rule**: every `Must` AC and every business rule must have ≥1 Linked TC. Flag any AC with zero TCs as a coverage gap. Conversely, every TC must name the `AC` it verifies — no orphan TCs.
+- **Coverage rule**: every `Critical` and `High` AC and every business rule must have ≥1 Linked TC. Flag any such AC with zero TCs as a coverage gap. Conversely, every TC must name the `AC` it verifies — no orphan TCs.
 
-> Write all content in English (the vault is shared on GitHub) — body text, cell content, headers, and Type/Priority/Status values.
+> Write all content in English (the vault is shared on GitHub) — body text, cell content, headers, and Type / Criticality / Status values.

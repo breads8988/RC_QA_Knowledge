@@ -1,6 +1,6 @@
 ---
 name: gen-ac-from-jira
-description: Use when writing acceptance criteria (AC) from a Jira ticket, acting as a senior BA. Fetches the ticket via the Atlassian (Jira) MCP, optionally takes UI screenshots, decomposes the requirement into BABOK-aligned AC — Given/When/Then scenarios plus business rules with MoSCoW priority — and appends to a per-feature AC spec in the Obsidian QA vault, ready for test-case generation.
+description: Use when writing acceptance criteria (AC) from a Jira ticket, acting as a senior BA. Fetches the ticket via the Atlassian (Jira) MCP, optionally takes UI screenshots, decomposes the requirement into BABOK-aligned AC — Given/When/Then scenarios plus business rules, each rated by criticality — and appends to a per-feature AC spec in the Obsidian QA vault, ready for test-case generation.
 ---
 
 # Generate Acceptance Criteria from Jira
@@ -43,7 +43,7 @@ Read `references/ac-techniques.md` and apply it. Produce two complementary forms
 - **Scenario-based (Given/When/Then)** — cover happy path first, then alternate flows, negative cases, edge/boundary, and permission cases. One scenario = one outcome (atomic).
 - **Business rules** — constraints, limits, formulas, policies, permissions that govern many scenarios.
 
-Assign each AC/rule a **MoSCoW** priority (Must / Should / Could / Won't). Keep every AC testable, unambiguous, and free of implementation detail (the *what*, not the *how*).
+Rate each AC/rule by **criticality** (🔴 Critical / 🟠 High / 🟡 Medium / ⚪ Low — impact if it fails, see `references/ac-techniques.md` §6), which maps 1:1 to the verifying TC's priority. Keep every AC testable, unambiguous, and free of implementation detail (the *what*, not the *how*).
 
 ### 5. Write / append the AC spec
 Target file: `02_Acceptance_Criteria/<feature>.md`, using the format in `04_Templates/ac_template.md` (single source of truth — read it from the vault). Use `mkdir -p`.
@@ -52,8 +52,8 @@ Target file: `02_Acceptance_Criteria/<feature>.md`, using the format in `04_Temp
 
 AC IDs `AC-<CODE>-NN`, rule IDs `BR-<CODE>-NN`. Each row's **Jira** column links this ticket. Leave the `Linked TCs` column blank — `/gen-tc` fills it. New AC start at `Status: Draft`.
 
-### 6. Report & raise questions
-Print a summary: AC added this run + feature total, by type and priority. Then, as a BA, list **open questions / ambiguities** the ticket left unresolved (anything you had to assume) so the user can confirm with stakeholders before TCs are written. Never silently invent business rules — flag assumptions explicitly.
+### 6. Self-check & report
+Run the final gate in `references/ac-techniques.md` §9 and fix any miss before reporting. Then print a summary: AC added this run + feature total, by type and priority. Then, as a BA, list **open questions / ambiguities** the ticket left unresolved (anything you had to assume) so the user can confirm with stakeholders before TCs are written. Never silently invent business rules — flag assumptions explicitly.
 
 ## Handling collisions
 The per-feature file is expected to grow, so default for an existing file is **append** (continue numbering). Never renumber existing AC. If this `<KEY>` was already added before, ask the user: replace that ticket's rows, add anyway, or abort.

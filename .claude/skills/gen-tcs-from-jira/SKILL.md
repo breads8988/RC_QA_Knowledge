@@ -65,6 +65,6 @@ The per-feature file is expected to grow, so the default for an existing file is
 - One feature = one register file (`03_Testcases/<feature>.md`), accumulating TCs from all its tickets.
 - IDs are feature-based: `TC-<CODE>-NNN`, continuous within the feature.
 - Register format lives in `04_Templates/testcases_template.md` (user-managed). Read it each run — do not hardcode a copy.
-- Traceability `Jira → AC → TC`: each TC names the AC/BR it verifies (**AC** column, from `02_Acceptance_Criteria/<feature>.md`) and links its ticket (**Jira** column). Coverage rule: every `Must` AC + business rule should have ≥1 TC — flag gaps.
+- Traceability `Jira → AC → TC`: each TC names the AC/BR it verifies (**AC** column, from `02_Acceptance_Criteria/<feature>.md`) and links its ticket (**Jira** column). Coverage rule: every `Critical`/`High` AC + business rule should have ≥1 TC — flag gaps.
 - Write all content in English (the vault is shared on GitHub) — body text, cell content, headers, and tag values.
 - Never modify `.obsidian/` config.

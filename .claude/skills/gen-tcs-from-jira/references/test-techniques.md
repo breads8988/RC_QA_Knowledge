@@ -40,9 +40,23 @@ For each input visible in the UI:
 - Concurrent action / double-submit.
 
 ## 8. Edge cases
-- Boundary dates (timezone, leap year), special characters/emoji/unicode, very long text.
-- Localization / RTL if relevant.
-- Accessibility basics: keyboard navigation, screen-reader labels (note if in scope).
+Beyond BVA (§3, numeric/length ranges) and concurrency (§7), push inputs to their limits:
+- null / emptiness: null, empty, whitespace-only, missing field, default value.
+- characters: special chars, Unicode / emoji, leading / trailing spaces, very long text.
+- collections: zero / one / many, max+1, duplicate values, ordering.
+- date / time: timezone, DST, leap year, expired vs future dates.
+- localization / RTL, if relevant.
+- accessibility basics: keyboard navigation, screen-reader labels (note if in scope).
+
+## 9. Non-functional
+Test quality attributes where in scope (mirrors AC §3 Non-functional):
+- performance: response time / load / large datasets (e.g. P95 < 2s).
+- security: authn / authz, input sanitisation (XSS / SQLi), sensitive-data exposure, rate limiting.
+- accessibility: WCAG 2.1 AA — keyboard, screen-reader, contrast, focus order (basics also §8).
+- compatibility: supported devices / OS / browsers / screen sizes (responsive also §6).
+- localization / i18n: language, date / number / currency formats, RTL (also §8).
+- reliability: see §7 Error & resilience.
+- observability: audit log / events recorded for key actions.
 
 ## Prioritization
 Assign each TC a priority:
