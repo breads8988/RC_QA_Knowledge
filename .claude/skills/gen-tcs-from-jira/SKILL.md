@@ -30,39 +30,50 @@ Then run `/mcp` and authenticate (OAuth in browser). Resume `/gen-tc` after that
 Create a todo per step and work through them in order.
 
 ### 1. Resolve the feature code
+
 Read `00_Project_Info/features.md` and find the row for the feature slug. Use its **Code** as the ID prefix (`<CODE>`). If the slug is not listed, STOP and ask the user for a short code (2–6 uppercase letters), add a new row to the registry, then continue. Never invent a code silently or use a different code than the registry for a feature that already has one.
 
 ### 2. Fetch the ticket
+
 Call the Jira MCP tool to read the issue by key. Capture: summary, full description, issue type, status, labels/components, and any clarifying comments. Acceptance criteria in the ticket are optional — use them if present. If the tool name differs from what you expect, use whatever Jira "get issue" tool the connected MCP exposes.
 
 ### 3. Get the UI
+
 Ask the user to paste Figma screenshots of the screens/states involved (empty, filled, loading, error, success, validation states if relevant). Wait for them. If the user skips this, proceed using the ticket only and explicitly mark in the affected TCs' Note column that **UI coverage is pending** — never fabricate UI elements you have not seen.
 
 ### 4. Derive test conditions
+
 First, check for the feature's AC spec at `02_Acceptance_Criteria/<feature>.md`:
+
 - **If it exists**, read it. It is the primary source — derive TCs so that EVERY AC ID (`AC-<CODE>-NN`) and business rule (`BR-<CODE>-NN`) relevant to this ticket has at least one covering TC. Each TC records the AC/BR it verifies in its `AC` column.
 - **If it does NOT exist**, that is fine — the AC layer is **optional/conditional**. Derive conditions from the ticket + screenshots and set each TC's `AC` column to `—`. Only suggest authoring it (via `/gen-ac <feature> <KEY>`) if the ticket is genuinely ambiguous, high-risk, or needs stakeholder sign-off; for clear, small tickets do not nag.
 
 Then read `references/test-techniques.md` and apply EVERY applicable technique: positive/happy path, negative, boundary value analysis, equivalence partitioning, field-level validation, UI/UX from the screenshot, error/empty/loading states, and edge cases. List the conditions, grouped by theme, before writing so coverage is visible.
 
 ### 5. Write / append the register
+
 Target file: `03_Testcases/<feature>.md`, using the format in `04_Templates/testcases_template.md` (single source of truth — read it from the vault, not from this skill). Use `mkdir -p`.
+
 - **If the file does not exist**, create it: fill the header (Feature, SRS ref, Jira tickets) and write the grouped Test Case Table.
 - **If it exists**, this ticket's TCs are **appended** — continue the feature's TC numbering (find the highest existing `TC-<CODE>-NNN` and carry on), add rows under the right theme groups, and add this `<KEY>` to the header's "Jira tickets" list.
 
 TC IDs are feature-based and zero-padded (`TC-<CODE>-001`). Every row's **AC** column names the `AC-<CODE>-NN` / `BR-<CODE>-NN` it verifies (or `—`), and the **Jira** column links this ticket. New TCs start at `Coverage: 🔵 Pending`, `Status: ⬜ Not Run`. Keep each TC high-level (one scenario, 3–5 steps max, NO click-by-click — the automation/Cucumber layer writes detailed steps) and the expected result unambiguous (status / error code / state).
 
 ### 6. Update the Coverage Summary
+
 Recount ALL TCs in the file (existing + new) and refresh the Coverage Summary tables (Total/Automated/Manual/Pending + Critical/High/Medium/Low).
 
 ### 7. Report
+
 Print a short summary in chat: TCs added this run, new feature total, breakdown by priority and theme, and any gaps (UI not provided, conditions you could not cover). Surface anything uncovered — never imply full coverage silently.
 
 ## Handling collisions
+
 The per-feature file is expected to grow, so the default for an existing file is **append** (continue numbering). Never renumber or overwrite existing TCs. If a ticket's TCs were already added before (same `<KEY>` in the header list), ask the user: replace that ticket's rows, add anyway, or abort.
 
 ## Output conventions
-- One feature = one register file (`03_Testcases/<feature>.md`), accumulating TCs from all its tickets.
+
+- One feature = one register file (`03_Testcases/<feature>/TCs_<feature>.md`), accumulating TCs from all its tickets.
 - IDs are feature-based: `TC-<CODE>-NNN`, continuous within the feature.
 - Register format lives in `04_Templates/testcases_template.md` (user-managed). Read it each run — do not hardcode a copy.
 - Traceability `Jira → AC → TC`: each TC names the AC/BR it verifies (**AC** column, from `02_Acceptance_Criteria/<feature>.md`) and links its ticket (**Jira** column). Coverage rule: every `Critical`/`High` AC + business rule should have ≥1 TC — flag gaps.
