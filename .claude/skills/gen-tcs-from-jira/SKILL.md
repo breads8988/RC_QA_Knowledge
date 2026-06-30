@@ -48,7 +48,7 @@ First, check for the feature's AC spec at `02_Acceptance_Criteria/<feature>.md`:
 - **If it exists**, read it. It is the primary source — derive TCs so that EVERY AC ID (`AC-<CODE>-NN`) and business rule (`BR-<CODE>-NN`) relevant to this ticket has at least one covering TC. Each TC records the AC/BR it verifies in its `AC` column.
 - **If it does NOT exist**, that is fine — the AC layer is **optional/conditional**. Derive conditions from the ticket + screenshots and set each TC's `AC` column to `—`. Only suggest authoring it (via `/gen-ac <feature> <KEY>`) if the ticket is genuinely ambiguous, high-risk, or needs stakeholder sign-off; for clear, small tickets do not nag.
 
-Then read `references/test-techniques.md` and apply EVERY applicable technique: positive/happy path, negative, boundary value analysis, equivalence partitioning, field-level validation, UI/UX from the screenshot, error/empty/loading states, and edge cases. List the conditions, grouped by theme, before writing so coverage is visible.
+Then read `references/test-techniques.md` and follow it end-to-end: analyse the requirement first (§1), apply only techniques that add meaningful coverage (§2–§10), optimize to avoid redundant TCs (§11), and satisfy traceability + coverage rules before handoff. List conditions grouped by theme before writing so coverage is visible.
 
 ### 5. Write / append the register
 
@@ -76,6 +76,6 @@ The per-feature file is expected to grow, so the default for an existing file is
 - One feature = one register file (`03_Testcases/<feature>/TCs_<feature>.md`), accumulating TCs from all its tickets.
 - IDs are feature-based: `TC-<CODE>-NNN`, continuous within the feature.
 - Register format lives in `04_Templates/testcases_template.md` (user-managed). Read it each run — do not hardcode a copy.
-- Traceability `Jira → AC → TC`: each TC names the AC/BR it verifies (**AC** column, from `02_Acceptance_Criteria/<feature>.md`) and links its ticket (**Jira** column). Coverage rule: every `Critical`/`High` AC + business rule should have ≥1 TC — flag gaps.
+- Traceability: each TC links its ticket (**Jira** column). When AC exist, each TC names the AC/BR it verifies (**AC** column) — `Jira → AC → TC`. When AC are omitted, set **AC** to `—` — `Jira → TC`. Coverage rule: every requirement + business rule must have ≥1 TC; every `Critical`/`High` AC when present — flag gaps.
 - Write all content in English (the vault is shared on GitHub) — body text, cell content, headers, and tag values.
 - Never modify `.obsidian/` config.

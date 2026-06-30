@@ -5,7 +5,7 @@ This is the output format for `gen-tcs-from-jira`. **One register file per featu
 - `<CODE>` is the feature's short code from the registry `00_Project_Info/features.md` (e.g. `user_management` → `UM`). The **file** is named by the full feature slug; the **IDs** use the short code. `NNN` is the zero-padded TC number, **continuous within the feature** (`001`, `002`, …) across all its tickets.
 - A feature register **accumulates** TCs from multiple Jira tickets over time. Each row's **Jira** column links the specific ticket that TC came from.
 - Replace every `<...>` placeholder with real content. Group TCs under `###` headings by theme (Happy Path, Validation, Error handling, Edge cases, …). The rows below show the required **shape**, not fixed content.
-- Traceability: every TC names the **AC** it verifies (`AC-<CODE>-NN` / `BR-<CODE>-NN` from `02_Acceptance_Criteria/<feature>.md`) and links the **Jira** ticket. Flow: `Jira → AC → TC`.
+- Traceability: every TC links the **Jira** ticket (requirement). When AC exist, the **AC** column names `AC-<CODE>-NN` / `BR-<CODE>-NN` from `02_Acceptance_Criteria/<feature>.md` — flow: `Jira → AC → TC`. For simple tickets without AC, set **AC** to `—` — flow: `Jira → TC`.
 
 ---
 
@@ -46,7 +46,7 @@ This is the output format for `gen-tcs-from-jira`. **One register file per featu
 | -------------------- | -------------------------------------------------------- | -------------------------------------------------- |
 | **TC ID**            | Unique identifier — must match `@tag` in `.feature` file | `TC-<CODE>-NNN` e.g. `TC-LOGIN-001`             |
 | **Test Scenario**    | One-line title, start with an action verb                | Plain text                                         |
-| **AC**               | The acceptance criterion / business rule this TC verifies | `AC-<CODE>-NN` or `BR-<CODE>-NN`             |
+| **AC**               | The acceptance criterion / business rule this TC verifies | `AC-<CODE>-NN`, `BR-<CODE>-NN`, or `—` when designed directly from the requirement |
 | **Jira**             | The ticket this TC came from                             | `[<KEY>](url)`                                      |
 | **Priority**         | Business impact if this TC fails                         | 🔴 Critical / 🟠 High / 🟡 Medium / ⚪ Low          |
 | **Coverage**         | Automation status                                        | ✅ Automated / 🟡 Manual / 🔵 Pending               |
