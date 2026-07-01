@@ -39,13 +39,13 @@ Call the Jira MCP to read the issue by key. Capture: summary, full description, 
 
 ### 3. Analyse the requirement (BA work)
 
-Apply `references/ac-techniques.md` §1: identify functional requirements, business rules, actors, preconditions, triggers, outputs, state changes, dependencies, and assumptions. Then restate as a **user story** (`As a <role>, I want <capability>, so that <benefit>`). This step drives most of the AC quality. If screenshots are provided, use them to ground UI states.
+Apply `references/ac-techniques.md` §1: identify functional requirements, business rules, actors, preconditions, triggers, outputs, state changes, dependencies, impacted existing behaviour, and assumptions. Then restate as a **user story** (`As a <role>, I want <capability>, so that <benefit>`). This step drives most of the AC quality. If screenshots are provided, use them to ground UI states.
 
 ### 4. Decompose into AC
 
 Read `references/ac-techniques.md` and apply it. Produce two complementary forms:
 
-- **Scenario-based (Given/When/Then)** — cover happy path first, then alternate flows, negative cases, edge/boundary, and permission cases. One scenario = one outcome (atomic).
+- **Scenario-based (Given/When/Then)** — cover happy path first, then alternate flows, negative cases, rule/condition combinations, edge/boundary, and permission cases. One scenario = one outcome (atomic).
 - **Business rules** — constraints, limits, formulas, policies, permissions that govern many scenarios.
 
 Rate each AC/rule by **criticality** (🔴 Critical / 🟠 High / 🟡 Medium / ⚪ Low — impact if it fails, see `references/ac-techniques.md` §6), which maps 1:1 to the verifying TC's priority. Keep every AC testable, unambiguous, and free of implementation detail (the _what_, not the _how_).

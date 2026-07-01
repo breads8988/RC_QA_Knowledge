@@ -14,6 +14,7 @@ This step drives ~70% of AC quality. Before writing any AC, identify:
 - **Outputs** — results, messages, data produced.
 - **State changes** — what persists or transitions.
 - **External dependencies** — services, APIs, integrations.
+- **Impacted existing behaviour** — existing rules / flows this change modifies or may break (feeds downstream regression).
 - **Assumptions** — anything unstated you assumed (flag for §7).
 
 Then frame it: restate as **As a** `<role>` **I want** `<capability>` **so that** `<benefit>`, and INVEST-check the story (Independent, Negotiable, Valuable, Estimable, Small, **Testable**).
@@ -42,6 +43,7 @@ For each capability, cover only the classes that genuinely apply (not every clas
 - **Happy path** — the main success scenario, valid inputs, authorised user.
 - **Alternate flow** — other valid ways to reach success (e.g. login by email vs phone).
 - **Negative** — invalid input, missing required field, wrong state, unauthorised access. State the rejection + the error message/code.
+- **Rule / condition combinations** — when the outcome depends on a *combination* of conditions (eligibility, pricing, tiered permissions), enumerate the meaningful combinations (decision-table thinking); write an AC or business rule for each distinct outcome, plus the default/else.
 - **Boundary / edge** — push every input to its limits:
   - numeric: min−1 / min / max / max+1, zero, negative, overflow, decimal precision / rounding
   - length: empty, min, max, max+1 (truncation)
@@ -67,6 +69,7 @@ For each capability, cover only the classes that genuinely apply (not every clas
 - **When** = the single action or event under test. Keep it to one trigger.
 - **Then** = the observable, verifiable result. Must be objectively pass/fail — include status, error code, message, computed value, or persisted state when applicable. Compound consequences with `And`; contrast with `But`.
 - Describe the **what**, never the **how** — no UI clicks, no API/DB/tech detail. ("Then the transfer is rejected", not "Then the red toast `.error-banner` appears").
+- **Illustrate with concrete examples** — for rules, calculations, and boundaries, pin down real example values (e.g. *balance $100, transfer $150 → rejected*). Examples make the AC unambiguous and directly testable (Specification by Example).
 
 ## 5. Quality bar (reject an AC that fails any)
 
@@ -89,7 +92,8 @@ Rate each AC by the business impact if it fails — NOT MoSCoW (MoSCoW scopes st
 
 ## 7. Surface the gaps (BA duty)
 
-List every assumption you had to make and every ambiguity the ticket left open as **open questions** for stakeholders — do not invent business rules to fill silence. An AC built on an unconfirmed assumption must be flagged.
+- List every assumption you had to make and every ambiguity the ticket left open as **open questions** for stakeholders — do not invent business rules to fill silence.
+- An AC built on an unconfirmed assumption must be flagged.
 
 ## 8. Coverage rule
 
@@ -112,6 +116,7 @@ Quick gate before QA Lead review — verify, don't re-explain (section it enforc
 - [ ] Permissions covered (§3)
 - [ ] State transitions covered (§3)
 - [ ] Boundary cases identified (§3)
+- [ ] Rule / condition combinations covered where outcomes combine (§3)
 - [ ] Non-functional aspects covered where applicable (§3)
 - [ ] Open questions documented (§7)
 - [ ] All assumptions are either confirmed or explicitly flagged (§7)

@@ -48,7 +48,7 @@ First, check for the feature's AC spec at `02_Acceptance_Criteria/<feature>.md`:
 - **If it exists**, read it. It is the primary source — derive TCs so that EVERY AC ID (`AC-<CODE>-NN`) and business rule (`BR-<CODE>-NN`) relevant to this ticket has at least one covering TC. Each TC records the AC/BR it verifies in its `AC` column.
 - **If it does NOT exist**, that is fine — the AC layer is **optional/conditional**. Derive conditions from the ticket + screenshots and set each TC's `AC` column to `—`. Only suggest authoring it (via `/gen-ac <feature> <KEY>`) if the ticket is genuinely ambiguous, high-risk, or needs stakeholder sign-off; for clear, small tickets do not nag.
 
-Then read `references/test-techniques.md` and follow it end-to-end: analyse the requirement first (§1), apply only techniques that add meaningful coverage (§2–§10), optimize to avoid redundant TCs (§11), and satisfy traceability + coverage rules before handoff. List conditions grouped by theme before writing so coverage is visible.
+Then read `references/test-techniques.md` and follow it end-to-end: analyse the requirement first (§1), apply only techniques that add meaningful coverage (§2–§15), optimize to avoid redundant TCs (§16), and satisfy traceability + coverage rules before handoff. List conditions grouped by theme before writing so coverage is visible.
 
 ### 5. Write / append the register
 
