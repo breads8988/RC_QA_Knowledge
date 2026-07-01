@@ -105,6 +105,7 @@ Use when the entity has a **lifecycle / status** (draft→submitted→approved�
 
 For each user input **defined by the requirement or visible in the UI** (do not depend on screenshots alone).
 
+- **Required-input classes** — for each required field, cover its distinct classes **separately**: **valid / invalid-format / empty**. Do not merge "empty" into "invalid format" — each is its own equivalence partition (§5). Apply this to **every** required field consistently (e.g. if password-empty has a TC, email-empty must too).
 - Format validation (email, phone, currency, date).
 - Inline error message wording and trigger (on blur / on submit).
 - Mandatory marker vs. optional.
