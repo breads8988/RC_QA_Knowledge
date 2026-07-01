@@ -5,6 +5,7 @@ Single source of truth mapping each **feature** to its short **code**. `/gen-ac`
 | Feature (slug / file) | Code    | Description                     | SRS                        |
 | --------------------- | ------- | ------------------------------- | -------------------------- |
 | login                 | `LOGIN` | User login / authentication     | [[01_SRS/login/epic]]      |
+| registration          | `REG`   | User registration / sign-up (4-step onboarding) | [[01_SRS/registration/]] |
 | my_vehicle            | `MV`    | My Vehicle management           | [[01_SRS/my_vehicle/]]     |
 | user_management       | `UM`    | User management / accounts      | [[01_SRS/user_management/]] |
 
