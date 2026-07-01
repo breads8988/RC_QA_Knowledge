@@ -1,6 +1,6 @@
 # Acceptance Criteria — Template
 
-BABOK-aligned acceptance criteria (BABOK §10.1 *Acceptance and Evaluation Criteria*). **One AC spec per feature**, written to `02_Acceptance_Criteria/<feature>.md` (e.g. `login.md` — same feature slugs as `01_SRS/`). AC is the bridge between the requirement (SRS / Jira) and the test cases — every TC in `03_Testcases/<feature>.md` traces back to an AC ID here.
+BABOK-aligned acceptance criteria (BABOK §10.1 *Acceptance and Evaluation Criteria*). **One AC spec per feature**, written to `02_Acceptance_Criteria/<feature>/<feature>.md` (e.g. `login/login.md` — same feature slugs as `01_SRS/`). AC is the bridge between the requirement (SRS / Jira) and the test cases — every TC in `03_Testcases/<feature>/<feature>.md` traces back to an AC ID here.
 
 - `<CODE>` is the feature's short code from the registry `00_Project_Info/features.md` (e.g. `user_management` → `UM`). The **file** is named by the full feature slug; the **IDs** use the short code. `NN` is the zero-padded AC / rule number, **continuous within the feature** across all its tickets.
 - A feature AC spec **accumulates** criteria from multiple Jira tickets. Each row's **Jira** column links the specific ticket it came from.
@@ -71,7 +71,7 @@ BABOK-aligned acceptance criteria (BABOK §10.1 *Acceptance and Evaluation Crite
 | **Given**       | Precondition / context true before the action                   | One state per clause; `<br>And …` to compound     |
 | **When**        | The single action or event that triggers behaviour             | One trigger                                        |
 | **Then**        | Observable, verifiable outcome — pass/fail must be objective    | Include error code / message / state where relevant |
-| **Linked TCs**  | TCs in `03_Testcases/<feature>.md` that verify this AC          | `TC-<CODE>-NNN`, comma-separated                |
+| **Linked TCs**  | TCs in `03_Testcases/<feature>/<feature>.md` that verify this AC          | `TC-<CODE>-NNN`, comma-separated                |
 | **Status**      | Review state of the criterion                                   | Draft / Reviewed / Approved                        |
 
 ## Traceability

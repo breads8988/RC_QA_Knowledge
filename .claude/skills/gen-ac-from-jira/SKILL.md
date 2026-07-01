@@ -5,15 +5,15 @@ description: Use when writing acceptance criteria (AC) from a Jira ticket, actin
 
 # Generate Acceptance Criteria from Jira
 
-Act as a **senior Business Analyst**. Turn a Jira ticket into a clear, testable, BABOK-aligned acceptance-criteria spec (BABOK §10.1) — Given/When/Then scenarios + business rules — written **per feature** (`02_Acceptance_Criteria/<feature>.md`) so the QA team derives test cases from it via `/gen-tc`.
+Act as a **senior Business Analyst**. Turn a Jira ticket into a clear, testable, BABOK-aligned acceptance-criteria spec (BABOK §10.1) — Given/When/Then scenarios + business rules — written **per feature** (`02_Acceptance_Criteria/<feature>/<feature>.md`) so the QA team derives test cases from it via `/gen-tc`.
 
 ## Inputs
 
-- **Feature slug** — e.g. `login`, `user_management` (same slugs as `01_SRS/`). Passed explicitly in the command. Sets the spec file name `02_Acceptance_Criteria/<feature>.md`.
+- **Feature slug** — e.g. `login`, `user_management` (same slugs as `01_SRS/`). Passed explicitly in the command. Sets the spec file name `02_Acceptance_Criteria/<feature>/<feature>.md`.
 - **Feature code** — the short ID prefix (e.g. `UM`), resolved from the registry `00_Project_Info/features.md`, NOT invented ad hoc. See step 1.
 - **Jira key** — e.g. `RC-4` (the command extracts this from a key or URL).
-- **Vault path** — default is the **current working directory** (`.`). This skill is project-scoped inside the vault's `.claude/`, so Claude Code runs at the vault root; all paths below are **relative** to it. Never hardcode a machine-specific absolute path (the vault is shared via GitHub — absolute paths break on teammates' machines).
-- **Figma screenshots** _(optional)_ — pasted by the user; use them to ground UI-behaviour scenarios. Do NOT fetch Figma automatically.
+- **Vault path** — always the **current working directory** (`.`). This skill is project-scoped inside the vault's `.claude/`, so Claude Code runs at the vault root; all paths below are **relative** to it. Never hardcode a machine-specific absolute path (the vault is shared via GitHub — absolute paths break on teammates' machines).
+- **Figma screenshots** _(optional)_ — a **folder path** passed as the 3rd argument (e.g. `01_SRS/<feature>/figma`); read every image in it (`.png` / `.jpg` / `.jpeg` / `.webp`) to ground UI-behaviour scenarios. If no folder is given, the user may paste screenshots instead. Do NOT fetch Figma automatically.
 
 ## Prerequisite check (do this first)
 
@@ -37,9 +37,11 @@ Read `00_Project_Info/features.md` and find the row for the feature slug. Use it
 
 Call the Jira MCP to read the issue by key. Capture: summary, full description, issue type, status, labels/components, any existing acceptance criteria in the ticket, and clarifying comments.
 
+**If the issue is an Epic** (`issuetype.name` = Epic) or otherwise has child issues, fetch **all** children with `searchJiraIssuesUsingJql` (JQL `parent = <KEY>`, include the `description` and `comment` fields) and read each. An Epic usually has no detail of its own — the real requirements live in its children. Use the children **relevant to this feature** as the requirement sources, and trace each AC's **Jira** column to the **specific child ticket** it came from, not the Epic.
+
 ### 3. Analyse the requirement (BA work)
 
-Apply `references/ac-techniques.md` §1: identify functional requirements, business rules, actors, preconditions, triggers, outputs, state changes, dependencies, impacted existing behaviour, and assumptions. Then restate as a **user story** (`As a <role>, I want <capability>, so that <benefit>`). This step drives most of the AC quality. If screenshots are provided, use them to ground UI states.
+Apply `references/ac-techniques.md` §1: identify functional requirements, business rules, actors, preconditions, triggers, outputs, state changes, dependencies, impacted existing behaviour, and assumptions. Then restate as a **user story** (`As a <role>, I want <capability>, so that <benefit>`). This step drives most of the AC quality. If a Figma-screenshots folder was passed, list it and **Read every image file** to ground UI states; otherwise use any pasted screenshots. Never fabricate UI elements you have not seen.
 
 ### 4. Decompose into AC
 
@@ -52,7 +54,7 @@ Rate each AC/rule by **criticality** (🔴 Critical / 🟠 High / 🟡 Medium / 
 
 ### 5. Write / append the AC spec
 
-Target file: `02_Acceptance_Criteria/<feature>.md`, using the format in `04_Templates/ac_template.md` (single source of truth — read it from the vault). Use `mkdir -p`.
+Target file: `02_Acceptance_Criteria/<feature>/<feature>.md`, using the format in `04_Templates/ac_template.md` (single source of truth — read it from the vault). Use `mkdir -p`.
 
 - **If the file does not exist**, create it: header (Feature, SRS ref, Jira tickets, BA Owner), user story, GWT table, Business Rules table.
 - **If it exists**, **append** this ticket's criteria — continue the feature's numbering (highest existing `AC-<CODE>-NN` / `BR-<CODE>-NN`), and add this `<KEY>` to the header's "Jira tickets" list.
@@ -69,7 +71,7 @@ The per-feature file is expected to grow, so default for an existing file is **a
 
 ## Output conventions
 
-- One feature = one AC spec (`02_Acceptance_Criteria/<feature>/AC_<feature>.md`), accumulating AC from all its tickets.
+- One feature = one AC spec (`02_Acceptance_Criteria/<feature>/<feature>.md`), accumulating AC from all its tickets.
 - IDs are feature-based: `AC-<CODE>-NN` / `BR-<CODE>-NN`, continuous within the feature.
 - AC format lives in `04_Templates/ac_template.md` (user-managed) — read it each run, do not hardcode a copy.
 - Traceability flow `Jira → AC → TC`: this skill produces the AC layer; `/gen-tc` consumes it.

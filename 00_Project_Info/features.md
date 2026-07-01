@@ -10,6 +10,6 @@ Single source of truth mapping each **feature** to its short **code**. `/gen-ac`
 
 ## Rules
 
-- **Slug** — lowercase, matches `01_SRS/<slug>/`, `02_Acceptance_Criteria/<slug>.md`, `03_Testcases/<slug>.md`. This is what you pass to the commands.
+- **Slug** — lowercase, matches `01_SRS/<slug>/`, `02_Acceptance_Criteria/<slug>/<slug>.md`, `03_Testcases/<slug>/<slug>.md`. This is what you pass to the commands.
 - **Code** — 2–6 UPPERCASE letters, **unique**. Used only in IDs: `AC-<CODE>-NN`, `BR-<CODE>-NN`, `TC-<CODE>-NNN` (e.g. `user_management` → `UM` → `TC-UM-001`).
 - A code, once used in any ID, **must never change** (it would break traceability). To add a feature, append a new row here first.
