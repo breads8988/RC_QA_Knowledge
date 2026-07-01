@@ -191,6 +191,7 @@ Do not create separate TCs for every boundary value when one TC can represent th
 - **Clear expected result** — observable, objectively pass/fail (status / message / state / value).
 - **High-level** — says WHAT to verify, not click-by-click steps (automation owns detail).
 - **Self-contained** — preconditions + test data stated, so it runs independently and repeatably.
+- **No assertion hidden in preconditions** — anything the requirement states as a **default / initial state** ("masked by default", "empty on load", "button disabled initially") is an **assertion**: verify it in the Expected Result, never assume it in the Precondition. Preconditions hold only what is **not** the target of this TC.
 - **Traceable** — names the AC / business rule / requirement it verifies; no orphan TC.
 - **Unambiguous** — one interpretation; no vague wording.
 
@@ -244,6 +245,7 @@ Quick gate before QA Lead review — verify, don't re-explain (section it enforc
 - [ ] Every TC has a clear, observable expected result (Quality bar)
 - [ ] Each TC is one scenario, kept high-level — no click-by-click (Quality bar)
 - [ ] Preconditions + test data stated where needed (§14)
+- [ ] No expected default / initial state hidden in preconditions — asserted in Expected Result (Quality bar)
 - [ ] Priority set on every TC (= AC criticality, or business impact when no AC)
 - [ ] Negative (§3), boundary (§4/§12), and NFR (§13) covered where applicable
 - [ ] Combination & lifecycle logic covered — Decision Table / Pairwise / State Transition where they apply (§6–§8)
