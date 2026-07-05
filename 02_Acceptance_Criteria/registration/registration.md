@@ -2,7 +2,7 @@
 
 | Field                  | Value                                   |
 | ---------------------- | --------------------------------------- |
-| **Version**            | 1.1                                     |
+| **Version**            | 1.2                                     |
 | **Last updated**       | 2026-07-04                              |
 | **Feature**            | Registration / sign-up                  |
 | **SRS ref**            | [[01_SRS/registration/]]                |
@@ -43,6 +43,7 @@
 | AC-REG-18    | Preserve entered data on back navigation     | [RC-8](https://motionscloud.atlassian.net/browse/RC-8) | Alternate  | ⚪ Low       | The user is on any step after Step 1                                             | They navigate back to a previous step                                     | The previous step is shown with the data they already entered retained                                                     | `TC-REG-018`              | Draft  |
 | AC-REG-19    | Responsive layout on phone and tablet        | [RC-8](https://motionscloud.atlassian.net/browse/RC-8) | Edge       | 🟡 Medium   | The registration flow opened in the mobile web app                              | It is viewed on a phone and on a tablet                                    | The layout renders correctly and all fields/controls remain usable on both form factors                                    | `TC-REG-019`              | Draft  |
 | AC-REG-20    | Register a vehicle with all fields (Step 4)  | [RC-8](https://motionscloud.atlassian.net/browse/RC-8) | Happy      | 🟠 High     | On Step 4 "Register your vehicle" with the vehicle form open                     | They select Brand, Modell, Baujahr, Fahrzeugkategorie, Motor, No. of doors, No. of seats, enter KW, choose ownership (Owner/Rental) and register | The vehicle is added and appears in the registered-vehicle list                                                            | `TC-REG-021`              | Draft  |
+| AC-REG-35    | Vehicle ownership defaults to Owner         | [RC-8](https://motionscloud.atlassian.net/browse/RC-8) | Alternate  | 🟡 Medium   | On the vehicle registration form (Step 4) with the "Owner / Rental" choice shown | The vehicle form loads and the user views the ownership choice            | "Owner" is pre-selected by default; the user can switch to "Rental"; exactly one option is selected at any time and the chosen value is saved with the vehicle | `TC-REG-038`, `TC-REG-021` | Draft  |
 | AC-REG-21    | Search within Brand / Modell dropdown        | [RC-8](https://motionscloud.atlassian.net/browse/RC-8) | Alternate  | 🟡 Medium   | On the vehicle form with the Brand (or Modell) dropdown open                     | They type a search term                                                    | The dropdown list filters to matching options; Modell options depend on the selected Brand                                 | `TC-REG-023`              | Draft  |
 | AC-REG-22    | Block registering a vehicle with missing fields | [RC-8](https://motionscloud.atlassian.net/browse/RC-8) | Negative   | 🟠 High     | On the vehicle form with a required field not selected/entered                   | They attempt to register the vehicle                                       | The vehicle is not registered and the missing required field(s) are indicated                                              | `TC-REG-024`              | Draft  |
 | AC-REG-23    | Add more vehicles up to the limit            | [RC-8](https://motionscloud.atlassian.net/browse/RC-8) | Alternate  | 🟡 Medium   | The user has fewer than 4 vehicles registered                                    | They choose "Register more vehicles" and add another                      | The additional vehicle is added to the list (total ≤ 4)                                                                    | `TC-REG-025`              | Draft  |
@@ -72,12 +73,13 @@
 | BR-REG-08    | At least one vehicle must be registered to complete the registration flow.                                          | [RC-8](https://motionscloud.atlassian.net/browse/RC-8) | RC-8 Step 4                            | 🟠 High     | `TC-REG-022`                        | Draft  |
 | BR-REG-09    | A user may register a maximum of 4 vehicles; beyond that, adding is blocked and a contact-support popup is shown (`Alexis@repaircheck.com`). | [RC-8](https://motionscloud.atlassian.net/browse/RC-8) | RC-8 Step 4 / RC-20 (my_vehicle)       | 🟡 Medium   | `TC-REG-025`, `TC-REG-026`          | Draft  |
 | BR-REG-10    | A verification code is valid for **5 minutes**; once it expires it is rejected and a new code must be requested. | [RC-8](https://motionscloud.atlassian.net/browse/RC-8) | RC-8 Step 1 verification (5-min expiry, confirmed) | 🟡 Medium   | `TC-REG-030`                        | Draft  |
+| BR-REG-11    | Vehicle ownership is a mandatory single choice between "Owner" and "Rental", pre-selected to "Owner" by default; exactly one is always selected. | [RC-8](https://motionscloud.atlassian.net/browse/RC-8) | Stakeholder decision (2026-07-04) — default Owner | 🟡 Medium   | `TC-REG-038`, `TC-REG-021`          | Draft  |
 
 ## Traceability
 
 ```
 Epic RC-21 (User management)
-  └─ RC-8 (Registration page)  ──▶  AC-REG-01…34 / BR-REG-01…10  ──▶  TC-REG-NNN (via /gen-tc)
+  └─ RC-8 (Registration page)  ──▶  AC-REG-01…35 / BR-REG-01…11  ──▶  TC-REG-NNN (via /gen-tc)
 ```
 
 - **Upward**: header `SRS ref` + each row's `Jira` column link the AC to `RC-8` (the registration child of Epic `RC-21`).
@@ -94,6 +96,6 @@ Epic RC-21 (User management)
 6. **Postcode validity.** Assumed a format check only (Germany-oriented, per the German field labels). Confirm whether the postcode is validated against a real postcode service / must match the map-selected address.
 7. **Email change before verification.** If the user goes back and edits the email after a code was sent, is a new code required? (Not specified.)
 8. **Deleted-account email reuse (AC-REG-27).** Assumed an email freed by account deletion becomes available for a fresh registration. **Confirm** whether deleted-account emails are truly released, reserved for a grace period, or permanently blocked.
-9. **Vehicle ownership field.** Figma shows an "Owner / Rental" choice on the vehicle screen — is it required, and does it belong to registration or my_vehicle? (Left to `MV`.)
+9. **Vehicle ownership field — DECIDED (2026-07-04).** The "Owner / Rental" choice belongs to **registration** (this feature), not `MV`. It is a required single choice **defaulting to "Owner"** (pre-checked); the user can switch to "Rental". Covered by AC-REG-35 / BR-REG-11. The same field on the `MV` vehicle form is documented here and intentionally **not** duplicated in `my_vehicle`.
 10. **Password visibility (AC-REG-30).** Assumed the field is masked by default with an eye icon that reveals and re-hides. Confirm the default state and whether the toggle persists across steps.
 11. **SRS note.** No `01_SRS/registration/epic.md` exists yet; SRS ref points at the folder. Create the SRS note if the team wants a formal SRS anchor.
