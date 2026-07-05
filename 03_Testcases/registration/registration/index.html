@@ -1,0 +1,2468 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="QA knowledge base for the Repair Check (RC) project — SRS, acceptance criteria, and test cases.">
+      
+      
+        <meta name="author" content="MotionCloud QA">
+      
+      
+      
+        <link rel="prev" href="../../my_vehicle/my_vehicle/">
+      
+      
+        <link rel="next" href="../../../04_Templates/ac_template/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Test Case Register — Registration - RC QA Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#test-case-register-registration" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="RC QA Knowledge" class="md-header__button md-logo" aria-label="RC QA Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RC QA Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Test Case Register — Registration
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/breads8988/RC_QA_Knowledge" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    breads8988/RC_QA_Knowledge
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="RC QA Knowledge" class="md-nav__button md-logo" aria-label="RC QA Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RC QA Knowledge
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/breads8988/RC_QA_Knowledge" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    breads8988/RC_QA_Knowledge
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RC QA Knowledge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    00 Project Info
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    00 Project Info
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00_Project_Info/features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Feature Registry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 Acceptance Criteria
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    02 Acceptance Criteria
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Login
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Login
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02_Acceptance_Criteria/login/login/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Acceptance Criteria — Login
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    My vehicle
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    My vehicle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02_Acceptance_Criteria/my_vehicle/my_vehicle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Acceptance Criteria — My Vehicle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Registration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02_Acceptance_Criteria/registration/registration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Acceptance Criteria — Registration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 Testcases
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    03 Testcases
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Login
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Login
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../login/login/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test Case Register — Login
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    My vehicle
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    My vehicle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../my_vehicle/my_vehicle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test Case Register — My Vehicle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Registration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test Case Register — Registration
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test Case Register — Registration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#coverage-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coverage Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-case-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Case Table
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Case Table">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-happy-path-navigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Happy Path &amp; Navigation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-step-1-personal-info-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Step 1 — Personal Info Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-step-1-email-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Step 1 — Email Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-step-2-address" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Step 2 — Address
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-step-3-password" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Step 3 — Password
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-step-4-register-vehicle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Step 4 — Register Vehicle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-cross-cutting-navigation-responsiveness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Cross-cutting — Navigation &amp; Responsiveness
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gherkin-mapping-automated-tcs-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gherkin Mapping (Automated TCs only)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#note-tag-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Note Tag Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 Templates
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    04 Templates
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../04_Templates/ac_template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Acceptance Criteria — Template
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../04_Templates/bug_template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bug Report — Template (→ Jira issue type: Bug)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../04_Templates/testcases_template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test Case Register — Template
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#coverage-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coverage Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-case-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Case Table
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Case Table">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-happy-path-navigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Happy Path &amp; Navigation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-step-1-personal-info-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Step 1 — Personal Info Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-step-1-email-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Step 1 — Email Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-step-2-address" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Step 2 — Address
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-step-3-password" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Step 3 — Password
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-step-4-register-vehicle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Step 4 — Register Vehicle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-cross-cutting-navigation-responsiveness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Cross-cutting — Navigation &amp; Responsiveness
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gherkin-mapping-automated-tcs-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gherkin Mapping (Automated TCs only)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#note-tag-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Note Tag Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/breads8988/RC_QA_Knowledge/edit/main/03_Testcases/registration/registration.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="test-case-register-registration">Test Case Register — Registration<a class="headerlink" href="#test-case-register-registration" title="Permanent link">&para;</a></h1>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td>1.1</td>
+</tr>
+<tr>
+<td><strong>Last updated</strong></td>
+<td>2026-07-04</td>
+</tr>
+<tr>
+<td><strong>Feature</strong></td>
+<td>Registration / sign-up</td>
+</tr>
+<tr>
+<td><strong>SRS ref</strong></td>
+<td><a href="../../01_SRS/registration/.md">01_SRS/registration/</a></td>
+</tr>
+<tr>
+<td><strong>Jira tickets</strong></td>
+<td><code>RC-8</code> (Epic <a href="https://motionscloud.atlassian.net/browse/RC-21"><code>RC-21</code></a> — User management)</td>
+</tr>
+<tr>
+<td><strong>Owner</strong></td>
+<td>QC Team</td>
+</tr>
+<tr>
+<td><strong>Reviewer</strong></td>
+<td>TBD</td>
+</tr>
+<tr>
+<td><strong>Sprint / Release</strong></td>
+<td>TBD</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Scope note:</strong> Step 4 "Register your vehicle" <strong>is covered</strong> (RC-8's comment <em>"Skip Register Vehicle step for now"</em> was disregarded per stakeholder decision, 2026-07-01). Vehicle detail overlaps the <code>my_vehicle</code> (<code>MV</code>) feature (<code>RC-20</code>) — keep both registers in sync.</p>
+</blockquote>
+<h2 id="coverage-summary">Coverage Summary<a class="headerlink" href="#coverage-summary" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Total TCs</th>
+<th>Automated</th>
+<th>Manual</th>
+<th>Pending</th>
+<th>Coverage %</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>38</td>
+<td>0</td>
+<td>0</td>
+<td>38</td>
+<td>0%</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Critical</th>
+<th>High</th>
+<th>Medium</th>
+<th>Low</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6</td>
+<td>8</td>
+<td>19</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Coverage % = Automated / Total × 100. Update after each sprint.</p>
+</blockquote>
+<h2 id="test-case-table">Test Case Table<a class="headerlink" href="#test-case-table" title="Permanent link">&para;</a></h2>
+<h3 id="1-happy-path-navigation">1. Happy Path &amp; Navigation<a class="headerlink" href="#1-happy-path-navigation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>TC ID</th>
+<th>Test Scenario</th>
+<th>AC</th>
+<th>Jira</th>
+<th>Priority</th>
+<th>Coverage</th>
+<th>Cucumber Tag</th>
+<th>Preconditions</th>
+<th>Test Data</th>
+<th>High-level Steps</th>
+<th>Expected Result</th>
+<th>Status</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-REG-001</td>
+<td>Complete registration end-to-end (valid data)</td>
+<td>AC-REG-01</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🔴 Critical</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-001</code></td>
+<td>Guest user; email not previously registered</td>
+<td>Unused valid email; first/last name; valid address; strong password; 1 valid vehicle</td>
+<td>1. Enter valid personal info 2. Verify email with correct code 3. Enter valid address 4. Set a strong password 5. Register 1 vehicle and finish</td>
+<td>A new account is created, the user is signed in, and the home page is shown</td>
+<td>⬜ Not Run</td>
+<td></td>
+</tr>
+<tr>
+<td>TC-REG-002</td>
+<td>Open registration from Login screen</td>
+<td>AC-REG-02</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟡 Medium</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-002</code></td>
+<td>Guest user on the Login screen</td>
+<td>—</td>
+<td>1. On Login screen select "Don't have an account? Register"</td>
+<td>Step 1 "Enter your personal info" is displayed</td>
+<td>⬜ Not Run</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-step-1-personal-info-validation">2. Step 1 — Personal Info Validation<a class="headerlink" href="#2-step-1-personal-info-validation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>TC ID</th>
+<th>Test Scenario</th>
+<th>AC</th>
+<th>Jira</th>
+<th>Priority</th>
+<th>Coverage</th>
+<th>Cucumber Tag</th>
+<th>Preconditions</th>
+<th>Test Data</th>
+<th>High-level Steps</th>
+<th>Expected Result</th>
+<th>Status</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-REG-003</td>
+<td>Submit valid personal info → code sent</td>
+<td>AC-REG-03, BR-REG-04</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🔴 Critical</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-003</code></td>
+<td>On Step 1; email unused</td>
+<td><code>johndoe@gmail.com</code>, First <code>John</code>, Last <code>Doe</code></td>
+<td>1. Enter valid email, first and last name 2. Proceed</td>
+<td>A verification code is emailed to the address and the "Enter your verification code" screen is shown</td>
+<td>⬜ Not Run</td>
+<td></td>
+</tr>
+<tr>
+<td>TC-REG-004</td>
+<td>Reject invalid email format</td>
+<td>AC-REG-04, BR-REG-02</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟠 High</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-004</code></td>
+<td>On Step 1</td>
+<td>Invalid emails: <code>abcd.xyz</code>, <code>abc@</code>, <code>@x.com</code></td>
+<td>1. Enter a malformed email 2. Attempt to proceed</td>
+<td>Flow does not advance; "Invalid email format" is shown on the email field</td>
+<td>⬜ Not Run</td>
+<td></td>
+</tr>
+<tr>
+<td>TC-REG-005</td>
+<td>Reject already-registered email</td>
+<td>AC-REG-05, BR-REG-01</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🔴 Critical</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-005</code></td>
+<td>An account already exists for the email</td>
+<td>Existing email e.g. <code>registered@gmail.com</code></td>
+<td>1. Enter an already-registered email + names 2. Proceed</td>
+<td>Flow does not advance; "Email has already been registered" is shown</td>
+<td>⬜ Not Run</td>
+<td><code>[DATA]</code> pre-seed a registered account</td>
+</tr>
+<tr>
+<td>TC-REG-006</td>
+<td>Block proceed on missing required field(s)</td>
+<td>AC-REG-06, BR-REG-06</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟠 High</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-006</code></td>
+<td>On Step 1</td>
+<td>Each of email / first name / last name empty in turn</td>
+<td>1. Leave a required field empty 2. Observe the Next action</td>
+<td>Next stays disabled and "Please fill first and last name" prompts the missing field(s)</td>
+<td>⬜ Not Run</td>
+<td>Covers all 3 required fields (same outcome)</td>
+</tr>
+<tr>
+<td>TC-REG-007</td>
+<td>Soft warning on digits-only name (non-blocking)</td>
+<td>AC-REG-07</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>⚪ Low</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-007</code></td>
+<td>On Step 1; email valid &amp; unused</td>
+<td>First/Last name = <code>12345</code></td>
+<td>1. Enter a digits-only name 2. Proceed</td>
+<td>"Are you sure you entered your name correctly?" warning is shown but the user can still proceed</td>
+<td>⬜ Not Run</td>
+<td></td>
+</tr>
+<tr>
+<td>TC-REG-029</td>
+<td>Re-register email of a deleted account</td>
+<td>AC-REG-27</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟡 Medium</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-029</code></td>
+<td>An account previously existed for the email but was deleted</td>
+<td>Email of a deleted account e.g. <code>deleted.user@gmail.com</code></td>
+<td>1. Enter the deleted account's email + valid names 2. Proceed</td>
+<td>The email is treated as available and registration proceeds to email verification (no "already registered" block)</td>
+<td>⬜ Not Run</td>
+<td><code>[DATA]</code> seed then delete an account · behaviour to confirm — see AC open questions</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-step-1-email-verification">3. Step 1 — Email Verification<a class="headerlink" href="#3-step-1-email-verification" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>TC ID</th>
+<th>Test Scenario</th>
+<th>AC</th>
+<th>Jira</th>
+<th>Priority</th>
+<th>Coverage</th>
+<th>Cucumber Tag</th>
+<th>Preconditions</th>
+<th>Test Data</th>
+<th>High-level Steps</th>
+<th>Expected Result</th>
+<th>Status</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-REG-008</td>
+<td>Accept correct verification code</td>
+<td>AC-REG-08, BR-REG-04</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🔴 Critical</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-008</code></td>
+<td>A verification code was emailed</td>
+<td>The valid 6-digit code</td>
+<td>1. Enter the correct 6-digit code</td>
+<td>Code accepted; flow advances to Step 2 "Enter your address"</td>
+<td>⬜ Not Run</td>
+<td></td>
+</tr>
+<tr>
+<td>TC-REG-009</td>
+<td>Reject incorrect verification code</td>
+<td>AC-REG-09</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🔴 Critical</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-009</code></td>
+<td>A verification code was emailed</td>
+<td>A wrong 6-digit code</td>
+<td>1. Enter an incorrect code</td>
+<td>Code rejected; "Incorrect code, please enter it again" shown; stays on code screen</td>
+<td>⬜ Not Run</td>
+<td></td>
+</tr>
+<tr>
+<td>TC-REG-010</td>
+<td>Resend code respects 5-min cooldown</td>
+<td>AC-REG-10, BR-REG-05</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟡 Medium</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-010</code></td>
+<td>On the verification screen with active resend cooldown</td>
+<td>5-min cooldown</td>
+<td>1. Attempt resend during the cooldown 2. Wait the full 5 minutes 3. Resend</td>
+<td>Resend is unavailable during the 5-min cooldown; after it elapses, resending emails a new code and restarts the cooldown</td>
+<td>⬜ Not Run</td>
+<td>⚠️ Figma shows "00:23" — value differs from confirmed 5 min</td>
+</tr>
+<tr>
+<td>TC-REG-030</td>
+<td>Reject expired verification code</td>
+<td>AC-REG-28, BR-REG-10</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟠 High</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-030</code></td>
+<td>A verification code was emailed more than 5 minutes ago</td>
+<td>Code sent &gt;5 min ago (expired); boundary: valid at 4:59, expired at 5:01</td>
+<td>1. Wait until 5 min elapse after the code was sent 2. Enter the now-expired code</td>
+<td>Code rejected as expired; an "expired code, request a new one" message is shown and the flow does not advance</td>
+<td>⬜ Not Run</td>
+<td><code>[DATA]</code> needs 5-min expiry window · BVA at the 5-min boundary</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-step-2-address">4. Step 2 — Address<a class="headerlink" href="#4-step-2-address" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>TC ID</th>
+<th>Test Scenario</th>
+<th>AC</th>
+<th>Jira</th>
+<th>Priority</th>
+<th>Coverage</th>
+<th>Cucumber Tag</th>
+<th>Preconditions</th>
+<th>Test Data</th>
+<th>High-level Steps</th>
+<th>Expected Result</th>
+<th>Status</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-REG-011</td>
+<td>Submit valid address manually</td>
+<td>AC-REG-11, BR-REG-06</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟠 High</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-011</code></td>
+<td>On Step 2</td>
+<td>Postcode <code>70184</code>, Street <code>Ausschtpunkt 1</code></td>
+<td>1. Enter valid postcode and street name &amp; number 2. Proceed</td>
+<td>Flow advances to Step 3 "Set your password"</td>
+<td>⬜ Not Run</td>
+<td></td>
+</tr>
+<tr>
+<td>TC-REG-012</td>
+<td>Reject invalid postcode</td>
+<td>AC-REG-12, BR-REG-07</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟡 Medium</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-012</code></td>
+<td>On Step 2</td>
+<td>Postcode <code>12abc@#</code></td>
+<td>1. Enter an invalid postcode 2. Attempt to proceed</td>
+<td>Flow does not advance; "Please enter a valid postcode" is shown</td>
+<td>⬜ Not Run</td>
+<td></td>
+</tr>
+<tr>
+<td>TC-REG-013</td>
+<td>Select address via map search</td>
+<td>AC-REG-13</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟡 Medium</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-013</code></td>
+<td>On Step 2</td>
+<td>Search term e.g. <code>Aussichtspunkt</code></td>
+<td>1. Open "Search your address" 2. Search and select a suggestion / place the pin</td>
+<td>Selected postcode and street name &amp; number are autofilled into the address fields</td>
+<td>⬜ Not Run</td>
+<td><code>[DEP]</code> map/geocoding service</td>
+</tr>
+<tr>
+<td>TC-REG-031</td>
+<td>Move map pin updates the shown address</td>
+<td>AC-REG-29</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟡 Medium</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-031</code></td>
+<td>On Step 2 with the map open ("Move the pin until you are done")</td>
+<td>A drag to a nearby valid location</td>
+<td>1. Open the map 2. Drag the pin to a new location 3. Observe the address shown above the map</td>
+<td>The address displayed above the map updates to the pin's new location; on confirm it autofills the address fields</td>
+<td>⬜ Not Run</td>
+<td><code>[DEP]</code> map/geocoding service</td>
+</tr>
+<tr>
+<td>TC-REG-014</td>
+<td>Block proceed on missing address field(s)</td>
+<td>AC-REG-14, BR-REG-06</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟡 Medium</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-014</code></td>
+<td>On Step 2</td>
+<td>Postcode or street left empty</td>
+<td>1. Leave a required address field empty 2. Observe Next</td>
+<td>Next stays disabled</td>
+<td>⬜ Not Run</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-step-3-password">5. Step 3 — Password<a class="headerlink" href="#5-step-3-password" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>TC ID</th>
+<th>Test Scenario</th>
+<th>AC</th>
+<th>Jira</th>
+<th>Priority</th>
+<th>Coverage</th>
+<th>Cucumber Tag</th>
+<th>Preconditions</th>
+<th>Test Data</th>
+<th>High-level Steps</th>
+<th>Expected Result</th>
+<th>Status</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-REG-015</td>
+<td>Strong password enables continue</td>
+<td>AC-REG-15, BR-REG-03</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🔴 Critical</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-015</code></td>
+<td>On Step 3</td>
+<td><code>Password1!</code> (≥8, has number+symbol, has capital, no space)</td>
+<td>1. Enter a password meeting all four rules</td>
+<td>All four rules marked satisfied; strength shows "Strong"; the Next action is enabled</td>
+<td>⬜ Not Run</td>
+<td></td>
+</tr>
+<tr>
+<td>TC-REG-016</td>
+<td>Weak password blocks continue (rule violations)</td>
+<td>AC-REG-16, BR-REG-03</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟠 High</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-016</code></td>
+<td>On Step 3</td>
+<td>One rule broken per run: <code>Pass1!</code> (short) / <code>password1</code> (no capital) / <code>Password</code> (no number/symbol) / <code>Password 1!</code> (has space)</td>
+<td>1. Enter a password failing exactly one rule</td>
+<td>The failing rule is marked unmet; strength shows "Weak"; the Next action stays disabled</td>
+<td>⬜ Not Run</td>
+<td>Decision-table over the 4 password rules</td>
+</tr>
+<tr>
+<td>TC-REG-017</td>
+<td>Password length boundary (7 vs 8 chars)</td>
+<td>AC-REG-15, BR-REG-03</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟡 Medium</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-017</code></td>
+<td>On Step 3</td>
+<td><code>Pass12!</code> (7 chars) rejected; <code>Pass123!</code> (8 chars) accepted</td>
+<td>1. Enter a 7-char then an 8-char password (other rules met)</td>
+<td>7 chars → length rule unmet, Next disabled; 8 chars → all rules met, Next enabled</td>
+<td>⬜ Not Run</td>
+<td>BVA on min length</td>
+</tr>
+<tr>
+<td>TC-REG-020</td>
+<td>Password is masked with reveal toggle</td>
+<td>AC-REG-30</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>⚪ Low</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-020</code></td>
+<td>On Step 3</td>
+<td>Any password</td>
+<td>1. Enter a password 2. Tap the eye (reveal) control</td>
+<td>The characters are revealed as plain text while the reveal state is active</td>
+<td>⬜ Not Run</td>
+<td>UI state from Figma</td>
+</tr>
+<tr>
+<td>TC-REG-032</td>
+<td>Password masked by default (default eye icon)</td>
+<td>AC-REG-30</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>⚪ Low</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-032</code></td>
+<td>On Step 3, password entered</td>
+<td>Any password</td>
+<td>1. Enter a password 2. Observe the field on load / before any toggle</td>
+<td>The password is masked by default and the eye (reveal) icon is displayed</td>
+<td>⬜ Not Run</td>
+<td>UI state from Figma</td>
+</tr>
+<tr>
+<td>TC-REG-033</td>
+<td>Hide password again via eye icon toggle</td>
+<td>AC-REG-30</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>⚪ Low</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-033</code></td>
+<td>On Step 3 with the password currently revealed</td>
+<td>Any password</td>
+<td>1. With the password revealed, tap the eye icon again</td>
+<td>The password is re-masked (hidden) and the eye icon returns to its default (reveal) state</td>
+<td>⬜ Not Run</td>
+<td>UI state from Figma</td>
+</tr>
+</tbody>
+</table>
+<h3 id="6-step-4-register-vehicle">6. Step 4 — Register Vehicle<a class="headerlink" href="#6-step-4-register-vehicle" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>TC ID</th>
+<th>Test Scenario</th>
+<th>AC</th>
+<th>Jira</th>
+<th>Priority</th>
+<th>Coverage</th>
+<th>Cucumber Tag</th>
+<th>Preconditions</th>
+<th>Test Data</th>
+<th>High-level Steps</th>
+<th>Expected Result</th>
+<th>Status</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-REG-034</td>
+<td>Default empty state shows Register vehicle CTA</td>
+<td>AC-REG-31</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟡 Medium</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-034</code></td>
+<td>Reached Step 4 after setting the password; no vehicle registered yet</td>
+<td>—</td>
+<td>1. Arrive at Step 4 "Register your vehicle" with no vehicle added yet</td>
+<td>An empty state ("Let's start registering your vehicle", "You can register up to 4 vehicles") with a "Register vehicle" button is shown; no vehicle list and Next/Finish is not yet actionable</td>
+<td>⬜ Not Run</td>
+<td>UI empty state from Figma</td>
+</tr>
+<tr>
+<td>TC-REG-021</td>
+<td>Register a vehicle with all valid fields</td>
+<td>AC-REG-20</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟠 High</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-021</code></td>
+<td>On Step 4 with the vehicle form open</td>
+<td>Brand <code>Volkswagon</code>, Modell <code>Atlas SEL Premium R-Line</code>, Baujahr <code>2023</code>, Kategorie <code>Sedan</code>, Motor, Doors <code>4</code>, Seats <code>4</code>, KW <code>260</code>, Ownership <code>Owner</code></td>
+<td>1. Fill all vehicle fields with valid values 2. Register the vehicle</td>
+<td>The vehicle is added and appears in the registered-vehicle list</td>
+<td>⬜ Not Run</td>
+<td><code>[DEP]</code> brand/model/engine APIs</td>
+</tr>
+<tr>
+<td>TC-REG-038</td>
+<td>Vehicle ownership defaults to Owner, switchable to Rental</td>
+<td>AC-REG-35, BR-REG-11</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟡 Medium</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-038</code></td>
+<td>On Step 4 with the vehicle form open</td>
+<td>Ownership: default <code>Owner</code>; alternative <code>Rental</code></td>
+<td>1. Open the vehicle form and observe the ownership control before changing it 2. Switch the ownership to Rental and register</td>
+<td>"Owner" is pre-selected by default; exactly one of Owner/Rental is selected at any time; switching to Rental saves the vehicle with Rental ownership</td>
+<td>⬜ Not Run</td>
+<td>Default-state assertion from Figma</td>
+</tr>
+<tr>
+<td>TC-REG-035</td>
+<td>Autofill state lists vehicles + "Register more"</td>
+<td>AC-REG-32</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟡 Medium</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-035</code></td>
+<td>On Step 4 with ≥1 and &lt;4 vehicles registered</td>
+<td>1–3 registered vehicles</td>
+<td>1. Register a vehicle 2. Observe the Step 4 list view</td>
+<td>The registered vehicle(s) are listed (brand/model/specs); a "Register more vehicles" option ("You can add upto 4 vehicles") and a Finish action are shown</td>
+<td>⬜ Not Run</td>
+<td>UI autofill state from Figma</td>
+</tr>
+<tr>
+<td>TC-REG-022</td>
+<td>Finish registration after adding ≥1 vehicle</td>
+<td>AC-REG-17, BR-REG-08</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟠 High</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-022</code></td>
+<td>At least one vehicle registered in the list</td>
+<td>1 registered vehicle</td>
+<td>1. With ≥1 vehicle in the list, finish registration</td>
+<td>Registration completes, the account is created/signed in, and the home page is shown</td>
+<td>⬜ Not Run</td>
+<td></td>
+</tr>
+<tr>
+<td>TC-REG-023</td>
+<td>Search / filter Brand and dependent Modell</td>
+<td>AC-REG-21</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟡 Medium</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-023</code></td>
+<td>On the vehicle form</td>
+<td>Brand search <code>Vol</code>; then open Modell</td>
+<td>1. Open Brand dropdown and type a term 2. Select a brand, open Modell</td>
+<td>Brand list filters to matches; Modell list shows only models for the selected brand</td>
+<td>⬜ Not Run</td>
+<td><code>[DEP]</code> brand/model APIs</td>
+</tr>
+<tr>
+<td>TC-REG-024</td>
+<td>Block registering vehicle with missing field(s)</td>
+<td>AC-REG-22</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟠 High</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-024</code></td>
+<td>On the vehicle form</td>
+<td>One required field (e.g. Brand or KW) left empty</td>
+<td>1. Leave a required field unset 2. Attempt to register</td>
+<td>The vehicle is not registered and the missing required field(s) are indicated</td>
+<td>⬜ Not Run</td>
+<td></td>
+</tr>
+<tr>
+<td>TC-REG-025</td>
+<td>Add multiple vehicles up to the limit (≤4)</td>
+<td>AC-REG-23, BR-REG-09</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟡 Medium</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-025</code></td>
+<td>Fewer than 4 vehicles registered</td>
+<td>Add 2nd, 3rd, 4th vehicle</td>
+<td>1. Choose "Register more vehicles" 2. Add vehicles until 4 total</td>
+<td>Each vehicle (up to 4 total) is added to the list</td>
+<td>⬜ Not Run</td>
+<td></td>
+</tr>
+<tr>
+<td>TC-REG-026</td>
+<td>Block 5th vehicle — limit popup</td>
+<td>AC-REG-24, BR-REG-09</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟡 Medium</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-026</code></td>
+<td>Exactly 4 vehicles already registered</td>
+<td>Attempt to add a 5th</td>
+<td>1. With 4 vehicles, attempt to add another</td>
+<td>Adding is blocked; a popup states the 4-vehicle limit with contact <code>Alexis@repaircheck.com</code></td>
+<td>⬜ Not Run</td>
+<td>BVA on max=4</td>
+</tr>
+<tr>
+<td>TC-REG-036</td>
+<td>Open vehicle 3-dot menu (edit / remove options)</td>
+<td>AC-REG-33</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟡 Medium</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-036</code></td>
+<td>At least one vehicle in the list</td>
+<td>—</td>
+<td>1. Tap the 3-dot menu on a listed vehicle</td>
+<td>A context menu with "Edit Vehicle" and "Remove Vehicle" options is shown</td>
+<td>⬜ Not Run</td>
+<td>UI context menu from Figma</td>
+</tr>
+<tr>
+<td>TC-REG-027</td>
+<td>Edit a registered vehicle</td>
+<td>AC-REG-25</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟡 Medium</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-027</code></td>
+<td>At least one vehicle in the list</td>
+<td>Change e.g. No. of seats <code>4</code>→<code>7</code></td>
+<td>1. Open the vehicle's 3-dot menu 2. Choose "Edit Vehicle" 3. Change a field and save</td>
+<td>The vehicle's details are updated in the list</td>
+<td>⬜ Not Run</td>
+<td></td>
+</tr>
+<tr>
+<td>TC-REG-028</td>
+<td>Remove a registered vehicle</td>
+<td>AC-REG-26</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟡 Medium</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-028</code></td>
+<td>At least one vehicle in the list</td>
+<td>—</td>
+<td>1. Open the vehicle's 3-dot menu 2. Choose "Remove Vehicle"</td>
+<td>The vehicle is removed from the list</td>
+<td>⬜ Not Run</td>
+<td></td>
+</tr>
+<tr>
+<td>TC-REG-037</td>
+<td>Removing a vehicle at the limit re-enables adding</td>
+<td>AC-REG-34</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟡 Medium</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-037</code></td>
+<td>Exactly 4 vehicles registered (limit reached, adding blocked)</td>
+<td>Remove 1 vehicle → 3 remain</td>
+<td>1. With 4 vehicles, remove one via its 3-dot menu 2. Observe the add-vehicle option</td>
+<td>Adding is no longer blocked; the "Register more vehicles" option ("You can register up to 4 vehicles") reappears and a new vehicle can be added</td>
+<td>⬜ Not Run</td>
+<td>State transition: limit → below limit</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-cross-cutting-navigation-responsiveness">7. Cross-cutting — Navigation &amp; Responsiveness<a class="headerlink" href="#7-cross-cutting-navigation-responsiveness" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>TC ID</th>
+<th>Test Scenario</th>
+<th>AC</th>
+<th>Jira</th>
+<th>Priority</th>
+<th>Coverage</th>
+<th>Cucumber Tag</th>
+<th>Preconditions</th>
+<th>Test Data</th>
+<th>High-level Steps</th>
+<th>Expected Result</th>
+<th>Status</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-REG-018</td>
+<td>Back navigation preserves entered data</td>
+<td>AC-REG-18</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>⚪ Low</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-018</code></td>
+<td>On any step after Step 1; data entered</td>
+<td>Data from a prior step</td>
+<td>1. Navigate back to a previous step</td>
+<td>The previous step is shown with the previously entered data retained</td>
+<td>⬜ Not Run</td>
+<td></td>
+</tr>
+<tr>
+<td>TC-REG-019</td>
+<td>Responsive layout on phone and tablet</td>
+<td>AC-REG-19</td>
+<td><a href="https://motionscloud.atlassian.net/browse/RC-8">RC-8</a></td>
+<td>🟡 Medium</td>
+<td>🔵 Pending</td>
+<td><code>@TC-REG-019</code></td>
+<td>Registration flow opened in mobile web app</td>
+<td>Phone + tablet viewports</td>
+<td>1. Open the flow on a phone 2. Open it on a tablet</td>
+<td>Layout renders correctly and all fields/controls remain usable on both form factors</td>
+<td>⬜ Not Run</td>
+<td><code>[DEP]</code> device/viewport matrix</td>
+</tr>
+</tbody>
+</table>
+<h2 id="gherkin-mapping-automated-tcs-only">Gherkin Mapping (Automated TCs only)<a class="headerlink" href="#gherkin-mapping-automated-tcs-only" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Add scenarios here as automation is implemented. The TC ID tag is mandatory for result tracing.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c"># (none automated yet)</span>
+</code></pre></div>
+<h2 id="note-tag-reference">Note Tag Reference<a class="headerlink" href="#note-tag-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tag</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[FLAKY]</code></td>
+<td>Unstable — fails intermittently on CI. Check logs before rerunning</td>
+</tr>
+<tr>
+<td><code>[BUG]</code></td>
+<td>Blocked by open bug — include ticket ID</td>
+</tr>
+<tr>
+<td><code>[DEP]</code></td>
+<td>Depends on specific env, mock service, fixture, or config</td>
+</tr>
+<tr>
+<td><code>[SKIP]</code></td>
+<td>Temporarily skipped — include reason and owner</td>
+</tr>
+<tr>
+<td><code>[DATA]</code></td>
+<td>Requires complex or manual data setup</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.sections", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.action.edit"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
