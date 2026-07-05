@@ -181,6 +181,8 @@
   },
   "active": "b7443cb176c40844",
   "lastOpenFiles": [
+    "04_Templates/testcases_template1.md",
+    "04_Templates/testcases_template copy.md",
     "site/search/search_index.json",
     "site/search",
     "site/04_Templates/testcases_template/index.html",
@@ -191,7 +193,6 @@
     "site/04_Templates/ac_template",
     "site/04_Templates",
     "site/03_Testcases/registration/registration/index.html",
-    "site/03_Testcases/my_vehicle/my_vehicle/index.html",
     "site/01_SRS/registration/figma/Screenshot 2026-07-01 at 10.40.55.png",
     "site/01_SRS/registration/figma/Screenshot 2026-07-01 at 10.40.30.png",
     "site/01_SRS/login/figma/login.png",
