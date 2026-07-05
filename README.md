@@ -22,6 +22,7 @@ Main flow: **Jira ticket → AC (BA) → Test Cases (QA) → Bug (on failure)**.
   testcases_template.md     # TC register format
   bug_template.md          # Bug report format (creates a Jira Bug)
 .claude/                   # Skills + commands (active when Claude Code runs at the vault)
+mkdocs.yml, Makefile, scripts/, .github/   # Docs website (see section 8)
 ```
 
 A **feature** (e.g. `login`) accumulates multiple Jira tickets. Files are named by feature for readability; IDs use a short code for brevity.
@@ -112,3 +113,31 @@ Jira ticket  →  AC-<CODE>-NN / BR-<CODE>-NN  →  TC-<CODE>-NNN
 | `/gen-tc <feature> <KEY>` | `gen-tcs-from-jira` | Generate the TC register from Jira + Figma |
 
 Everything is project-scoped under `.claude/` — it travels with the repo, so anyone who clones it can use it.
+
+---
+
+## 8. View as a website (MkDocs Material)
+
+A free, searchable web UI for these docs — a lightweight alternative to Confluence.
+The markdown files are **not moved**: `scripts/build-docs-tree.sh` builds a `docs/`
+folder of symlinks and MkDocs renders from there. Obsidian and the skills keep
+working against the repo root.
+
+**One-time setup** (needs Python 3):
+```bash
+make install
+```
+
+**Preview locally** (auto-reloads on edits):
+```bash
+make serve      # then open http://127.0.0.1:8000
+```
+
+**Publish to the web (GitHub Pages):**
+- Automatic — pushing to `main` runs `.github/workflows/docs.yml` and deploys.
+  One-time: on GitHub → **Settings → Pages → Build and deployment → Source = GitHub Actions**.
+  The site appears at `https://breads8988.github.io/RC_QA_Knowledge/`.
+- Manual — `make deploy` (builds and pushes to the `gh-pages` branch).
+
+`docs/` and `site/` are generated and git-ignored — never edit them by hand;
+edit the real folders at the repo root.

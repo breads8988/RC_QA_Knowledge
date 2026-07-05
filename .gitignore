@@ -1,3 +1,12 @@
+# macOS
+.DS_Store
+
+# MkDocs docs site (all generated — do not commit)
+# /docs is the symlink tree from scripts/build-docs-tree.sh; /site is built HTML.
+/docs/
+/site/
+.venv/
+
 # Logs
 logs
 *.log

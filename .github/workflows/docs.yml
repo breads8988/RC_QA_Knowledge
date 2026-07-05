@@ -1,0 +1,52 @@
+name: Deploy docs to GitHub Pages
+
+# What runs when:
+#   - Pull request  -> BUILD ONLY (checks the site compiles; does NOT touch the
+#                      live site, so open PRs never overwrite each other).
+#   - Push to main  -> BUILD + DEPLOY (merging a PR to main updates the website).
+#   - Manual        -> "Run workflow" button (workflow_dispatch).
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  NO_MKDOCS_2_WARNING: "true"
+
+jobs:
+  # Always build — verifies the docs compile on every PR and push.
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - run: pip install -r requirements-docs.txt
+      - run: bash scripts/build-docs-tree.sh
+      - run: mkdocs build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  # Deploy ONLY when changes land on main (i.e. a PR was merged).
+  deploy:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
