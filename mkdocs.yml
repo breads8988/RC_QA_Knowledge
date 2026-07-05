@@ -1,0 +1,70 @@
+site_name: RC QA Knowledge
+site_description: QA knowledge base for the Repair Check (RC) project — SRS, acceptance criteria, and test cases.
+site_author: MotionCloud QA
+
+repo_name: breads8988/RC_QA_Knowledge
+repo_url: https://github.com/breads8988/RC_QA_Knowledge
+edit_uri: edit/main/
+
+# The knowledge files stay at the repo root (Obsidian vault + Claude skills
+# untouched). `scripts/build-docs-tree.sh` builds ./docs as a tree of symlinks
+# pointing at the numbered folders, and MkDocs builds from there. Both ./docs
+# and ./site are generated and git-ignored.
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  language: en
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - navigation.sections
+    - navigation.indexes
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.action.edit
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+plugins:
+  - search
+  - roamlinks
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+

@@ -1,0 +1,4 @@
+# Dependencies for building/serving the docs website (MkDocs Material).
+# Install into a virtualenv:  pip install -r requirements-docs.txt
+mkdocs-material>=9.7
+mkdocs-roamlinks-plugin>=0.3.2
