@@ -8,6 +8,8 @@ Single source of truth mapping each **feature** to its short **code**. `/gen-ac`
 | registration          | `REG`   | User registration / sign-up (4-step onboarding) | [[01_SRS/registration/]] |
 | my_vehicle            | `MV`    | My Vehicle management           | [[01_SRS/my_vehicle/]]     |
 | user_management       | `UM`    | User management / accounts      | [[01_SRS/user_management/]] |
+| expert_call_appointment | `ECA` | Find an Expert — list, filter, book appointment / schedule call (Calendly) | [[01_SRS/expert_call_appointment/]] |
+| lawyer                | `LAW`   | Lawyer page (Unfall Rechtsberatung) — list lawyers, filter by rating, request appointment | [[01_SRS/lawyer/]] |
 
 ## Rules
 
