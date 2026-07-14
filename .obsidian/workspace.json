@@ -11,10 +11,12 @@
             "id": "b7443cb176c40844",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "excalidraw",
+              "state": {
+                "file": "00_Project_Info/system-high-level-design.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "system-high-level-design.excalidraw"
             }
           }
         ]
@@ -176,11 +178,18 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "obsidian-excalidraw-plugin:New drawing": false
     }
   },
   "active": "b7443cb176c40844",
   "lastOpenFiles": [
+    "00_Project_Info/system-high-level-design.excalidraw.md",
+    "scripts/gen_excalidraw_hld.py",
+    "00_Project_Info/system-high-level-design.md",
+    "plans/2026-07-09-ba-kit-integration.md",
+    "plans",
+    "01_SRS/login/figma/QA_Knowledge.code-workspace",
     "04_Templates/testcases_template1.md",
     "04_Templates/testcases_template copy.md",
     "site/search/search_index.json",
@@ -190,9 +199,6 @@
     "site/04_Templates/ac_template/index.html",
     "site/04_Templates/testcases_template",
     "site/04_Templates/bug_template",
-    "site/04_Templates/ac_template",
-    "site/04_Templates",
-    "site/03_Testcases/registration/registration/index.html",
     "site/01_SRS/registration/figma/Screenshot 2026-07-01 at 10.40.55.png",
     "site/01_SRS/registration/figma/Screenshot 2026-07-01 at 10.40.30.png",
     "site/01_SRS/login/figma/login.png",
@@ -223,9 +229,6 @@
     "04_Templates/tc-template.md",
     "01_SRS/login/epic.md",
     "01.SRS/login/epic.md",
-    "commands/gen-tc.md",
-    "skills/gen-tcs-from-jira/references/test-techniques.md",
-    "skills/gen-tcs-from-jira/references/tc-template.md",
-    "skills/gen-tcs-from-jira/SKILL.md"
+    "commands/gen-tc.md"
   ]
 }
