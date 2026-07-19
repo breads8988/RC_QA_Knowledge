@@ -11,10 +11,10 @@
             "id": "b7443cb176c40844",
             "type": "leaf",
             "state": {
-              "type": "graph",
+              "type": "empty",
               "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           }
         ]
@@ -176,23 +176,34 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "obsidian-excalidraw-plugin:New drawing": false
     }
   },
   "active": "b7443cb176c40844",
   "lastOpenFiles": [
+    "00_Project_Info/system-high-level-design.excalidraw.md",
+    "03_Testcases/lawyer/lawyer.md",
+    "03_Testcases/lawyer",
+    "03_Testcases/expert_call_appointment/expert_call_appointment.md",
+    "03_Testcases/expert_call_appointment",
+    "02_Acceptance_Criteria/lawyer/lawyer.md",
+    "02_Acceptance_Criteria/lawyer",
+    "02_Acceptance_Criteria/expert_call_appointment/expert_call_appointment.md",
+    "02_Acceptance_Criteria/expert_call_appointment",
+    "01_SRS/lawyer/figma/lawyer.png",
+    "01_SRS/lawyer/figma",
+    "01_SRS/lawyer",
+    "01_SRS/expert_call_appointment/figma/Screenshot 2026-07-05 at 06.06.19.png",
+    "01_SRS/expert_call_appointment/figma/Screenshot 2026-07-05 at 06.06.14.png",
+    "01_SRS/expert_call_appointment/figma",
+    "01_SRS/expert_call_appointment",
+    "scripts/gen_excalidraw_hld.py",
+    "00_Project_Info/system-high-level-design.md",
+    "plans/2026-07-09-ba-kit-integration.md",
+    "plans",
     "04_Templates/testcases_template1.md",
     "04_Templates/testcases_template copy.md",
-    "site/search/search_index.json",
-    "site/search",
-    "site/04_Templates/testcases_template/index.html",
-    "site/04_Templates/bug_template/index.html",
-    "site/04_Templates/ac_template/index.html",
-    "site/04_Templates/testcases_template",
-    "site/04_Templates/bug_template",
-    "site/04_Templates/ac_template",
-    "site/04_Templates",
-    "site/03_Testcases/registration/registration/index.html",
     "site/01_SRS/registration/figma/Screenshot 2026-07-01 at 10.40.55.png",
     "site/01_SRS/registration/figma/Screenshot 2026-07-01 at 10.40.30.png",
     "site/01_SRS/login/figma/login.png",
@@ -216,16 +227,6 @@
     "02_Acceptance_Criteria/my_vehicle/my_vehicle.md",
     "02_Acceptance_Criteria/login/login.md",
     "00_Project_Info/features.md",
-    "assets/images/favicon.png",
-    "01_SRS/my_vehicle/figma/Screenshot 2026-07-04 at 12.20.17.png",
-    "01_SRS/login/epic_login.md",
-    "01_SRS/login/login.png",
-    "04_Templates/tc-template.md",
-    "01_SRS/login/epic.md",
-    "01.SRS/login/epic.md",
-    "commands/gen-tc.md",
-    "skills/gen-tcs-from-jira/references/test-techniques.md",
-    "skills/gen-tcs-from-jira/references/tc-template.md",
-    "skills/gen-tcs-from-jira/SKILL.md"
+    "01_SRS/login/epic_login.md"
   ]
 }
