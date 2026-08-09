@@ -16,6 +16,8 @@ Single source of truth mapping each **feature** to its short **code**. `/gen-ac`
 | accident_assistant    | `AA`    | Accident Assistance / Unfallhilfe — Report Accident flow entry, Overview, Step 1 Accident details (location, incident type, parties involved) | [[01_SRS/accident_assistant/]] |
 | workshop               | `WS`    | Workshop finder & voucher (nearby-workshop map/list search, voucher redemption code, save voucher, request appointment/callback) | [[01_SRS/workshop/]] |
 | saved_voucher          | `SV`    | Saved Voucher page (lists vouchers the user saved during the Workshop flow; separate page, connected to workshop's save-voucher action) | [[01_SRS/saved_voucher/]] |
+| expert_call_appointment | `ECA` | Find an Expert — list, filter, book appointment / schedule call (Calendly) | [[01_SRS/expert_call_appointment/]] |
+| lawyer                | `LAW`   | Lawyer page (Unfall Rechtsberatung) — list lawyers, filter by rating, request appointment | [[01_SRS/lawyer/]] |
 
 ## Rules
 
