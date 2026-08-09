@@ -7,6 +7,13 @@
 /site/
 .venv/
 
+# Obsidian — share vault config, ignore per-user UI state and plugin binaries.
+# Install community plugins from Obsidian (see .obsidian/community-plugins.json).
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/graph.json
+.obsidian/plugins/
+
 # Logs
 logs
 *.log
