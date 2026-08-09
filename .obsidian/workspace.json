@@ -4,17 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "929e2f1ea53f4c05",
+        "id": "b93d309881b89e97",
         "type": "tabs",
         "children": [
           {
-            "id": "b7443cb176c40844",
+            "id": "a7a61ba9a8c7622e",
             "type": "leaf",
             "state": {
-              "type": "empty",
+              "type": "graph",
               "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
         ]
@@ -176,12 +176,15 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false,
-      "obsidian-excalidraw-plugin:New drawing": false
+      "bases:Create new base": false
     }
   },
-  "active": "b7443cb176c40844",
+  "active": "a7a61ba9a8c7622e",
   "lastOpenFiles": [
+    "Untitled.canvas",
+    "README.md",
+    "Untitled.base",
+    "00_Project_Info/features.md",
     "00_Project_Info/system-high-level-design.excalidraw.md",
     "03_Testcases/lawyer/lawyer.md",
     "03_Testcases/lawyer",
@@ -201,7 +204,6 @@
     "scripts/gen_excalidraw_hld.py",
     "00_Project_Info/system-high-level-design.md",
     "plans/2026-07-09-ba-kit-integration.md",
-    "plans",
     "04_Templates/testcases_template1.md",
     "04_Templates/testcases_template copy.md",
     "site/01_SRS/registration/figma/Screenshot 2026-07-01 at 10.40.55.png",
@@ -216,7 +218,6 @@
     "docs/01_SRS/login/index.md",
     "docs/01_SRS/index.md",
     "Welcome.md",
-    "README.md",
     "04_Templates/testcases_template.md",
     "04_Templates/bug_template.md",
     "04_Templates/ac_template.md",
@@ -225,8 +226,6 @@
     "03_Testcases/login/login.md",
     "02_Acceptance_Criteria/registration/registration.md",
     "02_Acceptance_Criteria/my_vehicle/my_vehicle.md",
-    "02_Acceptance_Criteria/login/login.md",
-    "00_Project_Info/features.md",
-    "01_SRS/login/epic_login.md"
+    "02_Acceptance_Criteria/login/login.md"
   ]
 }

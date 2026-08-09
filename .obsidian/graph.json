@@ -5,8 +5,51 @@
   "showAttachments": false,
   "hideUnresolved": false,
   "showOrphans": true,
-  "collapse-color-groups": true,
-  "colorGroups": [],
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "path:00_Project_Info",
+      "color": {
+        "a": 1,
+        "rgb": 16756768
+      }
+    },
+    {
+      "query": "path:02_Acceptance_Criteria",
+      "color": {
+        "a": 1,
+        "rgb": 5020415
+      }
+    },
+    {
+      "query": "path:03_Testcases",
+      "color": {
+        "a": 1,
+        "rgb": 3984255
+      }
+    },
+    {
+      "query": "path:04_Templates",
+      "color": {
+        "a": 1,
+        "rgb": 10980346
+      }
+    },
+    {
+      "query": "path:docs",
+      "color": {
+        "a": 1,
+        "rgb": 7239297
+      }
+    },
+    {
+      "query": "-path:/",
+      "color": {
+        "a": 1,
+        "rgb": 16739179
+      }
+    }
+  ],
   "collapse-display": true,
   "showArrow": false,
   "textFadeMultiplier": 0,

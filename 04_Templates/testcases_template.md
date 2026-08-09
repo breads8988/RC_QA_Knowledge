@@ -14,16 +14,16 @@ This is the output format for `gen-tcs-from-jira`. **One register file per featu
 ```markdown
 # Test Case Register — <Feature name>
 
-| Field                | Value                                   |
-| -------------------- | --------------------------------------- |
-| **Version**          | 1.0                                     |
-| **Last updated**     | <YYYY-MM-DD>                            |
-| **Feature**          | <feature name>                          |
-| **SRS ref**          | [[01_SRS/<feature>/epic]]               |
+| Field                | Value                                    |
+| -------------------- | ---------------------------------------- |
+| **Version**          | 1.0                                      |
+| **Last updated**     | <YYYY-MM-DD>                             |
+| **Feature**          | <feature name>                           |
+| **SRS ref**          | [[01_SRS/<feature>/epic]]                |
 | **Jira tickets**     | `RC-4`, `RC-12` (tickets covered so far) |
-| **Owner**            | QC Team                                 |
-| **Reviewer**         | <Lead name>                             |
-| **Sprint / Release** | <Sprint X>                              |
+| **Owner**            | QC Team                                  |
+| **Reviewer**         | <Lead name>                              |
+| **Sprint / Release** | <Sprint X>                               |
 ```
 
 ## Coverage Summary
@@ -42,30 +42,30 @@ This is the output format for `gen-tcs-from-jira`. **One register file per featu
 
 ## Column Guide
 
-| Column               | Description                                               | Values / Format                                    |
-| -------------------- | -------------------------------------------------------- | -------------------------------------------------- |
-| **TC ID**            | Unique identifier — must match `@tag` in `.feature` file | `TC-<CODE>-NNN` e.g. `TC-LOGIN-001`             |
-| **Test Scenario**    | One-line title, start with an action verb                | Plain text                                         |
+| Column               | Description                                               | Values / Format                                                                    |
+| -------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| **TC ID**            | Unique identifier — must match `@tag` in `.feature` file  | `TC-<CODE>-NNN` e.g. `TC-LOGIN-001`                                                |
+| **Test Scenario**    | One-line title, start with an action verb                 | Plain text                                                                         |
 | **AC**               | The acceptance criterion / business rule this TC verifies | `AC-<CODE>-NN`, `BR-<CODE>-NN`, or `—` when designed directly from the requirement |
-| **Jira**             | The ticket this TC came from                             | `[<KEY>](url)`                                      |
-| **Priority**         | Business impact if this TC fails                         | 🔴 Critical / 🟠 High / 🟡 Medium / ⚪ Low          |
-| **Coverage**         | Automation status                                        | ✅ Automated / 🟡 Manual / 🔵 Pending               |
-| **Cucumber Tag**     | `@TC-ID` used in `.feature` — mandatory if Automated     | `@TC-<CODE>-NNN` — must match TC ID exactly     |
-| **Preconditions**    | System / data state required before test starts          | plain text                                         |
-| **Test Data**        | Concrete input values — placeholders for sensitive data  | e.g. `amount: 100,000 VND`                         |
-| **High-level Steps** | 3–5 steps describing the flow — no click-level detail    | numbered                                           |
-| **Expected Result**  | Observable, verifiable outcome — no vague statements     | include status / error code / state where relevant |
-| **Status**           | Latest execution result this cycle (≠ Coverage)          | ✅ Pass / ❌ Fail / ⛔ Blocked / ⬜ Not Run           |
-| **Note**             | Flag special cases — include ticket/link if available    | `[FLAKY]` `[BUG]` `[DEP]` `[SKIP]` `[DATA]`        |
+| **Jira**             | The ticket this TC came from                              | `[<KEY>](url)`                                                                     |
+| **Priority**         | Business impact if this TC fails                          | 🔴 Critical / 🟠 High / 🟡 Medium / ⚪ Low                                         |
+| **Coverage**         | Automation status                                         | ✅ Automated / 🟡 Manual / 🔵 Pending                                              |
+| **Cucumber Tag**     | `@TC-ID` used in `.feature` — mandatory if Automated      | `@TC-<CODE>-NNN` — must match TC ID exactly                                        |
+| **Preconditions**    | System / data state required before test starts           | plain text                                                                         |
+| **Test Data**        | Concrete input values — placeholders for sensitive data   | e.g. `amount: 100,000 VND`                                                         |
+| **High-level Steps** | 3–5 steps describing the flow — no click-level detail     | numbered                                                                           |
+| **Expected Result**  | Observable, verifiable outcome — no vague statements      | include status / error code / state where relevant                                 |
+| **Status**           | Latest execution result this cycle (≠ Coverage)           | ✅ Passed / ❌ Failed / ⛔ Blocked / ⬜ Not Run                                    |
+| **Note**             | Flag special cases — include ticket/link if available     | `[FLAKY]` `[BUG]` `[DEP]` `[SKIP]` `[DATA]`                                        |
 
 ## Test Case Table
 
 ```markdown
 ### 1. <Group name — e.g. Happy Path>
 
-| TC ID          | Test Scenario | AC            | Jira         | Priority    | Coverage   | Cucumber Tag      | Preconditions   | Test Data | High-level Steps | Expected Result | Status    | Note |
-| -------------- | ------------- | ------------- | ------------ | ----------- | ---------- | ----------------- | --------------- | --------- | ---------------- | --------------- | --------- | ---- |
-| TC-<CODE>-001 | <scenario>  | AC-<CODE>-01 | [<KEY>](url) | 🔴 Critical | 🔵 Pending | `@TC-<CODE>-001` | <preconditions> | <data>    | 1. … 2. … 3. …   | <expected>      | ⬜ Not Run |      |
+| TC ID         | Test Scenario | AC           | Jira         | Priority    | Coverage   | Cucumber Tag     | Preconditions   | Test Data | High-level Steps | Expected Result | Status     | Note |
+| ------------- | ------------- | ------------ | ------------ | ----------- | ---------- | ---------------- | --------------- | --------- | ---------------- | --------------- | ---------- | ---- |
+| TC-<CODE>-001 | <scenario>    | AC-<CODE>-01 | [<KEY>](url) | 🔴 Critical | 🔵 Pending | `@TC-<CODE>-001` | <preconditions> | <data>    | 1. … 2. … 3. …   | <expected>      | ⬜ Not Run |      |
 
 ### 2. <next group> …
 ```
