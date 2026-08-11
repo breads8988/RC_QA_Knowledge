@@ -46,6 +46,9 @@
 | AC-LAW-17  | Keep the filter across an orientation change      | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | Edge           | 🟡 Medium   | A 3★ rating filter is applied on a tablet in portrait orientation                                           | The device is rotated to landscape                    | The 3★ filter is still applied<br>And the same lawyers are listed in the same order                                                            | `TC-LAW-018` | Draft  |
 | AC-LAW-18  | Lawyer page requires an authenticated user        | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | Permission     | 🔴 Critical | A user is not logged in<br>And the Lawyer feature is currently Admin-configured "login required"             | The user attempts to access the Lawyer page              | The user cannot view the lawyer list<br>And is redirected to the Login page                                                                    | `TC-LAW-020` | Draft  |
 | AC-LAW-19  | Rating filter resets on returning to the page     | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | Edge           | 🟡 Medium   | A 3★ rating filter is applied on the Lawyer list page                                                        | The user navigates away and back to the Lawyer page (or reloads it) | The filter is reset to its default (no filter) — unlike an orientation change (AC-LAW-17), navigation away/reload does **not** preserve the filter | `TC-LAW-021` | Draft  |
+| AC-LAW-20  | A lawyer added in the Web Portal appears on the Lawyer Web app | `—` | Happy | 🔴 Critical | Admin has added a new lawyer via the Web Portal (Manage Lawyers → Add Lawyer) with valid Full Name, Full address, Rate, and Company name | A user opens the Lawyer Web app list ("Unfall Rechtsberatung") | The new lawyer appears as a list entry, with name, firm/company, rating, and address matching exactly what the admin entered in the Web Portal | `TC-LAW-022` | Draft  |
+| AC-LAW-21  | Lawyer details edited in the Web Portal are reflected on the Lawyer Web app | `—` | Happy | 🟠 High | Admin has edited an existing lawyer's Full Name, Full address, Rate, and/or Company name via the Web Portal (Manage Lawyers → Edit) and selected Save | A user views that lawyer's entry on the Lawyer Web app list | The name, firm, rating, and address shown to the user match the values last saved in the Web Portal — never stale/previous data | `TC-LAW-023` | Draft  |
+| AC-LAW-22  | A lawyer deleted in the Web Portal no longer appears on the Lawyer Web app | `—` | Happy | 🟠 High | Admin has deleted a lawyer via the Web Portal (Manage Lawyers → Delete → Yes, I'm sure) | A user views the Lawyer Web app list | The deleted lawyer no longer appears as a list entry | `TC-LAW-024` | Draft  |
 
 ## Business Rules (rule-based AC)
 
@@ -58,6 +61,7 @@
 | BR-LAW-05  | The Lawyer page must be fully functional on **phone and tablet** viewports in **both orientations**, explicitly including iPad Pro landscape.                                 | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | RC-116 description ("Should work on phone and tablet") + the iPad display defect fixed under this ticket. | 🔴 Critical | `TC-LAW-016`, `TC-LAW-017` | Draft  |
 | BR-LAW-06  | Access to the Lawyer page is governed by the **same Admin feature-config mechanism** as the Home page's `enabled` + `loginRequired` flags per feature. Current config: **login required** — a guest cannot view the lawyer list. | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | Confirmed by stakeholder 2026-08-06 ("theo config, hiện tại phải đăng nhập mới coi được"). Mirrors `homepage` BR-HOME-01 and `expert` BR-ECA-07. | 🔴 Critical | `TC-LAW-020` | Draft  |
 | BR-LAW-07  | The rating filter persists **only across a device orientation change** (AC-LAW-17). It does **not** persist when the user navigates away from the Lawyer page and returns, or reloads the page — the filter resets to default (no filter) in those cases. | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | Confirmed by stakeholder 2026-08-06 ("không giữ filter, mỗi lần quay lại là mới"). | 🟡 Medium   | `TC-LAW-021` | Draft  |
+| BR-LAW-08  | The Web Portal — Manage Lawyers screen (feature `wp_lawyer`) is the single source of truth for a lawyer's Full Name, Address, Rate, and Company; every add, edit, and delete made there must propagate to and be reflected by the consumer-facing Lawyer Web app (this feature). | `—` | Stakeholder confirmation (chat, 2026-08-10) | 🟠 High | `TC-LAW-022`, `TC-LAW-023`, `TC-LAW-024` | Draft  |
 
 ## Confirmed Decisions (resolved 2026-08-06 — all 14 prior open questions answered)
 
@@ -77,85 +81,38 @@
 | 12 | Filter persistence | Confirmed: the filter persists **only** across an orientation change (AC-LAW-17) — it **resets** on navigating away/back or on reload. Added AC-LAW-19, BR-LAW-07. |
 | 13 | Localisation | **German is the priority/primary language** for this ticket's scope; other locales not required. |
 | 14 | Backend scope | Keep **separate** — `RC-29`/`RC-63` API AC are not merged into this feature spec (same decision as `expert`). |
-# Acceptance Criteria — Lawyer (Unfall Rechtsberatung)
 
-| Field                  | Value                                                          |
-| ---------------------- | -------------------------------------------------------------- |
-| **Version**            | 1.0                                                            |
-| **Last updated**       | 2026-07-09                                                     |
-| **Feature**            | Lawyer page — Unfall Rechtsberatung (Accident legal advice)    |
-| **SRS ref**            | [[01_SRS/lawyer/]]                                             |
-| **Jira tickets**       | `RC-116` (child of Epic `RC-101` — Web App)                    |
-| **BA Owner**           | QC Team                                                        |
-| **Reviewer (PO/Lead)** | TBD                                                            |
-| **Status**             | Draft                                                          |
+## Column Guide
 
-## User Story
-
-**As a** RepairCheck web-app user who needs legal help after an accident
-**I want** to open "Unfall Rechtsberatung", browse a list of lawyers, filter them by rating, and request an appointment
-**So that** I can find suitable legal representation and have the lawyer contact me to arrange it
-
-## Scenario-based AC — Given / When / Then
-
-> Grounded in RC-116 and the Lawyer-page Figma (`01_SRS/lawyer/figma/lawyer.png`). **Confirmed flow (2026-07-09):** "Get appointment" → "Do you want &lt;Lawyer&gt; to contact you?" → **"Yes, contact me" opens Calendly** (`https://calendly.com/alextyl/jaekelgmbh`) **in a new browser tab** (the Repair Check tab is preserved); after the user completes the booking, they **return to the Repair Check tab themselves** and see a **"Thanks for booking your appointment" popup** (no automatic redirect).
-
-| AC ID        | Scenario           | Jira         | Type      | Criticality | Given (context)             | When (action / trigger)      | Then (expected outcome)                          | Linked TCs      | Status |
-| ------------ | ------------------ | ------------ | --------- | ----------- | --------------------------- | ---------------------------- | ------------------------------------------------ | --------------- | ------ |
-| AC-LAW-01 | Open the lawyer list from "Unfall Rechtsberatung" | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | Happy | 🟠 High | A signed-in user on the Home page | They tap the "Unfall Rechtsberatung" (Accident legal advice) tile | The "Lawyers" list page opens and shows the available lawyers | `TC-LAW-001` | Draft |
-| AC-LAW-02 | View the list of lawyers | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | Happy | 🔴 Critical | The user has opened the Lawyers page | The list is displayed | A list of lawyer cards is shown; each card shows the lawyer's name, law firm, star rating with review count, full address, phone number, email, and a "Get appointment" action | `TC-LAW-002`, `TC-LAW-012` | Draft |
-| AC-LAW-03 | Open the rating filter panel | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | Alternate | 🟡 Medium | The Lawyers list is displayed | They tap the filter icon in the header | A "Filter by" panel opens showing a RATINGS selector with values 1★, 2★, 3★, 4★, 5★ | `TC-LAW-003` | Draft |
-| AC-LAW-04 | Filter lawyers by minimum rating | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | Alternate | 🟠 High | The "Filter by" panel is open | They select a minimum star rating and apply | Only lawyers whose rating meets or exceeds the selected value are listed (e.g. selecting 2★ shows lawyers rated 2★ and above) | `TC-LAW-004` | Draft |
-| AC-LAW-05 | "Get appointment" opens a contact-confirmation prompt | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | Happy | 🔴 Critical | The Lawyers list is displayed | They tap "Get appointment" on a lawyer card | A prompt "Do you want &lt;Lawyer&gt; to contact you?" is shown, explaining the lawyer will contact them to arrange the appointment, with "Yes, contact me" and "No, I will check later" | `TC-LAW-006` | Draft |
-| AC-LAW-06 | "Yes, contact me" opens the lawyer's Calendly in a new tab | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | Happy | 🔴 Critical | The contact-confirmation prompt is shown | They select "Yes, contact me" | The Calendly scheduling page (`https://calendly.com/alextyl/jaekelgmbh`) opens in a **new browser tab** and the Repair Check tab is preserved, so the user can pick a day and time | `TC-LAW-007` | Draft |
-| AC-LAW-07 | Complete the booking → "Thank you" popup on return to the app tab | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | Happy | 🔴 Critical | The lawyer's Calendly page is open in a separate tab; the booking has been completed | They switch back to the Repair Check tab | A "Thanks for booking your appointment" popup is shown on the Repair Check tab, with an "Ok, Back to lawyers" action (no automatic redirect from Calendly) | `TC-LAW-008` | Draft |
-| AC-LAW-08 | Decline the appointment request | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | Alternate | 🟡 Medium | The contact-confirmation prompt is shown | They select "No, I will check later" | The prompt closes, Calendly is not opened, no request is submitted, and they return to the lawyer list | `TC-LAW-009` | Draft |
-| AC-LAW-09 | Return to the lawyer list from the confirmation | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | Alternate | ⚪ Low | The "Thanks for booking your appointment" popup is shown | They select "Ok, Back to lawyers" | They are returned to the lawyer list | `TC-LAW-010` | Draft |
-| AC-LAW-10 | No lawyers match the rating filter (empty state) | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | Edge | 🟡 Medium | The "Filter by" panel is open | They apply a minimum rating that no lawyer satisfies | A no-results / empty state is shown and no lawyer cards are listed | `TC-LAW-005` | Draft |
-| AC-LAW-11 | Responsive layout on phone and tablet | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | Edge | 🟡 Medium | The Lawyer flow opened in the mobile web app | It is viewed on a phone and on a tablet | The layout renders correctly and all cards, the filter, and the appointment actions remain usable on both form factors | `TC-LAW-011` | Draft |
-
-## Business Rules (rule-based AC)
-
-| Rule ID      | Business Rule                                  | Jira         | Rationale / Source     | Criticality | Linked TCs      | Status |
-| ------------ | ---------------------------------------------- | ------------ | ---------------------- | ----------- | --------------- | ------ |
-| BR-LAW-01 | Each lawyer entry displays the lawyer's name, law firm, average star rating with review count, full address, phone number, and email address. (No distance is shown, unlike the expert list.) | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | Figma lawyer list (`lawyer.png`) | 🟡 Medium | `TC-LAW-002` | Draft |
-| BR-LAW-02 | The lawyer list can be filtered by minimum rating (1–5 stars). Selecting N★ returns lawyers whose rating is **greater than or equal to** N (e.g. 2★ → lawyers rated ≥ 2★). | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | Figma "Filter by" (RATINGS) + RC-116 dev comment (2026-07-09): "filter is getting records that have higher value than the selected filter value" | 🟠 High | `TC-LAW-004` | Draft |
-| BR-LAW-03 | The appointment flow is: "Get appointment" → contact-confirmation prompt → "Yes, contact me" opens **Calendly** (`https://calendly.com/alextyl/jaekelgmbh`) in a **new browser tab** (the Repair Check tab is preserved). After completing the booking, the user returns to the Repair Check tab themselves and a "Thanks for booking your appointment" popup is shown there (no automatic redirect from Calendly). | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | RC-116 Story 3 + stakeholder confirmation (2026-07-09) + Figma popups | 🔴 Critical | `TC-LAW-006`, `TC-LAW-007`, `TC-LAW-008` | Draft |
-| BR-LAW-04 | The Lawyer page must render and function correctly on both phone and tablet form factors. | [RC-116](https://motionscloud.atlassian.net/browse/RC-116) | RC-116 requirement + QA comment (iPad display defect) | 🟡 Medium | `TC-LAW-011` | Draft |
+| Column          | Description                                                       | Values / Format                                   |
+| --------------- | ------------------------------------------------------------------ | --------------------------------------------------- |
+| **AC ID**       | Unique scenario id — TCs trace back to this                        | `AC-LAW-NN`                                        |
+| **Rule ID**     | Unique business-rule id — TCs trace back to this                   | `BR-LAW-NN`                                        |
+| **Scenario**    | Short title of the behaviour, start with an action verb            | Plain text                                          |
+| **Jira**        | The ticket this AC came from                                       | `[RC-116](url)`                                     |
+| **Type**        | Class of scenario                                                  | Happy / Alternate / Negative / Edge / Non-functional / Permission |
+| **Criticality** | Impact if this AC fails — drives the verifying TC's priority       | 🔴 Critical / 🟠 High / 🟡 Medium / ⚪ Low            |
+| **Given**       | Precondition / context true before the action                      | One state per clause; `<br>And …` to compound       |
+| **When**        | The single action or event that triggers behaviour                 | One trigger                                          |
+| **Then**        | Observable, verifiable outcome — pass/fail must be objective        | Include error code / message / state where relevant   |
+| **Linked TCs**  | TCs in `03_Testcases/lawyer/lawyer.md` that verify this AC          | `TC-LAW-NNN`, comma-separated                       |
+| **Status**      | Review state of the criterion                                      | Draft / Reviewed / Approved                          |
 
 ## Traceability
 
 ```
-RC-116  ──▶  AC-LAW-01..19 / BR-LAW-01..07  ──▶  TC-LAW-NNN
- (the why)          (the what — this file)        (the how to verify)
+Jira ticket (RC-116, child of Epic RC-101)  ──▶  AC-LAW-NN / BR-LAW-NN  ──▶  TC-LAW-NNN
+ (the why)                                        (the what — this file)        (the how to verify)
 ```
 
 - **Upward**: header `SRS ref` + each row's `Jira` column link back to `RC-116` (Epic `RC-101`).
-- **Downward**: `Linked TCs` populated by `/gen-tc lawyer RC-116` — see [`03_Testcases/lawyer/lawyer.md`](../../03_Testcases/lawyer/lawyer.md).
-- **Coverage**: every AC and business rule has ≥1 linked TC (BR-LAW-06 verified indirectly at the Home-page tile level — see `homepage.md`).
+- **Downward**: the `Linked TCs` column lists the verifying test cases in [`03_Testcases/lawyer/lawyer.md`](../../03_Testcases/lawyer/lawyer.md) — filled by `/gen-tc`.
+- **Coverage rule**: every `Critical`/`High` AC and every business rule needs ≥1 Linked TC (BR-LAW-06 verified indirectly at the Home-page tile level — see `homepage.md`).
 
 **Scenario classes intentionally not covered** (§3 of the AC technique guide):
 
 | Class                                            | Why skipped                                                                                      |
 | ------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| Permission                                       | Now covered — see AC-LAW-18, BR-LAW-06 (login required, per Admin feature-config).                |
 | State transitions                                | Browsing, filtering and opening an external scheduling page change no entity lifecycle in the app; the booking state lives in Calendly (BR-LAW-04). |
 | Performance, security, accessibility, observability | No target, threshold or requirement is stated anywhere in RC-116; inventing one would be unverifiable. |
 | Localisation / i18n                              | Confirmed German is the priority language for this ticket's scope; other locales not required.    |
-Jira RC-101 (Epic — Web App)
- └─ RC-116 (Fix Lawyer page)  ──▶  AC-LAW-01…11 / BR-LAW-01…04  ──▶  TC-LAW-NNN (via /gen-tc)
-```
-
-- **Upward**: header `SRS ref` + each row's `Jira` column link the AC to its source ticket (RC-116).
-- **Downward**: the `Linked TCs` column lists the verifying test cases in `03_Testcases/lawyer/lawyer.md` (filled by `/gen-tc`).
-- **Coverage rule**: every Critical/High AC and every business rule needs ≥1 Linked TC.
-
-## Open Questions / Assumptions (BA — confirm with stakeholders before TC generation)
-
-1. **✅ DECIDED (2026-07-09) — Appointment flow opens Calendly in a new tab.** "Get appointment" → contact-confirmation prompt → **"Yes, contact me" opens Calendly** (`https://calendly.com/alextyl/jaekelgmbh`) in a **new browser tab**. After completing the booking, the user **returns to the Repair Check tab themselves** and sees a "Thanks for booking your appointment" popup (no automatic redirect). Captured in AC-LAW-05/06/07 and BR-LAW-03. **Follow-up:** is the Calendly link **shared** for all lawyers, or is there a **per-lawyer** link (the expert page uses per-expert links per BR-ECA-05)?
-2. **Rating filter semantics.** RC-116 comment thread: QA reported "filter 2★ shows 3★ and 4★" as a bug; dev replied the filter returns records **≥** the selected value (minimum-rating semantics). BR-LAW-02 assumes minimum-rating is the intended behaviour (consistent with the expert list). **Confirm** this is intended (not exact-match). Also confirm how a decimal rating (e.g. 4.8) is matched to a star bucket.
-3. **Empty-state UI (AC-LAW-09).** The design does not show a "no lawyers match" state. Confirm the expected message/behaviour when the rating filter excludes every lawyer.
-4. **Filter apply model & multi-select.** Confirm whether the rating filter is single-select (one star value) or multi-select, and whether it applies live or on an explicit "Apply"/close action. Figma shows one value (4★) highlighted.
-5. **Lawyer list data source & ordering.** Confirm where the lawyer list comes from and the default ordering (the expert list is nearest-first by distance, but lawyer cards show no distance — confirm there is no location/distance concept here).
-6. **Callback request persistence.** Confirm what "Yes, contact me" does server-side (creates a request record? notifies the lawyer/firm?) and whether the user can see/track the request afterward.
-7. **SRS note.** No `01_SRS/lawyer/epic.md` exists yet; the SRS ref points at the folder. Create the SRS note if the team wants a formal SRS anchor.
