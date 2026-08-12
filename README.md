@@ -2,9 +2,18 @@
 
 QA knowledge base for **RepairCheck (RC)** — requirements, acceptance criteria, and test cases stored as Obsidian markdown and generated from Jira tickets with Claude Code.
 
-RepairCheck is a multi-tenant SaaS for car accident and damage assistance (German market), built by MotionsCloud and sold to insurance companies. Three groups use it: **drivers** (Web App + Android), **Client Admins** at each insurance company (Web Portal), and **MCS Admins** (SaaS Admin). Read `CLAUDE.md` for the business model, actors, and domain vocabulary — that context matters more than any format rule below.
+RepairCheck is a multi-tenant SaaS for car accident and damage assistance (German market), built by MotionsCloud and sold to insurance companies. Three groups use it: **drivers** (Web App + Android), **Client Admins** at each insurance company (Web Portal), and **MCS Admins** (SaaS Admin).
 
 Main flow: **Jira ticket → AC (BA) → Test Cases (QA) → Bug (on failure)**.
+
+### Two files to read before you write anything
+
+| File | What it holds |
+| ---- | ------------- |
+| `00_Project_Info/conventions.md` | **All structural rules** — paths, slugs, the registry, IDs, linking, templates. Single source of truth. |
+| `CLAUDE.md` | **The business** — what the product is, who the actors are, German domain vocabulary, the entity model. |
+
+This README is orientation and setup only. It deliberately does not repeat the rules — when they lived in five files at once they drifted apart, which is what broke the vault the first time.
 
 ---
 
@@ -12,7 +21,8 @@ Main flow: **Jira ticket → AC (BA) → Test Cases (QA) → Bug (on failure)**.
 
 ```
 00_Project_Info/
-  features.md                     # Registry: slug → code, grouped by domain
+  conventions.md                  # Structural rules — the canonical one
+  features.md                     # Registry: slug → code → entity, grouped by domain
   system-high-level-design.md     # Architecture, actors, core entities
 01_SRS/
   <domain>/<domain>.md            # Domain hub — lists that domain's sub-features
@@ -27,12 +37,12 @@ Main flow: **Jira ticket → AC (BA) → Test Cases (QA) → Bug (on failure)**.
   ac_template.md                  # AC format
   testcases_template.md           # TC register format
   bug_template.md                 # Bug report format (creates a Jira Bug)
-CLAUDE.md                         # Business context + vault conventions
+CLAUDE.md                         # Business context for the agent
 .claude/                          # Skills + commands (active when Claude Code runs at the vault)
 mkdocs.yml, Makefile, scripts/, .github/   # Docs website (see section 8)
 ```
 
-**The three pillars mirror each other** — a feature sits at the same relative path under `01_SRS/`, `02_Acceptance_Criteria/` and `03_Testcases/`, and the note's file name always equals its leaf folder name:
+The three pillars **mirror each other** — the same feature sits at the same relative path under each, and the note's file name equals its leaf folder name:
 
 ```
 01_SRS/workshop/wa_workshop/wa_workshop.md
@@ -40,11 +50,7 @@ mkdocs.yml, Makefile, scripts/, .github/   # Docs website (see section 8)
 03_Testcases/workshop/wa_workshop/wa_workshop.md
 ```
 
-A feature that belongs to no domain drops the `<domain>/` level — `01_SRS/login/login.md`. Domains in use: `accident`, `lawyer`, `voucher`, `workshop`.
-
-**The `wa_` / `wp_` prefix tells you the actor**, not just the app: `wa_` = Web App (driver), `wp_` = Web Portal (Client Admin). `wa_workshop` and `wp_workshop` are two different features — a driver searching for a garage vs. an admin editing the garage record. Never register a bare domain name (`workshop`) as a slug; it is ambiguous between the two.
-
-A **feature** accumulates multiple Jira tickets. Files are named by slug for readability; IDs use a short code for brevity.
+`wa_` = Web App (driver), `wp_` = Web Portal (Client Admin) — the prefix identifies the **actor**, so `wa_workshop` and `wp_workshop` are two different features, not two views of one. Full rules in `conventions.md` §1–§2.
 
 ---
 
@@ -95,16 +101,18 @@ Copy `04_Templates/bug_template.md`, fill it in, then create a Jira issue of typ
 
 ## 4. Feature Registry (`00_Project_Info/features.md`)
 
-Before working on a **new** feature, add a row to the registry: slug (lowercase, matching the leaf folder name) + code (2–6 uppercase letters, unique across the whole registry). Put the row under the right `##` section — that section is what tells the skills which domain the feature belongs to.
+Before working on a **new** feature, add a row: slug + code + entity, under the right `##` section (the section is what tells the skills the domain).
 
-| Section          | Slug          | Code   | Example ID       |
-| ---------------- | ------------- | ------ | ---------------- |
-| `## Standalone`  | `login`       | `LOGIN` | `TC-LOGIN-001`  |
-| `## Standalone`  | `my_vehicle`  | `MV`    | `TC-MV-001`     |
-| `## Workshop`    | `wa_workshop` | `WS`    | `TC-WS-001`     |
-| `## Workshop`    | `wp_workshop` | `WPWS`  | `TC-WPWS-001`   |
+| Section         | Slug          | Code    | Entity              | Example ID     |
+| --------------- | ------------- | ------- | ------------------- | -------------- |
+| `## Standalone` | `login`       | `LOGIN` | `User`              | `TC-LOGIN-001` |
+| `## Standalone` | `my_vehicle`  | `MV`    | `Vehicle`           | `TC-MV-001`    |
+| `## Workshop`   | `wa_workshop` | `WS`    | `Workshop` `Voucher` | `TC-WS-001`   |
+| `## Workshop`   | `wp_workshop` | `WPWS`  | `Workshop` `Voucher` | `TC-WPWS-001` |
 
-⚠️ Once a code is used in an ID it **must not change** (it breaks traceability). If you run a command for a feature not in the table, the skill will ask for a code and which domain it belongs to, then add it.
+⚠️ Once a code is used in an ID it **must not change** — it breaks traceability. If you run a command for a feature not in the table, the skill asks for the code, domain and entity, then adds the row for you.
+
+The **Entity** column is how cross-feature impact is found: search the registry for an entity and you get every feature sharing those records — often in a *different* domain, so the hub will not show them. Rules for filling it: `conventions.md` §3–§4.
 
 ---
 
@@ -122,13 +130,21 @@ Jira ticket  →  AC-<CODE>-NN / BR-<CODE>-NN  →  TC-<CODE>-NNN
 
 ## 6. Conventions
 
-- **1 feature = 1 file** for both AC and TC, accumulating multiple tickets (append, continue numbering, never renumber).
-- **Templates are the single source of truth** in `04_Templates/` — skills read them on every run. To change a format, edit the template, not the files in `.claude/`.
-- **Write everything in English** (the vault is shared on GitHub). German product terms stay German where the UI uses them; gloss them on first use.
-- **Linking — one hop per level.** The graph reads `features.md → domain hub → feature SRS note → its AC/TC`. `features.md` links only to hubs and standalone features; an AC/TC note links only up to its own SRS note. Cross-feature references go in prose using the other feature's code, not a wiki-link.
-- **Never link to a folder.** `[[01_SRS/accident/wa_my_accident/]]` with a trailing slash does not resolve — Obsidian links point at notes, not folders, so it renders as a dead grey node. Link the note: `[[01_SRS/accident/wa_my_accident/wa_my_accident]]`.
-- Test cases stay **high-level** — one scenario, 3–5 steps, no click-by-click. The Cucumber layer writes the detailed steps.
-- Do not touch `.obsidian/`.
+**All of them live in `00_Project_Info/conventions.md`** — read it there, not here. Section map:
+
+| § | Covers |
+| - | ------ |
+| 1 | The three mirrored pillars; file name = leaf folder name |
+| 2 | Slug rules and the `wa_` / `wp_` platform prefix |
+| 3 | Feature registry: codes, code immutability, the Entity column |
+| 4 | Finding impact across features |
+| 5 | Traceability and the coverage rule |
+| 6 | Linking discipline — one hop per level; never link to a folder |
+| 7 | Templates |
+| 8 | Writing rules (English, high-level TCs, never fabricate) |
+| 9 | Generated folders — `docs/`, `site/` |
+
+Two that bite most often, repeated here only as a warning: a feature is **1 file per pillar** and grows by appending (never renumber existing IDs), and **`docs/` + `site/` are generated** — edit the real folders at the repo root.
 
 ---
 

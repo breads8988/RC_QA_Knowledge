@@ -7,22 +7,11 @@ description: Use when generating test cases (TCs) from a Jira ticket plus Figma 
 
 Turn a Jira ticket and its Figma UI into a complete, traceable Test Case Register written as Obsidian markdown — **one register file per feature**, grouped tables, every TC linked to the AC it verifies and to its Jira ticket.
 
-## Vault layout (read this before writing any path)
+## Read the conventions first
 
-The three pillars are **mirror images**. A feature occupies the same relative path under each:
+**Read `00_Project_Info/conventions.md` before writing any path, ID, or link.** It is the single source of truth for the vault's structure — the three mirrored pillars, slug and `wa_`/`wp_` prefix rules, the registry and its Entity column, how impact is found, and the linking discipline. This skill does not restate those rules; if it ever appears to contradict that file, that file wins.
 
-```
-01_SRS/<domain>/<slug>/<slug>.md               02_Acceptance_Criteria/<domain>/<slug>/<slug>.md
-01_SRS/<domain>/<slug>/*.png  (screens)        03_Testcases/<domain>/<slug>/<slug>.md
-01_SRS/<domain>/<slug>/figma/*.png
-```
-
-- **The file name always equals its leaf folder name.** Never `workshop/wa_workshop/workshop.md`.
-- A feature with no domain drops the `<domain>/` level: `03_Testcases/login/login.md`.
-- A slug under a shared domain carries a platform prefix: `wa_` (Web App) or `wp_` (Web Portal) — e.g. `workshop/wa_workshop`, `workshop/wp_workshop`. Never use a bare domain name as a slug; it is ambiguous between the two platforms.
-- Domains in use: `accident`, `lawyer`, `voucher`, `workshop`. Everything else is standalone.
-
-Resolve the real path from `00_Project_Info/features.md` (step 1) — do not guess it from the slug alone.
+Also read `CLAUDE.md` for the business layer — the actors behind `wa_`/`wp_`, the German domain vocabulary, and the entity model. A `wa_` feature and its `wp_` twin have different actors and different failure modes, so the same screen name does not mean the same test.
 
 ## Inputs
 
@@ -53,7 +42,11 @@ Read `00_Project_Info/features.md` and find the row for the feature slug.
 - **Code** — use the row's **Code** as the ID prefix (`<CODE>`). Never invent a code silently, and never use a different code than the registry for a feature that already has one.
 - **Path** — the section the row sits under gives the domain. A row under `## Workshop` means `<domain>` = `workshop`; a row under `## Standalone` has no domain. Build the target path from that, then **verify it against the disk** (`ls 01_SRS/<domain>/<slug>/`) before writing. If the folder does not exist, stop and ask — do not create a second home for a feature that already has one.
 
-If the slug is not listed at all, STOP and ask the user for a short code (2–6 uppercase letters) and which domain it belongs to, add a new row to the correct section of the registry, then continue.
+- **Entity** — read the row's **Entity** column. It names the records this feature owns, and it is how regression impact is found in step 4b.
+
+If the slug is not listed at all, STOP and ask the user for three things — a short code (2–6 uppercase letters), which domain it belongs to, and which **entity** it takes as its subject (see the registry's "Entity column" section for the valid list and the rule against declaring session state) — then add a complete row to the correct section of the registry and continue.
+
+If the row exists but its **Entity** cell is blank, do not guess it. Carry on with the run, and say so in the step-7 report so it gets filled.
 
 ### 2. Fetch the ticket
 
@@ -74,6 +67,18 @@ First, check for the feature's AC spec at the mirror path resolved in step 1 (`0
 
 Then read `references/test-techniques.md` and follow it end-to-end: analyse the requirement first (§1), apply only techniques that add meaningful coverage (§2–§15), optimize to avoid redundant TCs (§16), and satisfy traceability + coverage rules before handoff. List conditions grouped by theme before writing so coverage is visible.
 
+### 4b. Regression impact — find the affected features, don't guess them
+
+`references/test-techniques.md` §15 requires every ticket to state its regression impact and to **reuse existing TCs** for impacted areas. That is only possible if you actually go and read them. Do this before writing:
+
+1. Take this feature's **Entity** values from the registry row (step 1).
+2. Search `00_Project_Info/features.md` for each entity. Every **other** row listing the same entity is a regression candidate — these are features that read or write the same records, and they are often in a **different domain**, so the domain hub will not reveal them. (Example: `Voucher` is listed by `wa_workshop`, `wp_workshop`, `wa_saved_voucher` and `wp_user_voucher` — two domains, four features.)
+3. Also read the **domain hub** (`01_SRS/<domain>/<domain>.md`) for sibling sub-features on the other platform. A `wa_` feature and its `wp_` twin act on the same records through different actors, so admin-side changes routinely break the driver-side view and vice versa.
+4. For each candidate, open its TC register and skim the group headings and TC IDs. Cite **real** `TC-<CODE>-NNN` IDs when you say existing coverage applies. **Never invent a TC ID** — if you have not opened the file, say coverage is unverified instead.
+5. If the change is company-scoped data (any list or filter), add a cross-tenant negative case: a Client Admin must never see another company's records. Multi-tenancy is a standing risk on every such feature.
+
+Keep this proportionate — a self-contained UI-copy change may genuinely have no impact, and "none, isolated" is a valid finding. Report what you checked, not just what you found.
+
 ### 5. Write / append the register
 
 Target file: the path resolved in step 1 — `03_Testcases/<domain>/<slug>/<slug>.md`, or `03_Testcases/<slug>/<slug>.md` when standalone. Use the format in `04_Templates/testcases_template.md` (single source of truth — read it from the vault, not from this skill). Use `mkdir -p`.
@@ -92,6 +97,11 @@ Recount ALL TCs in the file (existing + new) and refresh the Coverage Summary ta
 ### 7. Report
 
 Print a short summary in chat: TCs added this run, new feature total, breakdown by priority and theme, and any gaps (UI not provided, conditions you could not cover). Surface anything uncovered — never imply full coverage silently.
+
+Also report, every run:
+
+- **Regression impact from step 4b** — which features you checked (by entity and by domain sibling), which existing TC IDs you verified as still-covering, and which impacted areas you could **not** cover here. "None, isolated change" is a valid answer; silence is not.
+- **Registry drift** — if this feature's row, or any row you read while searching by entity, has a blank **Entity** cell, list those slugs and ask the user to fill them. A blank cell silently shrinks every future impact search, so it must not pass unmentioned.
 
 ## Handling collisions
 

@@ -7,22 +7,11 @@ description: Use when writing acceptance criteria (AC) from a Jira ticket, actin
 
 Act as a **senior Business Analyst**. Turn a Jira ticket into a clear, testable, BABOK-aligned acceptance-criteria spec (BABOK §10.1) — Given/When/Then scenarios + business rules — written **per feature** so the QA team derives test cases from it via `/gen-tc`.
 
-## Vault layout (read this before writing any path)
+## Read the conventions first
 
-The three pillars are **mirror images**. A feature occupies the same relative path under each:
+**Read `00_Project_Info/conventions.md` before writing any path, ID, or link.** It is the single source of truth for the vault's structure — the three mirrored pillars, slug and `wa_`/`wp_` prefix rules, the registry and its Entity column, how impact is found, and the linking discipline. This skill does not restate those rules; if it ever appears to contradict that file, that file wins.
 
-```
-01_SRS/<domain>/<slug>/<slug>.md               02_Acceptance_Criteria/<domain>/<slug>/<slug>.md
-01_SRS/<domain>/<slug>/*.png  (screens)        03_Testcases/<domain>/<slug>/<slug>.md
-01_SRS/<domain>/<slug>/figma/*.png
-```
-
-- **The file name always equals its leaf folder name.** Never `workshop/wa_workshop/workshop.md`.
-- A feature with no domain drops the `<domain>/` level: `02_Acceptance_Criteria/login/login.md`.
-- A slug under a shared domain carries a platform prefix: `wa_` (Web App) or `wp_` (Web Portal) — e.g. `workshop/wa_workshop`, `workshop/wp_workshop`. Never use a bare domain name as a slug; it is ambiguous between the two platforms.
-- Domains in use: `accident`, `lawyer`, `voucher`, `workshop`. Everything else is standalone.
-
-Resolve the real path from `00_Project_Info/features.md` (step 1) — do not guess it from the slug alone.
+Also read `CLAUDE.md` for the business layer — the actors behind `wa_`/`wp_`, the German domain vocabulary, and the entity model. AC quality depends far more on getting the actor right than on formatting.
 
 ## Inputs
 
@@ -53,7 +42,11 @@ Read `00_Project_Info/features.md` and find the row for the feature slug.
 - **Code** — use the row's **Code** as the ID prefix (`<CODE>`). Never invent a code silently, and never use a different code than the registry for a feature that already has one.
 - **Path** — the section the row sits under gives the domain. A row under `## Workshop` means `<domain>` = `workshop`; a row under `## Standalone` has no domain. Build the target path from that, then **verify it against the disk** (`ls 01_SRS/<domain>/<slug>/`) before writing. If the folder does not exist, stop and ask — do not create a second home for a feature that already has one.
 
-If the slug is not listed at all, STOP and ask the user for a short code (2–6 uppercase letters) and which domain it belongs to, add a new row to the correct section of the registry, then continue.
+- **Entity** — read the row's **Entity** column. It names the records this feature owns, and it is how impacted existing behaviour is found in step 3b.
+
+If the slug is not listed at all, STOP and ask the user for three things — a short code (2–6 uppercase letters), which domain it belongs to, and which **entity** it takes as its subject (see the registry's "Entity column" section for the valid list and the rule against declaring session state) — then add a complete row to the correct section of the registry and continue.
+
+If the row exists but its **Entity** cell is blank, do not guess it. Carry on with the run, and say so in the step-6 report so it gets filled.
 
 ### 2. Fetch the ticket
 
@@ -64,6 +57,18 @@ Call the Jira MCP to read the issue by key. Capture: summary, full description, 
 ### 3. Analyse the requirement (BA work)
 
 Apply `references/ac-techniques.md` §1: identify functional requirements, business rules, actors, preconditions, triggers, outputs, state changes, dependencies, impacted existing behaviour, and assumptions. Then restate as a **user story** (`As a <role>, I want <capability>, so that <benefit>`). This step drives most of the AC quality. If a Figma-screenshots folder was passed, list it and **Read every image file** to ground UI states; otherwise use any pasted screenshots. Never fabricate UI elements you have not seen.
+
+### 3b. Find the impacted existing behaviour — read it, don't recall it
+
+§1 asks for **impacted existing behaviour**. As a BA that means naming the existing rules this change can contradict, and you cannot do that from memory. Before decomposing:
+
+1. Take this feature's **Entity** values from the registry row (step 1).
+2. Search `00_Project_Info/features.md` for each entity. Every **other** row listing the same entity shares those records — and is often in a **different domain**, so the domain hub will not reveal it. (Example: `Voucher` is listed by `wa_workshop`, `wp_workshop`, `wa_saved_voucher` and `wp_user_voucher` — two domains, four features.)
+3. Open those features' AC specs and read their **Business Rules** tables. A new rule that contradicts an existing `BR-<CODE>-NN` is the single most expensive defect this skill can prevent — the two specs would each look correct on their own.
+4. Also read the **domain hub** (`01_SRS/<domain>/<domain>.md`) for the sibling on the other platform. A rule written for the driver's view (`wa_`) usually has a matching admin-side obligation (`wp_`), and vice versa.
+5. Cite **real** `BR-<CODE>-NN` / `AC-<CODE>-NN` IDs when you reference an existing rule. **Never invent an ID** — if you did not open the file, say so.
+
+Record what you find as prose in the AC spec's user-story section and, where it constrains this feature, as a business rule of its own. Conflicts you cannot resolve go to the step-6 open-questions list — do not silently pick a winner.
 
 ### 4. Decompose into AC
 
@@ -88,6 +93,11 @@ AC IDs `AC-<CODE>-NN`, rule IDs `BR-<CODE>-NN`. Each row's **Jira** column links
 ### 6. Self-check & report
 
 Run the final gate in `references/ac-techniques.md` §9 and fix any miss before reporting. Then print a summary: AC added this run + feature total, by type and priority. Then, as a BA, list **open questions / ambiguities** the ticket left unresolved (anything you had to assume) so the user can confirm with stakeholders before TCs are written. Never silently invent business rules — flag assumptions explicitly.
+
+Also report, every run:
+
+- **Impacted existing behaviour from step 3b** — which features you checked (by entity and by domain sibling), which existing `BR-`/`AC-` IDs this ticket touches or contradicts, and any conflict you left unresolved. "None, isolated change" is a valid answer; silence is not.
+- **Registry drift** — if this feature's row, or any row you read while searching by entity, has a blank **Entity** cell, list those slugs and ask the user to fill them. A blank cell silently shrinks every future impact search, so it must not pass unmentioned.
 
 ## Handling collisions
 
