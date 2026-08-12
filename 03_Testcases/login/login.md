@@ -5,7 +5,7 @@
 | **Version**          | 1.0                                           |
 | **Last updated**     | 2026-07-01                                    |
 | **Feature**          | Login                                         |
-| **SRS ref**          | [[01_SRS/login/epic]]                         |
+| **SRS ref**          | [[01_SRS/login/login]]                         |
 | **Jira tickets**     | `RC-6`, `RC-66`, `RC-26` (parent epic `RC-4`) |
 | **Owner**            | QC Team                                       |
 | **Reviewer**         | —                                             |
