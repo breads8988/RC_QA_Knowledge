@@ -5,7 +5,7 @@
 | **Version**           | 1.0                                        |
 | **Last updated**      | 2026-08-06                                 |
 | **Feature**           | Workshop Web app & voucher                  |
-| **SRS ref**           | [[01_SRS/workshop/]]                       |
+| **SRS ref**           | [[01_SRS/workshop/wa_workshop/wa_workshop]]                       |
 | **Jira tickets**      | `RC-120`                                   |
 | **Owner**             | QC Team                                    |
 | **Reviewer**          | —                                           |

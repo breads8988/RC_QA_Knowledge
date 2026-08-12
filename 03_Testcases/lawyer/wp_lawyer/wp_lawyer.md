@@ -5,7 +5,7 @@
 | **Version**            | 1.0                                        |
 | **Last updated**       | 2026-08-10                                 |
 | **Feature**            | Web Portal — Manage Lawyers (admin)        |
-| **SRS ref**            | [[01_SRS/wp_lawyer/]]                      |
+| **SRS ref**            | [[01_SRS/lawyer/wp_lawyer/wp_lawyer]]                      |
 | **Jira tickets**       | `RC-107`                                   |
 | **Owner**              | QC Team                                    |
 | **Reviewer**           | —                                           |

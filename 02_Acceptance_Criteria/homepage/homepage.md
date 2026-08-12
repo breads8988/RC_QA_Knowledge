@@ -5,7 +5,7 @@
 | **Version**            | 1.0                                     |
 | **Last updated**       | 2026-08-06                              |
 | **Feature**            | Home page (feature grid for logged-in/guest users, banner, quick menu, Admin-driven feature config) |
-| **SRS ref**            | [[01_SRS/homepage/]]                    |
+| **SRS ref**            | [[01_SRS/homepage/homepage]]                    |
 | **Jira tickets**       | `RC-1` (child of Epic [`RC-4`](https://motionscloud.atlassian.net/browse/RC-4) — Web app - Home page), `RC-106` (child of Epic [`RC-101`](https://motionscloud.atlassian.net/browse/RC-101) — Web App) |
 | **BA Owner**           | anhvu51                                 |
 | **Reviewer (PO/Lead)** | TBD                                     |

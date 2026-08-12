@@ -5,7 +5,7 @@
 | **Version**           | 1.1                                        |
 | **Last updated**      | 2026-08-06                                 |
 | **Feature**           | Accident Assistant (Unfallhilfe)           |
-| **SRS ref**           | [[01_SRS/accident_assistant/]]             |
+| **SRS ref**           | [[01_SRS/accident/wa_accident_assistant/wa_accident_assistant]]             |
 | **Jira tickets**      | `RC-110`                                   |
 | **Owner**             | QC Team                                    |
 | **Reviewer**          | —                                           |

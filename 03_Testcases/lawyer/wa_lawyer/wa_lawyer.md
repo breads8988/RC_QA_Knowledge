@@ -5,7 +5,7 @@
 | **Version**          | 1.0                                     |
 | **Last updated**     | 2026-08-03                              |
 | **Feature**          | Lawyer page / accident legal advice ("Unfall Rechtsberatung") |
-| **SRS ref**          | [[01_SRS/lawyer/]]                      |
+| **SRS ref**          | [[01_SRS/lawyer/wa_lawyer/wa_lawyer]]                      |
 | **Jira tickets**     | `RC-116` (under Epic [RC-101](https://motionscloud.atlassian.net/browse/RC-101)) |
 | **Owner**            | QC Team                                 |
 | **Reviewer**         | TBD                                     |

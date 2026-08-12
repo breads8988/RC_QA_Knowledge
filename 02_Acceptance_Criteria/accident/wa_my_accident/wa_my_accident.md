@@ -5,7 +5,7 @@
 | **Version**            | 1.0                                       |
 | **Last updated**       | 2026-08-06                                |
 | **Feature**            | My Accidents                              |
-| **SRS ref**            | [[01_SRS/my_accident/]]                   |
+| **SRS ref**            | [[01_SRS/accident/wa_my_accident/wa_my_accident]]                   |
 | **Jira tickets**       | `RC-111`                                  |
 | **BA Owner**           | —                                         |
 | **Reviewer (PO/Lead)** | —                                         |

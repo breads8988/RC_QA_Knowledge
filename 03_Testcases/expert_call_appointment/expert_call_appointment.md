@@ -5,7 +5,7 @@
 | **Version**          | 1.0                                     |
 | **Last updated**     | 2026-07-07                              |
 | **Feature**          | Expert call & appointment / Find an Expert |
-| **SRS ref**          | [[01_SRS/expert_call_appointment/]]     |
+| **SRS ref**          | [[01_SRS/expert_call_appointment/expert_call_appointment]]     |
 | **Jira tickets**     | `RC-112` (child of Epic `RC-101` — Web App) |
 | **Owner**            | QC Team                                 |
 | **Reviewer**         | TBD                                     |

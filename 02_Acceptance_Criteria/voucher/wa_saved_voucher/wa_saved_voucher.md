@@ -5,7 +5,7 @@
 | **Version**            | 1.0                                       |
 | **Last updated**       | 2026-08-06                                |
 | **Feature**            | Saved Voucher page                        |
-| **SRS ref**            | [[01_SRS/saved_voucher/]]                 |
+| **SRS ref**            | [[01_SRS/voucher/wa_saved_voucher/wa_saved_voucher]]                 |
 | **Jira tickets**       | `RC-65`                                   |
 | **BA Owner**           | —                                         |
 | **Reviewer (PO/Lead)** | —                                         |

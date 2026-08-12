@@ -5,7 +5,7 @@
 | **Version**            | 1.0                                        |
 | **Last updated**       | 2026-08-10                                 |
 | **Feature**            | Web Portal — Manage Workshop (admin)       |
-| **SRS ref**            | [[01_SRS/wp_workshop/]]                    |
+| **SRS ref**            | [[01_SRS/workshop/wp_workshop/wp_workshop]]                    |
 | **Jira tickets**       | `RC-104`                                   |
 | **BA Owner**           | —                                           |
 | **Reviewer (PO/Lead)** | —                                           |

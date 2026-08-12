@@ -5,7 +5,7 @@
 | **Version**            | 1.2                                     |
 | **Last updated**       | 2026-07-04                              |
 | **Feature**            | Registration / sign-up                  |
-| **SRS ref**            | [[01_SRS/registration/]]                |
+| **SRS ref**            | [[01_SRS/registration/registration]]                |
 | **Jira tickets**       | `RC-8` (Epic [`RC-21`](https://motionscloud.atlassian.net/browse/RC-21) — User management) |
 | **BA Owner**           | anhvu51                                 |
 | **Reviewer (PO/Lead)** | TBD                                     |

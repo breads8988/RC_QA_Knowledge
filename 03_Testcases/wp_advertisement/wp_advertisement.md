@@ -5,7 +5,7 @@
 | **Version**            | 1.0                                        |
 | **Last updated**       | 2026-08-11                                 |
 | **Feature**            | Web Portal — Manage Advertisements (admin) |
-| **SRS ref**            | [[01_SRS/wp_advertisement/]]               |
+| **SRS ref**            | [[01_SRS/wp_advertisement/wp_advertisement]]               |
 | **Jira tickets**       | `RC-115`                                   |
 | **Owner**              | QC Team                                    |
 | **Reviewer**           | —                                           |

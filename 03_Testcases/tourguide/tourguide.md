@@ -5,7 +5,7 @@
 | **Version**           | 1.0                                        |
 | **Last updated**      | 2026-08-06                                 |
 | **Feature**           | Tour Guide                                 |
-| **SRS ref**           | [[01_SRS/tourguide/]]                      |
+| **SRS ref**           | [[01_SRS/tourguide/tourguide]]                      |
 | **Jira tickets**      | `RC-49`                                    |
 | **Owner**             | QC Team                                    |
 | **Reviewer**          | —                                           |

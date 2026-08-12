@@ -5,7 +5,7 @@
 | **Version**            | 1.1                                                                                           |
 | **Last updated**       | 2026-07-04                                                                                    |
 | **Feature**            | My Vehicle management                                                                          |
-| **SRS ref**            | [[01_SRS/my_vehicle/]]                                                                         |
+| **SRS ref**            | [[01_SRS/my_vehicle/my_vehicle]]                                                                         |
 | **Jira tickets**       | `RC-109`, `RC-105` (under Epic [RC-101](https://motionscloud.atlassian.net/browse/RC-101))    |
 | **BA Owner**           | anhvu51                                                                                        |
 | **Reviewer (PO/Lead)** | <name>                                                                                         |
