@@ -1,11 +1,18 @@
 # Test Case Register — Template
 
-This is the output format for `gen-tcs-from-jira`. **One register file per feature**, written to `03_Testcases/<feature>/<feature>.md` (e.g. `login/login.md`, `my_vehicle/my_vehicle.md` — same feature slugs as `01_SRS/`).
+This is the output format for `gen-tcs-from-jira`. **One register file per feature**, written at the **same relative path** the feature has under `01_SRS/` and `02_Acceptance_Criteria/`.
 
-- `<CODE>` is the feature's short code from the registry `00_Project_Info/features.md` (e.g. `user_management` → `UM`). The **file** is named by the full feature slug; the **IDs** use the short code. `NNN` is the zero-padded TC number, **continuous within the feature** (`001`, `002`, …) across all its tickets.
+| Feature kind   | Register path                            |
+| -------------- | ---------------------------------------- |
+| Standalone     | `03_Testcases/<slug>/<slug>.md`          |
+| Under a domain | `03_Testcases/<domain>/<slug>/<slug>.md` |
+
+e.g. `03_Testcases/login/login.md`, `03_Testcases/workshop/wa_workshop/wa_workshop.md`. The file name always equals the leaf folder name.
+
+- `<CODE>` is the feature's short code from the registry `00_Project_Info/features.md` (e.g. `wa_workshop` → `WS`). The **file** is named by the full feature slug; the **IDs** use the short code. `NNN` is the zero-padded TC number, **continuous within the feature** (`001`, `002`, …) across all its tickets.
 - A feature register **accumulates** TCs from multiple Jira tickets over time. Each row's **Jira** column links the specific ticket that TC came from.
 - Replace every `<...>` placeholder with real content. Group TCs under `###` headings by theme (Happy Path, Validation, Error handling, Edge cases, …). The rows below show the required **shape**, not fixed content.
-- Traceability: every TC links the **Jira** ticket (requirement). When AC exist, the **AC** column names `AC-<CODE>-NN` / `BR-<CODE>-NN` from `02_Acceptance_Criteria/<feature>/<feature>.md` — flow: `Jira → AC → TC`. For simple tickets without AC, set **AC** to `—` — flow: `Jira → TC`.
+- Traceability: every TC links the **Jira** ticket (requirement). When AC exist, the **AC** column names `AC-<CODE>-NN` / `BR-<CODE>-NN` from the matching `02_Acceptance_Criteria/…` spec — flow: `Jira → AC → TC`. For simple tickets without AC, set **AC** to `—` — flow: `Jira → TC`.
 
 ---
 
@@ -19,7 +26,7 @@ This is the output format for `gen-tcs-from-jira`. **One register file per featu
 | **Version**          | 1.0                                     |
 | **Last updated**     | <YYYY-MM-DD>                            |
 | **Feature**          | <feature name>                          |
-| **SRS ref**          | [[01_SRS/<feature>/epic]]               |
+| **SRS ref**          | [[01_SRS/<domain>/<slug>/<slug>]]       |
 | **Jira tickets**     | `RC-4`, `RC-12` (tickets covered so far) |
 | **Owner**            | QC Team                                 |
 | **Reviewer**         | <Lead name>                             |

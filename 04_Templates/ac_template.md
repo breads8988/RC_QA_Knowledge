@@ -1,8 +1,15 @@
 # Acceptance Criteria — Template
 
-BABOK-aligned acceptance criteria (BABOK §10.1 *Acceptance and Evaluation Criteria*). **One AC spec per feature**, written to `02_Acceptance_Criteria/<feature>/<feature>.md` (e.g. `login/login.md` — same feature slugs as `01_SRS/`). AC is the bridge between the requirement (SRS / Jira) and the test cases — every TC in `03_Testcases/<feature>/<feature>.md` traces back to an AC ID here.
+BABOK-aligned acceptance criteria (BABOK §10.1 *Acceptance and Evaluation Criteria*). **One AC spec per feature**, written at the **same relative path** the feature has under `01_SRS/` and `03_Testcases/`. AC is the bridge between the requirement (SRS / Jira) and the test cases — every TC in the matching `03_Testcases/…` register traces back to an AC ID here.
 
-- `<CODE>` is the feature's short code from the registry `00_Project_Info/features.md` (e.g. `user_management` → `UM`). The **file** is named by the full feature slug; the **IDs** use the short code. `NN` is the zero-padded AC / rule number, **continuous within the feature** across all its tickets.
+| Feature kind       | AC spec path                                              |
+| ------------------ | --------------------------------------------------------- |
+| Standalone         | `02_Acceptance_Criteria/<slug>/<slug>.md`                 |
+| Under a domain     | `02_Acceptance_Criteria/<domain>/<slug>/<slug>.md`        |
+
+e.g. `02_Acceptance_Criteria/login/login.md`, `02_Acceptance_Criteria/workshop/wa_workshop/wa_workshop.md`. The file name always equals the leaf folder name.
+
+- `<CODE>` is the feature's short code from the registry `00_Project_Info/features.md` (e.g. `wa_workshop` → `WS`). The **file** is named by the full feature slug; the **IDs** use the short code. `NN` is the zero-padded AC / rule number, **continuous within the feature** across all its tickets.
 - A feature AC spec **accumulates** criteria from multiple Jira tickets. Each row's **Jira** column links the specific ticket it came from.
 - Two complementary forms (BABOK allows both — use whichever fits each requirement):
   - **Scenario-based** — `Given / When / Then`, for observable behaviour & flows.
@@ -23,7 +30,7 @@ BABOK-aligned acceptance criteria (BABOK §10.1 *Acceptance and Evaluation Crite
 | **Version**            | 1.0                                     |
 | **Last updated**       | <YYYY-MM-DD>                            |
 | **Feature**            | <feature name>                          |
-| **SRS ref**            | [[01_SRS/<feature>/epic]]               |
+| **SRS ref**            | [[01_SRS/<domain>/<slug>/<slug>]]       |
 | **Jira tickets**       | `RC-4`, `RC-12` (tickets covered so far) |
 | **BA Owner**           | <BA name>                               |
 | **Reviewer (PO/Lead)** | <name>                                  |
@@ -71,7 +78,7 @@ BABOK-aligned acceptance criteria (BABOK §10.1 *Acceptance and Evaluation Crite
 | **Given**       | Precondition / context true before the action                   | One state per clause; `<br>And …` to compound     |
 | **When**        | The single action or event that triggers behaviour             | One trigger                                        |
 | **Then**        | Observable, verifiable outcome — pass/fail must be objective    | Include error code / message / state where relevant |
-| **Linked TCs**  | TCs in `03_Testcases/<feature>/<feature>.md` that verify this AC          | `TC-<CODE>-NNN`, comma-separated                |
+| **Linked TCs**  | TCs in the matching `03_Testcases/…` register that verify this AC        | `TC-<CODE>-NNN`, comma-separated                |
 | **Status**      | Review state of the criterion                                   | Draft / Reviewed / Approved                        |
 
 ## Traceability
