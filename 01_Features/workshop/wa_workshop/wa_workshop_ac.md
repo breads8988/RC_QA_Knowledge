@@ -1,15 +1,16 @@
-# Acceptance Criteria — Workshop
+---
+type: ac
+feature: "[[wa_workshop]]"
+code: WS
+jira: [RC-120]
+version: 1.0
+updated: 2026-08-06
+ba_owner:
+reviewer:
+status: Draft
+---
 
-| Field                  | Value                                   |
-| ---------------------- | ---------------------------------------- |
-| **Version**            | 1.0                                       |
-| **Last updated**       | 2026-08-06                                |
-| **Feature**            | Workshop Web app & voucher                 |
-| **SRS ref**            | [[01_SRS/workshop/wa_workshop/wa_workshop]]                      |
-| **Jira tickets**       | `RC-120`                                  |
-| **BA Owner**           | —                                         |
-| **Reviewer (PO/Lead)** | —                                         |
-| **Status**             | Draft                                     |
+# Acceptance Criteria — Workshop (Web App, `WS`)
 
 ## User Story
 
@@ -60,7 +61,7 @@
 | **Given**       | Precondition / context true before the action                   | One state per clause; `<br>And …` to compound     |
 | **When**        | The single action or event that triggers behaviour             | One trigger                                        |
 | **Then**        | Observable, verifiable outcome — pass/fail must be objective    | Include error code / message / state where relevant |
-| **Linked TCs**  | TCs in `03_Testcases/workshop/workshop.md` that verify this AC          | `TC-WS-NNN`, comma-separated                |
+| **Linked TCs**  | TCs in `01_Features/workshop/wa_workshop/wa_workshop_tc.md` that verify this AC | `TC-WS-NNN`, comma-separated                |
 | **Status**      | Review state of the criterion                                   | Draft / Reviewed / Approved                        |
 
 ## Traceability

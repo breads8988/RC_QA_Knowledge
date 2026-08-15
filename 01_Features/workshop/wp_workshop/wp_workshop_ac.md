@@ -1,15 +1,16 @@
-# Acceptance Criteria — Web Portal, Manage Workshop
+---
+type: ac
+feature: "[[wp_workshop]]"
+code: WPWS
+jira: [RC-104]
+version: 1.0
+updated: 2026-08-10
+ba_owner:
+reviewer:
+status: Draft
+---
 
-| Field                  | Value                                     |
-| ---------------------- | ------------------------------------------ |
-| **Version**            | 1.0                                        |
-| **Last updated**       | 2026-08-10                                 |
-| **Feature**            | Web Portal — Manage Workshop (admin)       |
-| **SRS ref**            | [[01_SRS/workshop/wp_workshop/wp_workshop]]                    |
-| **Jira tickets**       | `RC-104`                                   |
-| **BA Owner**           | —                                           |
-| **Reviewer (PO/Lead)** | —                                           |
-| **Status**             | Draft                                      |
+# Acceptance Criteria — Manage Workshop (Web Portal, `WPWS`)
 
 ## User Story
 
@@ -55,7 +56,7 @@
 | BR-WPWS-04   | When multiple filter fields (Name, City, State, Country, Zipcode, Rating) are applied together, the result is the intersection (AND) of all applied conditions. | [RC-104](https://motionscloud.atlassian.net/browse/RC-104) | QA bug report (comment 2026-07-24)           | 🟠 High     | `TC-WPWS-018` | Draft  |
 | BR-WPWS-05   | The Manage Workshops list, its filters, and its rating logic apply only to regular workshops; specialized workshops are managed exclusively via the separate "Manage specialized workshops" page. | [RC-104](https://motionscloud.atlassian.net/browse/RC-104) | Jira description + QA bug report (comment 2026-07-16) | 🟠 High     | `TC-WPWS-021` | Draft  |
 | BR-WPWS-06   | The free-text **Find Workshops** search box and the **Export** action are out of scope for this ticket and are not to be validated until re-enabled by a future ticket. | [RC-104](https://motionscloud.atlassian.net/browse/RC-104) | Jira description: "Update: Not apply search and export function at this time" | 🟡 Medium   | — | Draft  |
-| BR-WPWS-07   | The Web Portal — Manage Workshops screen (this feature) is the single source of truth for a workshop's Name, Address, Rate, and Vouchers; every change made here must propagate to and be reflected by the consumer-facing Workshop Web app (feature `workshop`). | `—` | Stakeholder confirmation (chat, 2026-08-10) | 🟠 High     | `TC-WS-017`, `TC-WS-018` (verified in `03_Testcases/workshop/workshop.md`) | Draft  |
+| BR-WPWS-07   | The Web Portal — Manage Workshops screen (this feature) is the single source of truth for a workshop's Name, Address, Rate, and Vouchers; every change made here must propagate to and be reflected by the consumer-facing Workshop Web app (feature `WS`). | `—` | Stakeholder confirmation (chat, 2026-08-10) | 🟠 High     | `TC-WS-017`, `TC-WS-018` (verified in feature `WS`) | Draft  |
 
 ## Column Guide
 
@@ -70,7 +71,7 @@
 | **Given**       | Precondition / context true before the action                    | One state per clause; `<br>And …` to compound      |
 | **When**        | The single action or event that triggers behaviour               | One trigger                                        |
 | **Then**        | Observable, verifiable outcome — pass/fail must be objective      | Include error code / message / state where relevant |
-| **Linked TCs**  | TCs in `03_Testcases/wp_workshop/wp_workshop.md` that verify this AC | `TC-WPWS-NNN`, comma-separated                   |
+| **Linked TCs**  | TCs in `01_Features/workshop/wp_workshop/wp_workshop_tc.md` that verify this AC | `TC-WPWS-NNN`, comma-separated                   |
 | **Status**      | Review state of the criterion                                    | Draft / Reviewed / Approved                        |
 
 ## Traceability

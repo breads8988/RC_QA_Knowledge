@@ -24,12 +24,12 @@ Declare only the records the feature reads or writes **as its job** — not one 
 | wa_lawyer             | `LAW`   | `Lawyer`        | Lawyer page / accident legal advice ("Unfall Rechtsberatung") — list lawyers, filter by rating, request appointment              | `01_SRS/lawyer/wa_lawyer/`     |
 | wp_lawyer             | `WPLAW` | `Lawyer`        | Web Portal — Manage Lawyers (admin): add/edit/delete lawyer, filter, import/export lawyers                                       | `01_SRS/lawyer/wp_lawyer/`     |
 
-## Workshop — [[01_SRS/workshop/workshop|hub]]
+## Workshop — [[01_Features/workshop/workshop|hub]] ✅ migrated
 
-| Feature (slug / file) | Code   | Entity          | Description                                                                                                                                   | SRS                                           |
+| Feature (slug / file) | Code   | Entity          | Description                                                                                                                                   | Folder                                           |
 | --------------------- | ------ | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| wa_workshop           | `WS`   | `Workshop` `Voucher` | Workshop Web app & voucher (nearby-workshop map/list search, voucher redemption code, save voucher, request appointment/callback)              | `01_SRS/workshop/wa_workshop/`   |
-| wp_workshop           | `WPWS` | `Workshop` `Voucher` | Web Portal — Manage Workshop (admin): edit workshop, add/show voucher, rate workshop, filter by name/address/rating                            | `01_SRS/workshop/wp_workshop/`   |
+| wa_workshop           | `WS`   | `Workshop` `Voucher` | Workshop Web app & voucher (nearby-workshop map/list search, voucher redemption code, save voucher, request appointment/callback)              | `01_Features/workshop/wa_workshop/`   |
+| wp_workshop           | `WPWS` | `Workshop` `Voucher` | Web Portal — Manage Workshop (admin): edit workshop, add/show voucher, rate workshop, filter by name/address/rating                            | `01_Features/workshop/wp_workshop/`   |
 
 ## Voucher — [[01_SRS/voucher/voucher|hub]]
 

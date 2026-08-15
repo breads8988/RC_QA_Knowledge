@@ -1,15 +1,20 @@
-# Test Case Register — Web Portal, Manage Workshop
+---
+type: tc
+feature: "[[wp_workshop]]"
+code: WPWS
+jira: [RC-104]
+version: 1.0
+updated: 2026-08-10
+owner: QC Team
+reviewer:
+sprint:
+tc_total: 23
+tc_automated: 0
+tc_pending: 23
+status: Draft
+---
 
-| Field                 | Value                                    |
-| ---------------------- | ----------------------------------------- |
-| **Version**            | 1.0                                        |
-| **Last updated**       | 2026-08-10                                 |
-| **Feature**            | Web Portal — Manage Workshop (admin)       |
-| **SRS ref**            | [[01_SRS/workshop/wp_workshop/wp_workshop]]                    |
-| **Jira tickets**       | `RC-104`                                   |
-| **Owner**              | QC Team                                    |
-| **Reviewer**           | —                                           |
-| **Sprint / Release**   | —                                           |
+# Test Case Register — Manage Workshop (Web Portal, `WPWS`)
 
 ## Coverage Summary
 
@@ -27,7 +32,7 @@
 
 | TC ID          | Test Scenario | AC        | Jira                                                        | Priority    | Coverage   | Cucumber Tag       | Preconditions                                                              | Test Data                                                                                   | High-level Steps                                                                                 | Expected Result                                                                                                       | Status    | Note |
 | -------------- | ------------- | --------- | ------------------------------------------------------------ | ----------- | ---------- | ------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | --------- | ---- |
-| TC-WPWS-001 | Opening Edit shows the workshop's current data | AC-WPWS-01 | [RC-104](https://motionscloud.atlassian.net/browse/RC-104) | 🔴 Critical | 🔵 Pending | `@TC-WPWS-001` | Workshop `Autoservice Steinbauer GmbH` (Id `881658114`) exists with known Name/Code/Status/Rate/address | Workshop Id `881658114` | 1. Open Manage Workshops list<br>2. Select **Edit** for the workshop | Edit Workshop panel opens pre-filled with that workshop's saved Name, Code, Status, Special flag, Rate, and address fields (House number, Street, Zipcode, City, State, Country) — no field blank or stale | ⬜ Not Run | UI ref: `01_SRS/wp_workshop/Screenshot 2026-08-10 at 16.45.43.png` |
+| TC-WPWS-001 | Opening Edit shows the workshop's current data | AC-WPWS-01 | [RC-104](https://motionscloud.atlassian.net/browse/RC-104) | 🔴 Critical | 🔵 Pending | `@TC-WPWS-001` | Workshop `Autoservice Steinbauer GmbH` (Id `881658114`) exists with known Name/Code/Status/Rate/address | Workshop Id `881658114` | 1. Open Manage Workshops list<br>2. Select **Edit** for the workshop | Edit Workshop panel opens pre-filled with that workshop's saved Name, Code, Status, Special flag, Rate, and address fields (House number, Street, Zipcode, City, State, Country) — no field blank or stale | ⬜ Not Run | UI ref: `01_Features/workshop/wp_workshop/screens/Screenshot 2026-08-10 at 16.45.43.png` |
 | TC-WPWS-002 | Saving an edit persists and immediately reflects the new data | AC-WPWS-02 | [RC-104](https://motionscloud.atlassian.net/browse/RC-104) | 🔴 Critical | 🔵 Pending | `@TC-WPWS-002` | Edit Workshop panel is open for an existing workshop | New Name: `Autoservice Steinbauer GmbH (Updated)` | 1. Change the Name field<br>2. Select **Save**<br>3. Re-open **Edit** for the same workshop | The workshop record is updated; the Manage Workshops list row and the re-opened Edit panel both show the newly saved Name, never the old value or an empty form | ⬜ Not Run | Regresses reported bug: "Edit worshop already save the edited, that don't show latest update" (comment 2026-08-03) |
 | TC-WPWS-003 | Cancelling an edit discards unsaved changes | AC-WPWS-03 | [RC-104](https://motionscloud.atlassian.net/browse/RC-104) | 🟡 Medium | 🔵 Pending | `@TC-WPWS-003` | Edit Workshop panel is open for an existing workshop | Name field changed to `Temp Name` (not saved) | 1. Change the Name field<br>2. Select **Cancel**<br>3. Re-open **Edit** for the same workshop | Panel closes without saving; re-opened Edit panel shows the original Name, unchanged | ⬜ Not Run | |
 
@@ -42,8 +47,8 @@
 
 | TC ID          | Test Scenario | AC        | Jira                                                        | Priority    | Coverage   | Cucumber Tag       | Preconditions                                                              | Test Data                                                                                   | High-level Steps                                                                                 | Expected Result                                                                                                       | Status    | Note |
 | -------------- | ------------- | --------- | ------------------------------------------------------------ | ----------- | ---------- | ------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | --------- | ---- |
-| TC-WPWS-006 | Voucher list shows an empty state for a workshop with no vouchers | AC-WPWS-06 | [RC-104](https://motionscloud.atlassian.net/browse/RC-104) | 🟡 Medium | 🔵 Pending | `@TC-WPWS-006` | Workshop has no vouchers | Workshop: `QA spec workshop 1313` | 1. Select **Voucher** for the workshop | Vouchers modal opens; table shows "No results."; **Add Voucher** action is available | ⬜ Not Run | UI ref: `01_SRS/wp_workshop/Screenshot 2026-08-10 at 16.45.12.png` |
-| TC-WPWS-007 | Admin adds a valid voucher to a workshop | AC-WPWS-07 | [RC-104](https://motionscloud.atlassian.net/browse/RC-104) | 🔴 Critical | 🔵 Pending | `@TC-WPWS-007` | Vouchers modal is open for a workshop; **Add Voucher** selected | Title: `Summer Discount`; Code: `SUM10`; Discount: `10`; Unit: `%`; Valid from: today; Valid until: today + 30 days | 1. Fill Title, Code, Discount, Unit<br>2. Set Valid from / Valid until<br>3. Select **Add** | Voucher is created and appears in the workshop's voucher table with the entered Title, Code, Discount, Valid from, and Valid until | ⬜ Not Run | UI ref: `01_SRS/wp_workshop/Screenshot 2026-08-10 at 16.45.29.png` |
+| TC-WPWS-006 | Voucher list shows an empty state for a workshop with no vouchers | AC-WPWS-06 | [RC-104](https://motionscloud.atlassian.net/browse/RC-104) | 🟡 Medium | 🔵 Pending | `@TC-WPWS-006` | Workshop has no vouchers | Workshop: `QA spec workshop 1313` | 1. Select **Voucher** for the workshop | Vouchers modal opens; table shows "No results."; **Add Voucher** action is available | ⬜ Not Run | UI ref: `01_Features/workshop/wp_workshop/screens/Screenshot 2026-08-10 at 16.45.12.png` |
+| TC-WPWS-007 | Admin adds a valid voucher to a workshop | AC-WPWS-07 | [RC-104](https://motionscloud.atlassian.net/browse/RC-104) | 🔴 Critical | 🔵 Pending | `@TC-WPWS-007` | Vouchers modal is open for a workshop; **Add Voucher** selected | Title: `Summer Discount`; Code: `SUM10`; Discount: `10`; Unit: `%`; Valid from: today; Valid until: today + 30 days | 1. Fill Title, Code, Discount, Unit<br>2. Set Valid from / Valid until<br>3. Select **Add** | Voucher is created and appears in the workshop's voucher table with the entered Title, Code, Discount, Valid from, and Valid until | ⬜ Not Run | UI ref: `01_Features/workshop/wp_workshop/screens/Screenshot 2026-08-10 at 16.45.29.png` |
 | TC-WPWS-008 | Voucher is rejected when Valid from is not before Valid until | AC-WPWS-08 / BR-WPWS-01 | [RC-104](https://motionscloud.atlassian.net/browse/RC-104) | 🔴 Critical | 🔵 Pending | `@TC-WPWS-008` | Add Voucher form is open | Valid from: `10.09.2026`; Valid until: `01.09.2026` (before Valid from) | 1. Fill required fields<br>2. Set Valid from after Valid until<br>3. Select **Add** | Voucher is not created; a warning message is shown indicating Valid from must be before Valid until | ⬜ Not Run | |
 | TC-WPWS-009 | Voucher is rejected when Valid until is before the current date | AC-WPWS-09 / BR-WPWS-02 | [RC-104](https://motionscloud.atlassian.net/browse/RC-104) | 🔴 Critical | 🔵 Pending | `@TC-WPWS-009` | Add Voucher form is open; today is `10.08.2026` | Valid until: `09.08.2026` (yesterday) | 1. Fill required fields<br>2. Set Valid until to a past date<br>3. Select **Add** | Voucher is not created; a warning message is shown indicating Valid until must not be before the current date | ⬜ Not Run | |
 | TC-WPWS-010 | Voucher is accepted when Valid until equals the current date (boundary) | AC-WPWS-10 / BR-WPWS-02 | [RC-104](https://motionscloud.atlassian.net/browse/RC-104) | 🟡 Medium | 🔵 Pending | `@TC-WPWS-010` | Add Voucher form is open; today is `10.08.2026` | Valid from: `09.08.2026`; Valid until: `10.08.2026` (today) | 1. Fill required fields<br>2. Set Valid until to today's exact date<br>3. Select **Add** | Voucher is created (Valid until == current date satisfies "≥ current date") | ⬜ Not Run | |

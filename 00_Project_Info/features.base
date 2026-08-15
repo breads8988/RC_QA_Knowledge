@@ -1,0 +1,62 @@
+filters:
+  and:
+    - 'note.type == "feature" || note.type == "tc"'
+properties:
+  note.code:
+    displayName: Code
+  note.platform:
+    displayName: Platform
+  note.actor:
+    displayName: Actor
+  note.domain:
+    displayName: Domain
+  note.entity:
+    displayName: Entity
+  note.status:
+    displayName: Status
+  note.tc_total:
+    displayName: TCs
+  note.tc_automated:
+    displayName: Automated
+  file.name:
+    displayName: Note
+views:
+  - type: table
+    name: All features
+    filters:
+      and:
+        - 'note.type == "feature"'
+    groupBy:
+      property: note.domain
+      direction: ASC
+    order:
+      - file.name
+      - note.code
+      - note.platform
+      - note.actor
+      - note.entity
+      - note.status
+  - type: table
+    name: Impact by entity
+    filters:
+      and:
+        - 'note.type == "feature"'
+    groupBy:
+      property: note.entity
+      direction: ASC
+    order:
+      - file.name
+      - note.code
+      - note.platform
+      - note.status
+  - type: table
+    name: Test coverage
+    filters:
+      and:
+        - 'note.type == "tc"'
+    order:
+      - file.name
+      - note.code
+      - note.tc_total
+      - note.tc_automated
+      - note.status
