@@ -1,36 +1,45 @@
 # Test Case Register — Template
 
-This is the output format for `gen-tcs-from-jira`. **One register file per feature**, written at the **same relative path** the feature has under `01_SRS/` and `02_Acceptance_Criteria/`.
+This is the output format for `gen-tcs-from-jira`. **One register file per feature**, written **inside the feature's own folder**, beside its SRS and AC notes.
 
-| Feature kind   | Register path                            |
-| -------------- | ---------------------------------------- |
-| Standalone     | `03_Testcases/<slug>/<slug>.md`          |
-| Under a domain | `03_Testcases/<domain>/<slug>/<slug>.md` |
+| Feature kind   | Register path                              |
+| -------------- | ------------------------------------------ |
+| Standalone     | `01_Features/<slug>/<slug>_tc.md`          |
+| Under a domain | `01_Features/<domain>/<slug>/<slug>_tc.md` |
 
-e.g. `03_Testcases/login/login.md`, `03_Testcases/workshop/wa_workshop/wa_workshop.md`. The file name always equals the leaf folder name.
+e.g. `01_Features/login/login_tc.md`, `01_Features/workshop/wa_workshop/wa_workshop_tc.md`.
 
-- `<CODE>` is the feature's short code from the registry `00_Project_Info/features.md` (e.g. `wa_workshop` → `WS`). The **file** is named by the full feature slug; the **IDs** use the short code. `NNN` is the zero-padded TC number, **continuous within the feature** (`001`, `002`, …) across all its tickets.
+- `<CODE>` is the feature's short code, read from its hub note `01_Features/<domain>/<slug>/<slug>.md` (e.g. `wa_workshop` → `WS`). The **file** is named by the full feature slug; the **IDs** use the short code. `NNN` is the zero-padded TC number, **continuous within the feature** (`001`, `002`, …) across all its tickets.
 - A feature register **accumulates** TCs from multiple Jira tickets over time. Each row's **Jira** column links the specific ticket that TC came from.
 - Replace every `<...>` placeholder with real content. Group TCs under `###` headings by theme (Happy Path, Validation, Error handling, Edge cases, …). The rows below show the required **shape**, not fixed content.
-- Traceability: every TC links the **Jira** ticket (requirement). When AC exist, the **AC** column names `AC-<CODE>-NN` / `BR-<CODE>-NN` from the matching `02_Acceptance_Criteria/…` spec — flow: `Jira → AC → TC`. For simple tickets without AC, set **AC** to `—` — flow: `Jira → TC`.
+- Traceability: every TC links the **Jira** ticket (requirement). When AC exist, the **AC** column names `AC-<CODE>-NN` / `BR-<CODE>-NN` from the feature's `<slug>_ac.md` spec — flow: `Jira → AC → TC`. For simple tickets without AC, set **AC** to `—` — flow: `Jira → TC`.
 
 ---
 
 ## Register header
 
 ```markdown
-# Test Case Register — <Feature name>
+---
+type: tc
+feature: "[[<slug>]]"
+code: <CODE>
+jira: [RC-4, RC-12]
+version: 1.0
+updated: <YYYY-MM-DD>
+owner: QC Team
+reviewer: <Lead name>
+sprint: <Sprint X>
+tc_total: <n>
+tc_automated: <n>
+tc_pending: <n>
+status: Draft
+---
 
-| Field                | Value                                   |
-| -------------------- | --------------------------------------- |
-| **Version**          | 1.0                                     |
-| **Last updated**     | <YYYY-MM-DD>                            |
-| **Feature**          | <feature name>                          |
-| **SRS ref**          | [[01_SRS/<domain>/<slug>/<slug>]]       |
-| **Jira tickets**     | `RC-4`, `RC-12` (tickets covered so far) |
-| **Owner**            | QC Team                                 |
-| **Reviewer**         | <Lead name>                             |
-| **Sprint / Release** | <Sprint X>                              |
+# Test Case Register — <Feature name> (`<CODE>`)
+
+<!-- feature: links up to the hub. It is this note's ONLY link. The tc_* counters
+     feed the Test coverage view in 00_Project_Info/features.base — keep them in
+     sync with the Coverage Summary table below. -->
 ```
 
 ## Coverage Summary
