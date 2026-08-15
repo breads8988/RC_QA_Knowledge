@@ -1,6 +1,6 @@
 filters:
   and:
-    - 'note.type == "feature" || note.type == "tc"'
+    - note.type == "feature" || note.type == "tc"
 properties:
   note.code:
     displayName: Code
@@ -25,38 +25,38 @@ views:
     name: All features
     filters:
       and:
-        - 'note.type == "feature"'
+        - note.type == "feature"
     groupBy:
-      property: note.domain
+      property: domain
       direction: ASC
     order:
       - file.name
-      - note.code
-      - note.platform
-      - note.actor
-      - note.entity
-      - note.status
+      - code
+      - platform
+      - actor
+      - entity
+      - status
   - type: table
     name: Impact by entity
     filters:
       and:
-        - 'note.type == "feature"'
+        - note.type == "feature"
     groupBy:
-      property: note.entity
+      property: entity
       direction: ASC
     order:
       - file.name
-      - note.code
-      - note.platform
-      - note.status
+      - code
+      - platform
+      - status
   - type: table
     name: Test coverage
     filters:
       and:
-        - 'note.type == "tc"'
+        - note.type == "tc"
     order:
       - file.name
-      - note.code
-      - note.tc_total
-      - note.tc_automated
-      - note.status
+      - code
+      - tc_total
+      - tc_automated
+      - status
