@@ -55,10 +55,10 @@ status: Draft
 
 | AC ID        | Scenario           | Jira         | Type      | Criticality | Given (context)             | When (action / trigger)      | Then (expected outcome)                          | Linked TCs      | Status |
 | ------------ | ------------------ | ------------ | --------- | ----------- | --------------------------- | ---------------------------- | ------------------------------------------------ | --------------- | ------ |
-| AC-<CODE>-01 | <happy path title> | [<KEY>](url) | Happy     | 🔴 Critical | <user state / system state> | <the action the user takes>  | <observable result><br>And <secondary assertion> | `TC-<CODE>-001` | Draft  |
-| AC-<CODE>-02 | <alternate title>  | [<KEY>](url) | Alternate | 🟠 High     | <context>                   | <action>                     | <result>                                         | `TC-<CODE>-002` | Draft  |
-| AC-<CODE>-03 | <negative title>   | [<KEY>](url) | Negative  | 🔴 Critical | <context>                   | <invalid action / bad input> | <rejection + error message / code>               | `TC-<CODE>-003` | Draft  |
-| AC-<CODE>-04 | <edge title>       | [<KEY>](url) | Edge      | ⚪ Low       | <boundary context>          | <boundary action>            | <expected boundary behaviour>                    | `TC-<CODE>-004` | Draft  |
+| AC-<CODE>-01 | <happy path title> | [<KEY>](<url>) | Happy     | 🔴 Critical | <user state / system state> | <the action the user takes>  | <observable result><br>And <secondary assertion> | `TC-<CODE>-001` | Draft  |
+| AC-<CODE>-02 | <alternate title>  | [<KEY>](<url>) | Alternate | 🟠 High     | <context>                   | <action>                     | <result>                                         | `TC-<CODE>-002` | Draft  |
+| AC-<CODE>-03 | <negative title>   | [<KEY>](<url>) | Negative  | 🔴 Critical | <context>                   | <invalid action / bad input> | <rejection + error message / code>               | `TC-<CODE>-003` | Draft  |
+| AC-<CODE>-04 | <edge title>       | [<KEY>](<url>) | Edge      | ⚪ Low       | <boundary context>          | <boundary action>            | <expected boundary behaviour>                    | `TC-<CODE>-004` | Draft  |
 
 ## Business Rules (rule-based AC)
 
@@ -66,8 +66,8 @@ status: Draft
 
 | Rule ID      | Business Rule                                  | Jira         | Rationale / Source     | Criticality | Linked TCs      | Status |
 | ------------ | ---------------------------------------------- | ------------ | ---------------------- | ----------- | --------------- | ------ |
-| BR-<CODE>-01 | <e.g. "Password must be 8–32 chars, ≥1 digit"> | [<KEY>](url) | <stakeholder / policy> | 🔴 Critical | `TC-<CODE>-005` | Draft  |
-| BR-<CODE>-02 | <e.g. "Session expires after 15 min idle">     | [<KEY>](url) | <security policy>      | 🔴 Critical | `TC-<CODE>-006` | Draft  |
+| BR-<CODE>-01 | <e.g. "Password must be 8–32 chars, ≥1 digit"> | [<KEY>](<url>) | <stakeholder / policy> | 🔴 Critical | `TC-<CODE>-005` | Draft  |
+| BR-<CODE>-02 | <e.g. "Session expires after 15 min idle">     | [<KEY>](<url>) | <security policy>      | 🔴 Critical | `TC-<CODE>-006` | Draft  |
 
 ## Column Guide
 

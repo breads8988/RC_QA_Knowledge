@@ -140,6 +140,10 @@ def main() -> int:
                 if (not target or is_placeholder(target)
                         or target.startswith(("http://", "https://", "mailto:", "#"))):
                     continue
+                # A bare word with no separator and no extension cannot name a file —
+                # it is a template placeholder such as [<KEY>](<url>).
+                if "/" not in target and "." not in target:
+                    continue
                 if not (f.parent / target).resolve().exists():
                     problems.append(f"{rel}:{lineno}  missing md link   {target}")
 

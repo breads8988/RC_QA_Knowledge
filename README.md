@@ -19,38 +19,60 @@ This README is orientation and setup only. It deliberately does not repeat the r
 
 ## 1. Folder structure
 
+**One feature, one folder.** Its requirement, acceptance criteria, test cases and screenshots live together:
+
 ```
 00_Project_Info/
   conventions.md                  # Structural rules — the canonical one
-  features.md                     # Registry: slug → code → entity, grouped by domain
+  features.base                   # Live feature table, built from the hubs' properties
+  features.md                     # Retired registry — points at features.base
+  entities/e_*.md                 # One note per record type — the impact axis
   system-high-level-design.md     # Architecture, actors, core entities
-01_SRS/
-  <domain>/<domain>.md            # Domain hub — lists that domain's sub-features
-  <domain>/<slug>/<slug>.md       # Requirement note
-  <domain>/<slug>/*.png           # Screens
-  <domain>/<slug>/figma/*.png     # Figma exports
-02_Acceptance_Criteria/
-  <domain>/<slug>/<slug>.md       # BABOK-aligned AC (Given/When/Then + Business Rules)
-03_Testcases/
-  <domain>/<slug>/<slug>.md       # Test Case Register (tables, grouped by theme)
+01_Features/
+  <domain>/<domain>.md            # Domain hub — lists that domain's features
+  <domain>/<slug>/<slug>.md       # Feature hub — ALL metadata lives here
+  <domain>/<slug>/<slug>_srs.md   # Requirement note
+  <domain>/<slug>/<slug>_ac.md    # BABOK-aligned AC (Given/When/Then + Business Rules)
+  <domain>/<slug>/<slug>_tc.md    # Test Case Register (tables, grouped by theme)
+  <domain>/<slug>/screens/*.png   # Every image: app screenshots and Figma exports
+  <slug>/...                      # A standalone feature drops the <domain>/ level
 04_Templates/
+  feature_hub_template.md         # Feature hub format
+  srs_template.md                 # SRS note format
   ac_template.md                  # AC format
   testcases_template.md           # TC register format
   bug_template.md                 # Bug report format (creates a Jira Bug)
 CLAUDE.md                         # Business context for the agent
 .claude/                          # Skills + commands (active when Claude Code runs at the vault)
-mkdocs.yml, Makefile, scripts/, .github/   # Docs website (see section 8)
+scripts/check_links.py            # Every link resolves? Run before you push.
+scripts/gen_feature_index.py      # --check validates hub metadata; --write builds the site table
+mkdocs.yml, Makefile, .github/    # Docs website (see section 8)
 ```
 
-The three pillars **mirror each other** — the same feature sits at the same relative path under each, and the note's file name equals its leaf folder name:
+So one feature looks like this:
 
 ```
-01_SRS/workshop/wa_workshop/wa_workshop.md
-02_Acceptance_Criteria/workshop/wa_workshop/wa_workshop.md
-03_Testcases/workshop/wa_workshop/wa_workshop.md
+01_Features/workshop/wa_workshop/
+  wa_workshop.md        ← hub: code WS, entity links, status, links to the three below
+  wa_workshop_srs.md
+  wa_workshop_ac.md
+  wa_workshop_tc.md
+  screens/
 ```
 
 `wa_` = Web App (driver), `wp_` = Web Portal (Client Admin) — the prefix identifies the **actor**, so `wa_workshop` and `wp_workshop` are two different features, not two views of one. Full rules in `conventions.md` §1–§2.
+
+### How features connect
+
+There is no registry to keep in sync. **Each feature hub declares the entities it owns**, as links:
+
+```yaml
+entity:
+  - "[[e_workshop|Workshop]]"
+  - "[[e_voucher|Voucher]]"
+```
+
+That single line is the whole mechanism. To answer *"what else does this change put at risk?"*, open `00_Project_Info/entities/e_voucher.md` and read its **Backlinks** — every feature touching that record is listed, including features in other domains. Adding a new feature costs one line in one file; no existing note is edited.
 
 ---
 
@@ -80,8 +102,10 @@ Only when the ticket is **ambiguous / high-risk / needs PO-Dev sign-off**. For c
 /gen-ac <slug> <JIRA-KEY> [figma-folder]
 ```
 Examples:
-- `/gen-ac login RC-4` → `02_Acceptance_Criteria/login/login.md` (standalone feature)
-- `/gen-ac wa_workshop RC-36` → `02_Acceptance_Criteria/workshop/wa_workshop/wa_workshop.md` (under a domain)
+- `/gen-ac login RC-4` → `01_Features/login/login_ac.md` (standalone feature)
+- `/gen-ac wa_workshop RC-36` → `01_Features/workshop/wa_workshop/wa_workshop_ac.md` (under a domain)
+
+If the feature has no folder yet, the skill creates it — it asks you to confirm only two things, the **code** and the **entity**.
 
 The BA reviews and edits the result.
 
@@ -89,7 +113,7 @@ The BA reviews and edits the result.
 ```
 /gen-tc <slug> <JIRA-KEY> [figma-folder]
 ```
-Example: `/gen-tc wa_workshop RC-36 01_SRS/workshop/wa_workshop/figma` → creates/appends to `03_Testcases/workshop/wa_workshop/wa_workshop.md`. The skill will:
+Example: `/gen-tc wa_workshop RC-36 01_Features/workshop/wa_workshop/screens` → creates/appends to `01_Features/workshop/wa_workshop/wa_workshop_tc.md`. The skill will:
 - Read the AC if present (cover every AC); otherwise trace directly to Jira.
 - **Ask you to paste Figma screenshots** of the relevant screens.
 - Apply the full set of test-design techniques (happy / negative / boundary / EP / UI / error / edge).
@@ -134,17 +158,24 @@ Jira ticket  →  AC-<CODE>-NN / BR-<CODE>-NN  →  TC-<CODE>-NNN
 
 | § | Covers |
 | - | ------ |
-| 1 | The three mirrored pillars; file name = leaf folder name |
+| 1 | One feature, one folder; the `_srs` / `_ac` / `_tc` file names |
 | 2 | Slug rules and the `wa_` / `wp_` platform prefix |
-| 3 | Feature registry: codes, code immutability, the Entity column |
-| 4 | Finding impact across features |
+| 3 | Feature metadata in the hub's frontmatter; code immutability |
+| 4 | Entity notes, and finding impact through their backlinks |
 | 5 | Traceability and the coverage rule |
-| 6 | Linking discipline — one hop per level; never link to a folder |
+| 6 | Linking discipline — who may link to whom, and why |
 | 7 | Templates |
 | 8 | Writing rules (English, high-level TCs, never fabricate) |
 | 9 | Generated folders — `docs/`, `site/` |
 
-Two that bite most often, repeated here only as a warning: a feature is **1 file per pillar** and grows by appending (never renumber existing IDs), and **`docs/` + `site/` are generated** — edit the real folders at the repo root.
+Three that bite most often, repeated here only as a warning: a feature's AC/TC file grows by **appending** (never renumber existing IDs), an **AC or TC note never links sideways** to another feature (cite its code instead — features meet at the entity notes), and **`docs/` + `site/` are generated** — edit the real folders at the repo root.
+
+Before pushing, run both guards:
+
+```bash
+python3 scripts/check_links.py            # every link, embed and path resolves
+python3 scripts/gen_feature_index.py --check   # hub metadata is complete and codes are unique
+```
 
 ---
 

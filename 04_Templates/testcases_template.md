@@ -81,7 +81,7 @@ status: Draft
 
 | TC ID          | Test Scenario | AC            | Jira         | Priority    | Coverage   | Cucumber Tag      | Preconditions   | Test Data | High-level Steps | Expected Result | Status    | Note |
 | -------------- | ------------- | ------------- | ------------ | ----------- | ---------- | ----------------- | --------------- | --------- | ---------------- | --------------- | --------- | ---- |
-| TC-<CODE>-001 | <scenario>  | AC-<CODE>-01 | [<KEY>](url) | 🔴 Critical | 🔵 Pending | `@TC-<CODE>-001` | <preconditions> | <data>    | 1. … 2. … 3. …   | <expected>      | ⬜ Not Run |      |
+| TC-<CODE>-001 | <scenario>  | AC-<CODE>-01 | [<KEY>](<url>) | 🔴 Critical | 🔵 Pending | `@TC-<CODE>-001` | <preconditions> | <data>    | 1. … 2. … 3. …   | <expected>      | ⬜ Not Run |      |
 
 ### 2. <next group> …
 ```
