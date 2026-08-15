@@ -26,7 +26,7 @@ status: Draft
 | -------- | ---- | ------ | --- |
 | 3        | 5    | 5      | 1   |
 
-> **AC source:** [`01_Features/homepage/homepage_ac.md`](../../02_Acceptance_Criteria/homepage/homepage.md) — all 13 AC (`AC-HOME-01…13`) and 4 business rules (`BR-HOME-01…04`) have ≥1 covering TC.
+> **AC source:** [`01_Features/homepage/homepage_ac.md`](homepage_ac.md) — all 13 AC (`AC-HOME-01…13`) and 4 business rules (`BR-HOME-01…04`) have ≥1 covering TC.
 
 > ⚠️ **UI coverage is partial.** `01_Features/homepage/screens/Screenshot 2026-08-06 at 09.36.25.png` is a cropped capture of only the "LOGGED IN" Splash + Home flow — no guest view, inactive-tile styling, or the section cut off below it ("FIRST REGISTRATIO…") is visible. RC-1's Figma links (mobile + web) were not fetched. TCs marked `[DEP] UI pending` assert only behaviour the tickets describe.
 

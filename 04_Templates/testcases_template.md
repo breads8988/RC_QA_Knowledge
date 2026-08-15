@@ -63,7 +63,7 @@ status: Draft
 | **TC ID**            | Unique identifier — must match `@tag` in `.feature` file | `TC-<CODE>-NNN` e.g. `TC-LOGIN-001`             |
 | **Test Scenario**    | One-line title, start with an action verb                | Plain text                                         |
 | **AC**               | The acceptance criterion / business rule this TC verifies | `AC-<CODE>-NN`, `BR-<CODE>-NN`, or `—` when designed directly from the requirement |
-| **Jira**             | The ticket this TC came from                             | `[<KEY>](url)`                                      |
+| **Jira**             | The ticket this TC came from                             | `[<KEY>](<url>)`                                      |
 | **Priority**         | Business impact if this TC fails                         | 🔴 Critical / 🟠 High / 🟡 Medium / ⚪ Low          |
 | **Coverage**         | Automation status                                        | ✅ Automated / 🟡 Manual / 🔵 Pending               |
 | **Cucumber Tag**     | `@TC-ID` used in `.feature` — mandatory if Automated     | `@TC-<CODE>-NNN` — must match TC ID exactly     |

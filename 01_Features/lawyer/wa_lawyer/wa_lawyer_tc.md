@@ -26,7 +26,7 @@ status: Draft
 | -------- | ---- | ------ | --- |
 | 7        | 8    | 8      | 1   |
 
-> **AC source:** [`01_Features/lawyer/wa_lawyer/wa_lawyer_ac.md`](../../02_Acceptance_Criteria/lawyer/lawyer.md) — all 19 AC (`AC-LAW-01…19`) and 7 business rules (`BR-LAW-01…07`) have ≥1 covering TC (BR-LAW-06 verified indirectly at the Home-page tile level).
+> **AC source:** [`01_Features/lawyer/wa_lawyer/wa_lawyer_ac.md`](wa_lawyer_ac.md) — all 19 AC (`AC-LAW-01…19`) and 7 business rules (`BR-LAW-01…07`) have ≥1 covering TC (BR-LAW-06 verified indirectly at the Home-page tile level).
 
 > ⚠️ **UI coverage is pending.** `01_Features/lawyer/wa_lawyer/screens` is **empty**, so no design was available. TCs marked `[DEP] UI pending` assert only behaviour the ticket describes; the concrete lawyer-card contents and filter control type must be confirmed against the design before execution. No UI element was invented.
 

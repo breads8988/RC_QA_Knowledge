@@ -72,7 +72,7 @@ RC-1, RC-106  ──▶  AC-HOME-01..13 / BR-HOME-01..04  ──▶  TC-HOME-NNN
 ```
 
 - **Upward**: header `SRS ref` + each row's `Jira` column link back to `RC-1` (Epic `RC-4`) and `RC-106` (Epic `RC-101`).
-- **Downward**: `Linked TCs` populated by `/gen-tc homepage RC-1` (covering both `RC-1` and `RC-106`) — see [`01_Features/homepage/homepage_tc.md`](../../03_Testcases/homepage/homepage.md) (`TC-HOME-001…013`).
+- **Downward**: `Linked TCs` populated by `/gen-tc homepage RC-1` (covering both `RC-1` and `RC-106`) — see [`01_Features/homepage/homepage_tc.md`](homepage_tc.md) (`TC-HOME-001…013`).
 - **Coverage**: every AC and business rule has ≥1 linked TC. No coverage gap remains.
 
 **Scenario classes intentionally not covered** (§3 of the AC technique guide):

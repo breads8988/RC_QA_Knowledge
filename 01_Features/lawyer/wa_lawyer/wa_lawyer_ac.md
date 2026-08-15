@@ -107,7 +107,7 @@ Jira ticket (RC-116, child of Epic RC-101)  ──▶  AC-LAW-NN / BR-LAW-NN  �
 ```
 
 - **Upward**: header `SRS ref` + each row's `Jira` column link back to `RC-116` (Epic `RC-101`).
-- **Downward**: the `Linked TCs` column lists the verifying test cases in [`01_Features/lawyer/wa_lawyer/wa_lawyer_tc.md`](../../03_Testcases/lawyer/lawyer.md) — filled by `/gen-tc`.
+- **Downward**: the `Linked TCs` column lists the verifying test cases in [`01_Features/lawyer/wa_lawyer/wa_lawyer_tc.md`](wa_lawyer_tc.md) — filled by `/gen-tc`.
 - **Coverage rule**: every `Critical`/`High` AC and every business rule needs ≥1 Linked TC (BR-LAW-06 verified indirectly at the Home-page tile level — see `homepage.md`).
 
 **Scenario classes intentionally not covered** (§3 of the AC technique guide):

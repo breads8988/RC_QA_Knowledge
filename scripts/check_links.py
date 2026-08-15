@@ -31,6 +31,7 @@ SKIP_DIRS = {".git", ".venv", ".obsidian", "docs", "site", "node_modules", "plan
 FENCE_RE = re.compile(r"^\s*(```|~~~)")
 INLINE_CODE_RE = re.compile(r"`([^`\n]+)`")
 WIKI_RE = re.compile(r"(!?)\[\[([^\]\|#]+)(?:#[^\]\|]*)?(?:\|[^\]]*)?\]\]")
+MD_LINK_RE = re.compile(r"(?<!!)\[[^\]]*\]\(<?([^)<>]+?)>?\)")
 # A vault path starts with a numbered top-level folder: 00_Project_Info/, 01_Features/, ...
 # Screenshot file names contain spaces, so the tail must allow them.
 VAULT_PATH_RE = re.compile(r"^\d{2}_[A-Za-z_]+/.+$")
@@ -131,6 +132,16 @@ def main() -> int:
                     continue
                 if not resolve_path(span, root):
                     problems.append(f"{rel}:{lineno}  missing path      {span}")
+
+            # Ordinary markdown links to files in the vault. MkDocs resolves these
+            # relative to the page, so they break in a way wiki-links do not.
+            for target in MD_LINK_RE.findall(text):
+                target = target.split("#")[0].strip()
+                if (not target or is_placeholder(target)
+                        or target.startswith(("http://", "https://", "mailto:", "#"))):
+                    continue
+                if not (f.parent / target).resolve().exists():
+                    problems.append(f"{rel}:{lineno}  missing md link   {target}")
 
     if not args.quiet:
         for p in problems:

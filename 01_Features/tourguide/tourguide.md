@@ -4,6 +4,7 @@ code: TG
 platform: Web App
 actor: Driver
 entity: []
+entity_pending: "recorded as pure UI; if tour-guide progress is persisted per user this feature owns User — BA/dev to confirm"
 jira: [RC-49]
 status: Draft
 srs: "[[tourguide_srs]]"

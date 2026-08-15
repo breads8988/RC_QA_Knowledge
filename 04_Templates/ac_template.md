@@ -76,7 +76,7 @@ status: Draft
 | **AC ID**       | Unique scenario id — TCs trace back to this                      | `AC-<CODE>-NN`                                  |
 | **Rule ID**     | Unique business-rule id — TCs trace back to this                 | `BR-<CODE>-NN`                                  |
 | **Scenario**    | Short title of the behaviour, start with an action verb          | Plain text                                        |
-| **Jira**        | The ticket this AC came from                                     | `[<KEY>](url)`                                     |
+| **Jira**        | The ticket this AC came from                                     | `[<KEY>](<url>)`                                     |
 | **Type**        | Class of scenario                                               | Happy / Alternate / Negative / Edge / Permission  |
 | **Criticality** | Impact if this AC fails — drives the verifying TC's priority     | 🔴 Critical / 🟠 High / 🟡 Medium / ⚪ Low          |
 | **Given**       | Precondition / context true before the action                   | One state per clause; `<br>And …` to compound     |
