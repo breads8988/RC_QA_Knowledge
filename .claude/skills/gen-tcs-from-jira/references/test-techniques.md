@@ -28,7 +28,7 @@ This step drives most of TC quality. Before designing any test case, identify:
 
 - **Functional requirements** — what the system must do.
 - **Business rules** — constraints, policies, limits, formulas.
-- **Acceptance criteria** — read the feature's AC spec at its mirror path (`02_Acceptance_Criteria/<domain>/<slug>/<slug>.md`, or `02_Acceptance_Criteria/<slug>/<slug>.md` when standalone) when it exists; it is the primary source.
+- **Acceptance criteria** — read the feature's AC spec inside its folder (`01_Features/<domain>/<slug>/<slug>_ac.md`, or `01_Features/<slug>/<slug>_ac.md` when standalone) when it exists; it is the primary source.
 - **Actors / roles** — who performs the action and who is affected.
 - **Preconditions** — conditions that must already be true.
 - **Triggers** — what starts the behaviour under test.

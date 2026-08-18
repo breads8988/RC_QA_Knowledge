@@ -24,8 +24,24 @@ env:
   NO_MKDOCS_2_WARNING: "true"
 
 jobs:
+  # Structural guards. These fail the PR, because a broken link or a feature hub
+  # with no entity is invisible in review but silently breaks impact analysis for
+  # every later ticket. Both scripts are stdlib-only, so they run before install.
+  vault:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Every link, embed and path resolves
+        run: python3 scripts/check_links.py
+      - name: Feature metadata is complete and codes are unique
+        run: python3 scripts/gen_feature_index.py --check
+
   # Always build — verifies the docs compile on every PR and push.
   build:
+    needs: vault
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

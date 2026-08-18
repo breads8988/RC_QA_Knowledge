@@ -2,7 +2,7 @@
 
 QA knowledge base for **RepairCheck** — requirements (SRS), acceptance criteria, and test cases, written as Obsidian markdown and generated from Jira with `/gen-ac` and `/gen-tc`.
 
-> **Structural conventions — paths, slugs, the registry, linking, templates — live in [[00_Project_Info/conventions]]. Read that file before writing any path, ID, or link.** It is the single source of truth; this file deliberately does not repeat it.
+> **Structural conventions — paths, slugs, feature metadata, linking, templates — live in [[00_Project_Info/conventions]]. Read that file before writing any path, ID, or link.** It is the single source of truth; this file deliberately does not repeat it.
 >
 > This file is the **business layer**: what the product is, who uses it, what the words mean. Read it first. A correct-looking AC that misunderstands who the actor is, or what a voucher does, is worse than no AC at all.
 
@@ -51,7 +51,7 @@ Master data, geo-located:  Workshop · Expert · Lawyer
 Attached:                  Voucher · Advertisement / Banner · Pricing
 ```
 
-These same names are the values of the registry's **Entity** column, which is how cross-feature impact is found — see [[00_Project_Info/conventions]] §3–§4.
+Each of these is a note in `00_Project_Info/entities/` (`e_workshop`, `e_voucher`, …). A feature hub links the entities it owns, so **the entity note's backlinks are the impact list** — that is how cross-feature impact is found. See [[00_Project_Info/conventions]] §3–§4.
 
 Notes that shape test design:
 
@@ -61,7 +61,7 @@ Notes that shape test design:
 
 ## What this vault covers today
 
-17 features registered in [[00_Project_Info/features]] — **11 Web App** and **5 Web Portal**, plus `user_management` reserved but not started. **Android and SaaS Admin have no AC/TC yet.** If a ticket lands on one of those, the feature must be added to the registry first.
+16 feature folders under `01_Features/` — **11 Web App** and **5 Web Portal** — plus the `UM` code reserved for `user_management`, which has no folder yet. Open [[00_Project_Info/features.base|features.base]] for the live list. **Android and SaaS Admin have no AC/TC yet.** A ticket landing on one of those needs a new feature folder and hub — `/gen-ac` and `/gen-tc` create it, asking you to confirm the code and the entity.
 
 ---
 
@@ -71,6 +71,6 @@ Rules for the agent specifically. Everything structural is in [[00_Project_Info/
 
 - **Never fabricate.** No UI element you have not seen in a screenshot. No business rule the ticket does not state. No `TC-` / `AC-` / `BR-` ID you have not read in a file. Flag the assumption or say the coverage is unverified instead — a plausible invention is the most expensive thing you can add here, because it looks researched.
 - **Report what you checked, not just what you found.** "No regression impact, isolated change" is a valid finding; silence is not.
-- **Surface drift rather than patching around it.** A blank Entity cell, a slug that does not match its folder, a link that does not resolve — name it in the report. These are cheap to fix when named and expensive when they accumulate.
-- **Verify before asserting.** Check a file exists before linking to it; check a code against the registry before using it in an ID.
+- **Surface drift rather than patching around it.** An empty `entity`, a slug that does not match its folder, a link that does not resolve — name it in the report. These are cheap to fix when named and expensive when they accumulate.
+- **Verify before asserting.** Check a file exists before linking to it; read a code from the feature's hub before using it in an ID. `python3 scripts/check_links.py` and `python3 scripts/gen_feature_index.py --check` verify both mechanically.
 - Never modify `.obsidian/` config as part of a content task.

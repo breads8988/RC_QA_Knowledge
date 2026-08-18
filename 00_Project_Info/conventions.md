@@ -1,6 +1,6 @@
 # Vault conventions
 
-**This file is the single source of truth for how this vault is structured.** Every other file — `CLAUDE.md`, `README.md`, `features.md`, the two skills — points here instead of restating these rules. When a rule changes, change it here and nowhere else.
+**This file is the single source of truth for how this vault is structured.** Every other file — `CLAUDE.md`, `README.md`, the two skills — points here instead of restating these rules. When a rule changes, change it here and nowhere else.
 
 For *what the product is* — actors, domain vocabulary, entities — read `CLAUDE.md` instead. That is the business layer; this is the structural layer.
 
@@ -8,61 +8,79 @@ The vault is shared via GitHub, so **every path must be relative**. Never write 
 
 ---
 
-## 1. The three pillars mirror each other
+## 1. One feature, one folder
 
-A feature occupies the **same relative path** under all three pillars. This is the most important structural rule; almost every past breakage came from violating it.
+Everything about a feature lives together:
 
 ```
-01_SRS/<domain>/<slug>/<slug>.md          ← requirement note
-01_SRS/<domain>/<slug>/*.png              ← screens
-01_SRS/<domain>/<slug>/figma/*.png        ← Figma exports
-02_Acceptance_Criteria/<domain>/<slug>/<slug>.md
-03_Testcases/<domain>/<slug>/<slug>.md
+01_Features/<domain>/<slug>/<slug>.md          ← feature hub: all metadata
+01_Features/<domain>/<slug>/<slug>_srs.md      ← requirement note
+01_Features/<domain>/<slug>/<slug>_ac.md       ← acceptance criteria
+01_Features/<domain>/<slug>/<slug>_tc.md       ← test case register
+01_Features/<domain>/<slug>/screens/*.png      ← every image: app screenshots and Figma exports
+01_Features/<domain>/<domain>.md               ← domain hub, when the domain has 2+ features
 ```
 
-- **The note's file name always equals its leaf folder name.** `workshop/wa_workshop/wa_workshop.md`, never `workshop/wa_workshop/workshop.md`.
-- A feature that belongs to no domain drops the `<domain>/` level: `01_SRS/login/login.md`.
+- **A feature that belongs to no domain drops the `<domain>/` level:** `01_Features/login/login.md`.
 - Domains in use: `accident`, `lawyer`, `voucher`, `workshop` — the four subjects that have both a Web App and a Web Portal feature. Everything else is standalone.
+- **A folder is a feature if it contains `<name>_srs.md`.** A domain folder contains only feature folders. Scripts and skills use this to tell the two apart.
+- `_ac.md` and `_tc.md` are **optional** (see §5); `<slug>.md` and `<slug>_srs.md` always exist.
+- **One `screens/` folder, no `figma/`.** Where an image came from is not worth a second folder.
 
 ## 2. Slug and platform prefix
 
-- **Slug** — lowercase, identical to the leaf folder name. This is what you pass to `/gen-ac` and `/gen-tc`.
+- **Slug** — lowercase, identical to the feature folder name. This is what you pass to `/gen-ac` and `/gen-tc`.
 - A slug under a shared domain carries **`wa_`** (Web App, the driver) or **`wp_`** (Web Portal, the Client Admin). The prefix is not cosmetic — it identifies the actor and the permission model. See `CLAUDE.md` for who those actors are.
 - **Never register a bare domain name as a slug.** `workshop` alone is ambiguous between the driver feature and the admin feature, and that ambiguity is what once made the graph unreadable.
 
-## 3. Feature registry
+## 3. Feature metadata
 
-`features.md` maps **slug → short code**. `/gen-ac` and `/gen-tc` read it to keep IDs stable.
+There is no registry file. **The feature hub is the source of truth** for its own metadata:
 
-- Resolve **both** the code and the target path from a registry row. The `##` section a row sits under gives its domain; a row under `## Standalone` has none.
-- **Code** — 2–6 uppercase letters, unique across the whole registry. Used only in IDs: `AC-<CODE>-NN`, `BR-<CODE>-NN`, `TC-<CODE>-NNN`.
-- **A code already used in any ID must never change** — it would break traceability across hundreds of IDs.
-- Add the row *before* generating AC or TC for a new feature. Fill every column in the same edit.
+```yaml
+---
+type: feature
+code: WS                       # ID prefix — AC-WS-01, BR-WS-01, TC-WS-001
+domain: workshop               # omitted for a standalone feature
+platform: Web App              # Web App | Web Portal | Android | SaaS Admin
+actor: Driver                  # Driver | Client Admin | MCS Admin
+entity:                        # links, not plain text — see §4
+  - "[[e_workshop|Workshop]]"
+  - "[[e_voucher|Voucher]]"
+jira: [RC-120]                 # story tickets only, never the epic
+status: Draft
+srs: "[[wa_workshop_srs]]"
+ac: "[[wa_workshop_ac]]"       # omit if the feature has no AC
+tc: "[[wa_workshop_tc]]"       # omit if the feature has no TC
+related: []                    # see §6 — normally empty
+---
+```
 
-### The Entity column
+- **Code** — 2–6 uppercase letters, unique across the whole vault. Used only in IDs: `AC-<CODE>-NN`, `BR-<CODE>-NN`, `TC-<CODE>-NNN`.
+- **A code already used in any ID must never change** — it would break traceability across hundreds of IDs. Reserved codes for features that have no folder yet are listed in `features.md`.
+- `[[00_Project_Info/features.base|features.base]]` renders all of this as a live table (views: *All features*, *Impact by entity*, *Test coverage*). It is generated from the hubs — never edit a feature's data there.
+- SRS / AC / TC notes carry a lighter header: `type`, `feature` (a link back to the hub), `code`, `jira`, `status`. TC registers add `tc_total`, `tc_automated`, `tc_pending`.
 
-The domain tree groups features by *subject area*. It does **not** show impact: the `Voucher` entity is touched by four features spread across two domains (`workshop` and `voucher`), so changing voucher logic puts all four at risk while the hub shows them as two unrelated trees.
+## 4. Entities, and finding impact across features
 
-The **Entity** column is the second, orthogonal axis that makes impact findable. Valid values, from `system-high-level-design.md` §6:
+The domain tree groups features by *subject area*. It does **not** show impact: the `Voucher` record is touched by four features spread across two domains, so a voucher change puts all four at risk while the domain hubs show them as two unrelated trees.
 
-`Company` · `User` · `Vehicle` · `Accident` · `Workshop` · `Expert` · `Lawyer` · `Voucher` · `Ad` · `Pricing`
+**Entity notes are the second, orthogonal axis.** One note per record type in `00_Project_Info/entities/`:
 
-Rules for filling it:
+`e_company` · `e_user` · `e_vehicle` · `e_accident` · `e_workshop` · `e_expert` · `e_lawyer` · `e_voucher` · `e_ad` · `e_pricing`
 
-- Declare only the entity the feature takes as its **subject** — the records it reads or writes as its actual job. Use `—` when there is none (pure-UI features).
-- **Do not** declare an entity a feature merely branches on. Almost every screen behaves differently for a logged-in vs. guest user; if that counted, every row would list `User` and the column would carry no information. `homepage` lists `Ad` (it renders banners), not `User` (it only checks session state).
+Every feature hub links to the entities it owns. That single link is the whole mechanism:
+
+> **To answer "what else does this change put at risk?" — open the entity note and read its Backlinks.** Every feature that touches those records is listed there, automatically, including features in other domains.
+
+Rules for the `entity` value:
+
+- Declare only the entity the feature takes as its **subject** — the records it reads or writes as its actual job. Use `entity: []` when there is none (pure-UI features).
+- **Do not** declare an entity a feature merely branches on. Almost every screen behaves differently for a logged-in vs. guest user; if that counted, every feature would list `User` and the axis would carry no information. `homepage` lists `Ad` (it renders banners), not `User` (it only checks session state).
 - One entity is normal; two happens when a feature genuinely owns both (`registration` creates a `User` **and** registers a `Vehicle`). More than two usually means the feature is too broad — check whether it should be split.
+- **The `e_` prefix is required.** An entity note called `Voucher.md` would collide with the `voucher` domain hub — Obsidian resolves link targets case-insensitively — and every impact edge would silently point at the wrong note. Link with a display alias: `"[[e_voucher|Voucher]]"`.
 
-## 4. Finding impact across features
-
-To answer *"what else does this change put at risk?"*:
-
-1. Read this feature's **Entity** values from its registry row.
-2. **Search** `features.md` for each entity — every other row listing it shares those records, and is often in a **different domain**, so the hub will not reveal it.
-3. Read the **domain hub** (`01_SRS/<domain>/<domain>.md`) for the sibling on the other platform. A `wa_` feature and its `wp_` twin act on the same records through different actors, so admin-side changes routinely break the driver-side view and vice versa.
-4. Open those features' AC/TC files and cite **real** IDs. Never invent a `TC-` / `BR-` ID to make a cross-reference look researched.
-
-Both skills do this — `/gen-ac` at step 3b, `/gen-tc` at step 4b — and both report what they checked. When a registry row has a blank Entity cell they say so rather than guessing, because a blank cell silently shrinks every future impact search.
+Both skills do this — `/gen-ac` at step 3b, `/gen-tc` at step 4b — and both report what they checked. When a hub has an empty `entity` they say so rather than guessing, because an empty value silently shrinks every future impact search.
 
 ## 5. Traceability
 
@@ -75,24 +93,24 @@ AC are **optional** — write them when the ticket is ambiguous, high-risk, or n
 
 ## 6. Linking discipline
 
-Obsidian builds its graph from wiki-links alone — there is no index file it reads. The tree shape is purely a consequence of who links to whom, so it only survives if everyone follows the same rule:
+Obsidian builds its graph from links alone, **including links written in frontmatter**. The rules exist so the graph stays a set of readable feature clusters instead of a hairball:
 
-**One hop per level.**
+| Direction | How | Who maintains it |
+| --------- | --- | ---------------- |
+| Feature hub → its SRS / AC / TC | frontmatter `srs:` / `ac:` / `tc:` | the skills, automatically |
+| SRS / AC / TC → its feature hub | frontmatter `feature:` | the skills, automatically |
+| Feature hub → entity | frontmatter `entity:` | **the one human decision**, once per feature |
+| Feature ↔ feature | nothing — they meet at the shared entity note | automatic |
+| Domain hub → its features | a body table of wiki-links | on feature creation |
+| Feature hub → feature hub (`related:`) | only for a real dependency that shares **no** entity | rare, by hand, with the reason written in the body |
+| Inside AC / TC prose | the other feature's **code** in backticks (`WS`, `AA`) — never a wiki-link | — |
 
-```
-features.md  →  domain hub  →  feature SRS note  →  its AC / TC
-```
-
-- `features.md` links to **domain hubs and standalone features only** — never straight to a sub-feature. In the sub-feature tables the SRS column is a plain path in backticks, not a wiki-link.
-- A domain with 2+ sub-features has a hub at `01_SRS/<domain>/<domain>.md` listing them. Add a row to the hub when adding a sub-feature.
-- An AC or TC note links **up to its own SRS note only** (`[[01_SRS/<domain>/<slug>/<slug>]]` in the header's `SRS ref` row). Never link it to `features.md`, to a hub, or to a sibling feature.
-- Cross-feature references go in prose using the other feature's code (`WS`, `AA`), **not** a wiki-link.
-
-This restricts the **graph**, not your thinking. Cross-feature impact analysis is required (§4) — it just travels over **search** rather than backlinks. A code in backticks is plain searchable text, and `Cmd+Shift+F` for `WS` finds every mention instantly. Codes beat wiki-links here: short, stable, and they survive a file moving.
+- **An AC or TC note never links sideways.** It links up to its hub and nowhere else. Cross-feature impact belongs in the analysis, cited by code.
+- Codes beat wiki-links in prose: short, stable, searchable with `Cmd+Shift+F`, and they survive a file moving.
 
 ### Never link to a folder
 
-`[[01_SRS/accident/wa_my_accident/]]` — with a trailing slash — does not resolve. Obsidian links point at notes, not folders, so this renders as a dead grey node. Always link the note: `[[01_SRS/accident/wa_my_accident/wa_my_accident]]`. Verify the target file exists before writing the link.
+`[[01_Features/accident/wa_my_accident/]]` — with a trailing slash — does not resolve. Obsidian links point at notes, not folders, so this renders as a dead grey node. Always link the note. **Verify the target file exists before writing the link**, or run `python scripts/check_links.py`, which checks every wiki-link, embed and backtick path in the vault and exits non-zero if any is unresolved.
 
 ## 7. Templates
 
@@ -100,13 +118,15 @@ This restricts the **graph**, not your thinking. Cross-feature impact analysis i
 
 | File                    | Used by            |
 | ----------------------- | ------------------ |
+| `feature_hub_template.md` | creating a feature |
+| `srs_template.md`       | creating a feature |
 | `ac_template.md`        | `/gen-ac`          |
 | `testcases_template.md` | `/gen-tc`          |
 | `bug_template.md`       | manual bug reports |
 
 ## 8. Writing
 
-- **All note content in English** — body text, table cells, headers, and Type / Priority / Status values. The vault is shared on GitHub. German product terms stay German where the UI uses them; gloss them on first use.
+- **All note content in English** — body text, table cells, headers, and Type / Priority / Status values. The vault is shared on GitHub. German product terms stay German where the UI uses them; gloss them on first use. A verbatim stakeholder quote may stay in its original language **only if an English gloss follows it in parentheses** — the quote is evidence, the gloss is the content.
 - Test cases stay **high-level**: one scenario, 3–5 steps, no click-by-click. The Cucumber automation layer writes the detailed steps.
 - Never fabricate UI you have not seen in a screenshot, and never invent a business rule — flag the assumption instead.
 - Never modify `.obsidian/` config as part of a content task.

@@ -1,0 +1,76 @@
+---
+type: ac
+feature: "[[wa_workshop]]"
+code: WS
+jira: [RC-120]
+version: 1.0
+updated: 2026-08-06
+ba_owner:
+reviewer:
+status: Draft
+---
+
+# Acceptance Criteria — Workshop (Web App, `WS`)
+
+## User Story
+
+**As a** vehicle owner looking for a repair workshop
+**I want** to find nearby workshops on a map or list, view any discount voucher I've collected for a workshop, save that voucher, and request a callback appointment
+**So that** I can choose a trustworthy nearby workshop, redeem an available voucher in person, and get contacted to schedule my repair
+
+## Scenario-based AC — Given / When / Then
+
+| AC ID     | Scenario                                                              | Jira                                            | Type      | Criticality | Given (context)                                                                                                    | When (action / trigger)                                              | Then (expected outcome)                                                                                                                                     | Linked TCs | Status |
+| --------- | ----------------------------------------------------------------------- | -------------------------------------------------- | --------- | ----------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------ |
+| AC-WS-01  | Opening the Workshop Web app shows nearby workshops on a map            | [RC-120](https://motionscloud.atlassian.net/browse/RC-120) | Happy     | 🔴 Critical | User opens the Workshop Web app (e.g. from Werkstatt Finden / Check repair shops near me) with a location set        | User views the screen                                                    | A map is shown centered on the current/entered location, with pins for workshops within the default search radius                                            | `TC-WS-001` | Draft |
+| AC-WS-02  | User can search a different address to re-center the map               | [RC-120](https://motionscloud.atlassian.net/browse/RC-120) | Alternate | 🟡 Medium   | User is on the Workshop Web app map                                                                                   | User types a new address into the location search field and selects it  | The map re-centers on the new address and refreshes the workshop pins for that area                                                                           | `TC-WS-002` | Draft |
+| AC-WS-03  | Adjusting the radius slider updates the workshops shown                | [RC-120](https://motionscloud.atlassian.net/browse/RC-120) | Happy     | 🟡 Medium   | User is on the Workshop Web app map                                                                                   | User drags the **Set radius** slider to a larger/smaller value           | The set of workshop pins shown on the map updates to match the new radius                                                                                     | `TC-WS-003` | Draft |
+| AC-WS-04  | Selecting a workshop pin shows its summary card                        | [RC-120](https://motionscloud.atlassian.net/browse/RC-120) | Happy     | 🟠 High     | User is on the Workshop Web app map with pins shown                                                                   | User taps a workshop pin (e.g. "Jakel Gmbh")                             | A summary card appears showing the workshop's name, address, distance, and rating                                                                             | `TC-WS-004` | Draft |
+| AC-WS-05  | User can switch to List view                                           | [RC-120](https://motionscloud.atlassian.net/browse/RC-120) | Alternate | 🟡 Medium   | User is on the Workshop Web app map                                                                                   | User taps **List view**                                                  | The map is replaced by a scrollable list of nearby workshops, each showing name, address, distance, and rating                                                | `TC-WS-005` | Draft |
+| AC-WS-06  | Workshops without a collected voucher show "Get appointment"           | [RC-120](https://motionscloud.atlassian.net/browse/RC-120) | Happy     | 🔴 Critical | A selected workshop has no voucher collected by the user                                                             | User views that workshop's summary card                                  | The card's primary action reads **Get appointment**                                                                                                            | `TC-WS-006` | Draft |
+| AC-WS-07  | Workshops with a collected voucher show "View voucher details" instead | [RC-120](https://motionscloud.atlassian.net/browse/RC-120) | Happy     | 🔴 Critical | The user has an active (non-expired) collected voucher for a selected workshop                                       | User views that workshop's summary card                                  | The card's primary action reads **View voucher details** in place of "Get appointment"                                                                        | `TC-WS-007` | Draft |
+| AC-WS-08  | "View voucher details" opens the voucher redemption panel              | [RC-120](https://motionscloud.atlassian.net/browse/RC-120) | Happy     | 🔴 Critical | A workshop's summary card shows "View voucher details"                                                               | User taps **View voucher details**                                       | A panel opens showing the redemption code (e.g. "VKKGW1SL") and the instruction "Please show this code to the workshop cashier to redeem the voucher", with **Get appointment** and **Save voucher** actions | `TC-WS-008` | Draft |
+| AC-WS-09  | "Save voucher" saves the voucher and updates the button state          | [RC-120](https://motionscloud.atlassian.net/browse/RC-120) | Happy     | 🟠 High     | The voucher redemption panel is open and the voucher is not yet saved                                                | User taps **Save voucher**                                               | The voucher is saved<br>And the button updates to a **Saved** state                                                                                             | `TC-WS-009` | Draft |
+| AC-WS-10  | "Get appointment" opens the callback confirmation prompt               | [RC-120](https://motionscloud.atlassian.net/browse/RC-120) | Happy     | 🔴 Critical | User is viewing a workshop's summary card or voucher panel                                                           | User taps **Get appointment**                                            | A prompt opens asking "Do you need [Workshop name] to contact you?" with **No, I will check later** and **Yes, contact me** actions                            | `TC-WS-010` | Draft |
+| AC-WS-11  | Confirming the appointment request shows a booking confirmation        | [RC-120](https://motionscloud.atlassian.net/browse/RC-120) | Happy     | 🔴 Critical | The callback confirmation prompt is open                                                                             | User taps **Yes, contact me**                                            | The appointment/callback request is booked<br>And a "Thanks for booking your appointment" confirmation screen is shown                                          | `TC-WS-011` | Draft |
+| AC-WS-12  | Declining the appointment prompt returns without booking               | [RC-120](https://motionscloud.atlassian.net/browse/RC-120) | Alternate | 🟡 Medium   | The callback confirmation prompt is open                                                                             | User taps **No, I will check later**                                     | The prompt closes<br>And no appointment/callback request is booked                                                                                              | `TC-WS-012` | Draft |
+| AC-WS-13  | Returning to the Workshop Web app from the booking confirmation                  | [RC-120](https://motionscloud.atlassian.net/browse/RC-120) | Happy     | 🟡 Medium   | The "Thanks for booking your appointment" confirmation screen is shown                                               | User taps **Ok, Back to workshops**                                      | The user returns to the Workshop Web app (map/list)                                                                                                              | `TC-WS-013` | Draft |
+| AC-WS-14  | A collected voucher stays visible on the Saved Vouchers page (regression) | [RC-120](https://motionscloud.atlassian.net/browse/RC-120) | Happy   | 🔴 Critical | User has collected/saved a voucher and opens the Saved Vouchers page (`/saved-vouchers`)                             | User views the page                                                       | The saved voucher remains displayed<br>And it does **not** disappear after a few seconds                                                                        | `TC-WS-014` | Draft |
+| AC-WS-15  | An expired voucher no longer shows as active on the map/list (regression) | [RC-120](https://motionscloud.atlassian.net/browse/RC-120) | Edge    | 🔴 Critical | A workshop's voucher validity period has ended (expired)                                                             | User views that workshop's pin on the map or its entry in the list       | No voucher badge/icon is shown for that workshop<br>And its summary card's primary action reads "Get appointment", not "View voucher details"                   | `TC-WS-015` | Draft |
+| AC-WS-16  | A voucher added in the Web Portal admin becomes available to the end user | `—` | Happy | 🔴 Critical | Admin has added a valid voucher for the workshop via the Web Portal (Manage Workshops → Voucher → Add Voucher), satisfying BR-WPWS-01/02 (Valid from < Valid until, Valid until ≥ current date) | User views/collects that workshop in the Workshop Web app within the voucher's validity window | The voucher is available to the user for that workshop, with Title/Code/Discount and validity dates matching exactly what the admin entered in the Web Portal | `TC-WS-017` | Draft |
+| AC-WS-17  | Workshop details edited in the Web Portal are reflected in the Workshop Web app | `—` | Happy | 🟠 High | Admin has edited the workshop's Name, Full address, and/or Rate via the Web Portal (Manage Workshops → Edit) and selected Save | User views that workshop's pin, summary card, or list entry in the Workshop Web app | The Name, address, and rating shown to the user match the values last saved in the Web Portal — never stale/previous data | `TC-WS-018` | Draft |
+
+## Business Rules (rule-based AC)
+
+| Rule ID  | Business Rule                                                                                                     | Jira                                            | Rationale / Source                                                    | Criticality | Linked TCs | Status |
+| -------- | ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------------------------------- | ----------- | ---------- | ------ |
+| BR-WS-01 | Collected/saved vouchers must remain persistently visible on the Saved Vouchers page until used, removed, or expired — they must not auto-hide after a fixed display duration. | [RC-120](https://motionscloud.atlassian.net/browse/RC-120) | Ticket Issue 1: "Voucher display few seconds and hide... Expect: User could view saved voucher" | 🔴 Critical | `TC-WS-014` | Draft |
+| BR-WS-02 | A voucher's active/expired state (based on its expiration date) determines every "has voucher" indicator in the app — map pin badge, list entry badge, and the summary card's CTA ("View voucher details" vs "Get appointment"). Expired vouchers must never display as active. | [RC-120](https://motionscloud.atlassian.net/browse/RC-120) | Ticket Issue 2: "Voucher expired but logo voucher still display on map... Expect: Should not show voucher on map if voucher expired" | 🟠 High     | `TC-WS-015` | Draft |
+| BR-WS-03 | Each collected voucher has a unique alphanumeric redemption code (e.g. "VKKGW1SL") that the user shows to the workshop cashier in person to redeem it.             | [RC-120](https://motionscloud.atlassian.net/browse/RC-120) | Observed in UI: voucher panel displays a unique code with redemption instructions | 🟡 Medium   | `TC-WS-016` | Draft |
+
+## Column Guide
+
+| Column          | Description                                                       | Values / Format                                   |
+| --------------- | ---------------------------------------------------------------- | ------------------------------------------------- |
+| **AC ID**       | Unique scenario id — TCs trace back to this                      | `AC-WS-NN`                                  |
+| **Rule ID**     | Unique business-rule id — TCs trace back to this                 | `BR-WS-NN`                                  |
+| **Scenario**    | Short title of the behaviour, start with an action verb          | Plain text                                        |
+| **Jira**        | The ticket this AC came from                                     | `[RC-120](url)`                                     |
+| **Type**        | Class of scenario                                               | Happy / Alternate / Negative / Edge / Permission  |
+| **Criticality** | Impact if this AC fails — drives the verifying TC's priority     | 🔴 Critical / 🟠 High / 🟡 Medium / ⚪ Low          |
+| **Given**       | Precondition / context true before the action                   | One state per clause; `<br>And …` to compound     |
+| **When**        | The single action or event that triggers behaviour             | One trigger                                        |
+| **Then**        | Observable, verifiable outcome — pass/fail must be objective    | Include error code / message / state where relevant |
+| **Linked TCs**  | TCs in `01_Features/workshop/wa_workshop/wa_workshop_tc.md` that verify this AC | `TC-WS-NNN`, comma-separated                |
+| **Status**      | Review state of the criterion                                   | Draft / Reviewed / Approved                        |
+
+## Traceability
+
+```
+Jira ticket  ──▶  AC-WS-NN / BR-WS-NN  ──▶  TC-WS-NNN
+ (the why)         (the what — this file)                  (the how to verify)
+```
+
+- **Upward**: header `SRS ref` + each row's `Jira` column link the AC to its source.
+- **Downward**: the `Linked TCs` column lists the test cases that verify each AC.
+- **Coverage rule**: every `Critical` and `High` AC and every business rule must have ≥1 Linked TC. Flag any such AC with zero TCs as a coverage gap. Conversely, every TC must name the `AC` it verifies — no orphan TCs.
