@@ -10,6 +10,7 @@ jira: [RC-127]
 status: Draft
 srs: "[[wa_before_rental_srs]]"
 ac: "[[wa_before_rental_ac]]"
+tc: "[[wa_before_rental_tc]]"
 related: []
 ---
 
